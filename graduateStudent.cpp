@@ -20,10 +20,14 @@ protected:
 
 public:
     GradStudent();
-    void AssignPersonality;
+    GradStudent(GradStudent &from);
+    void AssignPersonality();
+    void PrintPersonality();
     void SetResearchFocus();
     void CheckIn();
     void IncYear();
+    void ChangeHappinessLevel(float amount);
+    void ChangeHappinessdT(float amount);
 };
 
 GradStudent::GradStudent(){
@@ -36,36 +40,39 @@ GradStudent::GradStudent(){
      */
 }
 
-GradStudent::AssignPersonality(){
+void GradStudent::AssignPersonality(){
     //Initialize personality object AND initialize 3 counters with values
 }
 
-GradStudent::SetResearchFocus(){
+void GradStudent::SetResearchFocus(){
     //Set focus int to one of x research focuses, buff/neg relevant counters
 }
 
-GradStudent::CheckIn(){
+void GradStudent::CheckIn(){
     //Get student vitals + imp. att. on interaction
 }
 
-GradStudent::IncYear(){
+void GradStudent::IncYear(){
     //Increment year of student after 3 semesters
 }
 
-class Counter {
-private:
-    float currval,baseval,dt;
+void GradStudent::ChangeHappinessLevel(float amount){
+    
+}
+
+class Counter { private:
+    float currval,baseval,currdt, basedt;
 
 public:
     Counter();
     void decay();
-}
+};
 
 Counter::Counter(){
     //Initialize each counter attribute to null
 }
 
-Counter::decay(){
+void Counter::decay(){
     //Decays currval of counter closer to baseval (in either direction)
 }
 
