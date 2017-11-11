@@ -22,7 +22,7 @@ class Personality{
 public:
     Personality();
     ~Personality();
-//    void generatePersonality(const Advisor &advisor);
+    void generatePersonality(float knowledge, float prestige, float mentoring);
     float getIntelligence();
     float getOptimism();
     float getStamina();
@@ -35,16 +35,25 @@ private:
 
 class Paper{
 public:
-    Paper();
-//    Paper(const GradStudent &student);
+    Paper(float intelligence, int focus, float risk);
     ~Paper();
-//    void generateCitations(const GradStudent &student);
+    int generateCitations(float intelligence, int focus, float risk);
     int getCitations();
     string getJournal();
     
 private:
     int citations;
     string journal;
+    string journals[10] = {"The Tartan",
+                            "Buzzfeed News",
+                            "Journal of Tourism Research and Hospitality",
+                            "Magazine of Concrete Research",
+                            "arXiv",
+                            "Proceedings of the Royal Society",
+                            "Reviews of Modern Science",
+                            "Cell",
+                            "Science",
+                            "Nature"};
 };
 
 #endif /* Paper_and_personality_hpp */

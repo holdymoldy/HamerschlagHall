@@ -5,7 +5,9 @@ using namespace std;
 
 
 Personality::Personality(){
-    
+    this->intelligence = 0;
+    this->optimism = 0;
+    this->stamina = 0;
 }
 
 Personality::~Personality(){
@@ -13,61 +15,114 @@ Personality::~Personality(){
 }
 
 
-//void Personality::generatePersonality(const Advisor &advisor){
-//
-//    // This function will need to be changed for game balancing
-//    float int_mean=50 + (advisor.Knowledge*0.1) + (advisor.Prestige*0.2) + (advisor.Mentoring*0.15);
-//    float stam_mean=50;
-//    float opt_mean = 50 + (advisor.Mentoring*0.2);
-//    float int_dev=10, stam_dev=10, opt_dev=10;
-//
-//    default_random_engine generator;
-//    normal_distribution<float> int_distribution(int_mean, int_dev);
-//    normal_distribution<float> stam_distribution(stam_mean, stam_dev);
-//    normal_distribution<float> opt_distribution(opt_mean, opt_dev);
-//
-//    float intelligence = int_distribution(generator);
-//    float stamina = stam_distribution(generator);
-//    float optimism = opt_distribution(generator);
-//
-//    float attrs[3] = {intelligence, stamina, optimism};
-//    for(int i=0; i<3; i+=1){
-//        if(attrs[i] > 100){
-//            attrs[i] = 100;
-//        }
-//        else if(attrs[i]<0){
-//            attrs[i] = 0;
-//        }
-//    }
-//}
+//knowledge, prestige, and mentoring all from advisor class
+void Personality::generatePersonality(float knowledge, float prestige, float mentoring){
+
+    // This function will need to be changed for game balancing
+    float int_mean=50 + (knowledge*0.1) + (prestige*0.2) + (mentoring*0.15);
+    float stam_mean=50;
+    float opt_mean = 50 + (mentoring*0.2);
+    float int_dev=10, stam_dev=10, opt_dev=10;
+
+    default_random_engine generator;
+    normal_distribution<float> int_distribution(int_mean, int_dev);
+    normal_distribution<float> stam_distribution(stam_mean, stam_dev);
+    normal_distribution<float> opt_distribution(opt_mean, opt_dev);
+
+    this->intelligence = int_distribution(generator);
+    this->stamina = stam_distribution(generator);
+    this->optimism = opt_distribution(generator);
+
+    float attrs[3] = {this->intelligence, this->stamina, this->optimism};
+    for(int i=0; i<3; i+=1){
+        if(attrs[i] > 100){
+            attrs[i] = 100;
+        }
+        else if(attrs[i]<0){
+            attrs[i] = 0;
+        }
+    }
+}
 
 // getter for personality value. This getter should be used by the Student class
 // The personality value should affect changes in mood, GPA, etc., in a student
 float Personality::getIntelligence(){
-    return intelligence;
+    return this->intelligence;
 }
 
 float Personality::getOptimism(){
-    return optimism;
+    return this->optimism;
 }
 
 float Personality::getStamina(){
-    return stamina;
+    return this->stamina;
 }
 
+Paper::~Paper(){
+}
 
-Paper::Paper(){}
+// other modifiers? GPA?
+Paper::Paper(float intelligence, int focus, float risk){
+    // risk is a value between 0 and 1 (from lowest risk paper submission to highest risk (1 is Nature))
+    
+    default_random_engine generator;
+    float multiplier = 0;
+    if(focus){
+        multiplier += 0.2;
+    }
+    // other multipliers here
+    
+    normal_distribution<float> accept_distribution(intelligence + multiplier*8, 20.0 - risk*5.0);
+    float acceptance = accept_distribution(generator);
+    if(acceptance > risk*100.0){
+        this->citations = generateCitations(intelligence, focus, risk);
+    }
+    
+    if(risk>=0 && risk<0.1){
+        this->journal = this->journals[0];
+    }
+    if(risk>=0.1 && risk<0.2){
+        this->journal = this->journals[1];
+    }
+    if(risk>=0.2 && risk<0.3){
+        this->journal = this->journals[2];
+    }
+    if(risk>=0.3 && risk<0.4){
+        this->journal = this->journals[3];
+    }
+    if(risk>=0.4 && risk<0.5){
+        this->journal = this->journals[4];
+    }
+    if(risk>=0.5 && risk<0.6){
+        this->journal = this->journals[5];
+    }
+    if(risk>=0.6 && risk<0.7){
+        this->journal = this->journals[6];
+    }
+    if(risk>=0.7 && risk<0.8){
+        this->journal = this->journals[7];
+    }
+    if(risk>=0.8 && risk<0.9){
+        this->journal = this->journals[8];
+    }
+    if(risk>=0.9 && risk<1.0){
+        this->journal = this->journals[9];
+    }
 
-//Paper::Paper(const GradStudent &student, float risk){
-//    // constructor for paper class based on attributes of student
-//    // should call Paper::generateCitations class method
-//
-//}
-//
-//void Paper::generateCitations(const GradStudent &student){
-//    // generates number of citations based on student's attributes
-//    // also generates journal to which it was accepted
-//}
+}
+
+int Paper::generateCitations(float intelligence, int focus, float risk){
+    // will need to be changed later for balancing
+    
+    default_random_engine generator;
+    float mean = intelligence + risk*500;
+    if(focus){
+        mean *= 2;
+    }
+    normal_distribution<float> cit_distribution(mean, 20);
+    
+    return (int)cit_distribution(generator);
+}
 
 int Paper::getCitations(){
     // getter for number of citations
