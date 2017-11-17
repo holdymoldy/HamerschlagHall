@@ -1,8 +1,7 @@
 #include<iostream>
 #include <random>
 #include "Advisor-Action.hpp"
-
-
+//Just trying to update
 void Advisor::WriteGrant(Drawing & draw) {
     if (Semester % 3 == 1 && Draw.CheckMouseWriteGrand() == 1) {  //Draw.CheckMouseWriteGrand() is in the drawing function and checks if the user is clicking WriteGrand button.
         double inherent_probability = Prestige * (Knowledge + Experience);// This math needs tuning to fall in (1,2)
