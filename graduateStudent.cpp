@@ -78,6 +78,10 @@ public:
     void ModifyHappinessdT(float amount);
     void ModifyResearchValue(float amount);
     void ModifyResearchdT(float amount);
+    void ModifyHappinessBasedT(float amount);
+    void ModifyResearchBasedT(float amount);
+
+
     void CreatePaper();
     int SubmitPaper(float risk); //1 if successful, paper returned, out returned to zero, then currpaper is null. 0 if not successful.
     void GeneratePaperAfterSuccess(float risk); //after success
@@ -268,6 +272,27 @@ void GradStudent::CheckIn(){
 void GradStudent::IncYear(){
     //Increment year of student after 3 semesters
     year += 1;
+}
+
+void GradStudent::ModifyHappinessValue(float amount){
+    happiness.value += amount;
+}
+void GradStudent::ModifyHappinessdT(float amount){
+    happiness.currdt += amount;
+}
+void GradStudent::ModifyResearchValue(float amount){
+    out.value += amount;
+}
+void ModifyResearchdT(float amount){
+    out.currdt += amount;
+}
+
+void GradStudent::ModifyHappinessBasedT(float amount){
+    happiness.basedt += amount;
+}
+
+void GradStudent::ModifyResearchBasedT(float amount){
+    out.basedt += amount;
 }
 
 
