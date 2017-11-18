@@ -90,7 +90,7 @@ float Personality::getStamina(){
 Paper::~Paper(){
 }
 
-int Paper::SubmitPaper(float intelligence, float focus, float risk){
+int Paper::SubmitPaper(float intelligence, int focus, float risk){
     // risk is a value between 0 and 1 (from lowest risk paper submission to highest risk (1 is Nature))
     
     default_random_engine generator;
