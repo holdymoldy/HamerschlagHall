@@ -41,8 +41,10 @@ public:
     void IncYear();     //Increment year of student after 3 semesters
     void ModifyHappinessValue(float amount);
     void ModifyHappinessdT(float amount);
+    void ModifyHappinessBasedT(float amount);
     void ModifyResearchValue(float amount);
     void ModifyResearchdT(float amount);
+    void ModifyResearchBasedT(float amount);
     void CreatePaper();
     int SubmitPaper(float risk); //1 if successful, paper returned, out returned to zero, then currpaper is null. 0 if not successful.
     void GeneratePaperAfterSuccess(float risk); //after success

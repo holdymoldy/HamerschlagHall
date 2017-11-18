@@ -262,24 +262,24 @@ void GradStudent::IncYear(){
 }
 
 void GradStudent::ModifyHappinessValue(float amount){
-    happiness.value += amount;
+    happiness->value += amount;
 }
 void GradStudent::ModifyHappinessdT(float amount){
-    happiness.currdt += amount;
+    happiness->currdt += amount;
 }
 void GradStudent::ModifyResearchValue(float amount){
-    out.value += amount;
+    out->value += amount;
 }
-void ModifyResearchdT(float amount){
-    out.currdt += amount;
+void GradStudent::ModifyResearchdT(float amount){
+    out->currdt += amount;
 }
 
 void GradStudent::ModifyHappinessBasedT(float amount){
-    happiness.basedt += amount;
+    happiness->basedt += amount;
 }
 
 void GradStudent::ModifyResearchBasedT(float amount){
-    out.basedt += amount;
+    out->basedt += amount;
 }
 
 
