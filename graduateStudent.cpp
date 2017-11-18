@@ -184,6 +184,9 @@ void GradStudent::AssignPersonality(float knowledge, float prestige, float mento
     happiness.basedt = this->personality.getOptimism();
     happiness.currdt = happiness.basedt;
 }
+void GradStudent::PrintPersonality(){
+    cout<<"Personality: intelligence="<<personality.getIntelligence()<<" | optimism="<<personality.getOptimism()<<" | stamina="<<personality.getStamina()<<endl;
+}
 
 void GradStudent::CreatePaper(){
     Paper pape = Paper();
