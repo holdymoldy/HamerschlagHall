@@ -7,6 +7,8 @@
 //
 
 #include "Paper_and_personality.cpp"
+#include <iostream>
+using namespace std;
 
 class Counter {
 public:
@@ -70,7 +72,7 @@ public:
     void ChangeResearchdT(float amount);
     void CreatePaper();
     int SubmitPaper(float risk); //1 if successful, paper returned, out returned to zero, then currpaper is null. 0 if not successful.
-    void GeneratePaperAfterSuccess(float risk); //aftersuccess
+    void GeneratePaperAfterSuccess(float risk); //after success
 };
 
 
@@ -145,16 +147,35 @@ int GradStudent::SubmitPaper(float risk){
     return currpaper.SubmitPaper(personality.getIntelligence(),focus,risk);
 }
 
-void GradStudent::SetResearchFocus(){
+void GradStudent::SetResearchFocus(int focustoset){
     //Set focus int to one of x research focuses, buff/neg relevant counters
+    if(focustoset != focus){ //only do something if desired focus if different from current focus
+        focus = focustoset;
+        if(focus==0){
+            out.basedt *= 2;
+        }
+        if(focus==1){
+            out.basedt *= 1/2;
+        }
+    }
 }
 
 void GradStudent::CheckIn(){
     //Get student vitals + imp. att. on interaction
+    cout << "Checking in with ";
+    for(int i=0;i<namelength;i++){
+        cout<<name[i];
+    }
+    cout<<"..."<<endl;
+    cout<<"Vitals: year="<<year<<" | happiness="<<happiness.value<<" | research="<<out.value<<endl;
+    cout<<"Personality: intelligence="<<personality.getIntelligence()<<" | optimism="<<personality.getOptimism()<<" | stamina="<<personality.getStamina()<<endl;
+
+    
 }
 
 void GradStudent::IncYear(){
     //Increment year of student after 3 semesters
+    year += 1;
 }
 
 void GradStudent::ChangeHappinessLevel(float amount){
