@@ -11,8 +11,7 @@
 
 class GradStudent {
 protected:
-    char *name;
-    int namelength;
+
     int year;
     int color[3];
     Personality personality;
@@ -113,6 +112,7 @@ void GradStudent::CreatePaper(){
 }
 
 int GradStudent::SubmitPaper(float risk){
+    return currpaper(Personality.getIntelligence(),focus,risk);
 }
 
 void GradStudent::SetResearchFocus(){
