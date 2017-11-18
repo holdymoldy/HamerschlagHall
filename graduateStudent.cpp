@@ -164,6 +164,20 @@ GradStudent &GradStudent::operator=(const GradStudent &from){
             name[i]=from.name[i];
         }
         namelength = from.namelength;
+        Personality *personality = new Personality;
+        personality = Personality(&from.personality); //use Personality class copy constructor
+        Paper *currpaper = new Paper;
+        currpaper = Paper(&from.currpaper); //use Paper class copy constructor
+        Counter *happiness = new Counter;
+        happiness = Counter(&from.happiness); //use Counter class copy constructor
+        Counter *out = new Counter;
+        out = Counter(&from.out); //use Counter class copy constructor
+        color = new int [3];
+        for(int i=0; i<3; i+=1){
+            color[i] = from.color[i];
+        }
+        year = from.year;
+        focus = from.focus;
     }
     return *this;
 }
