@@ -23,7 +23,7 @@ protected:
 public:
     GradStudent();
     GradStudent(const GradStudent &from);
-    const GradStudent &operator=(const GradStudent &from);
+    GradStudent &operator=(const GradStudent &from);
     void CleanUp();
     ~GradStudent();
     
@@ -36,16 +36,26 @@ public:
     void ChangeHappinessdT(float amount);
     void ChangeResearchLevel(float amount);
     void ChangeResearchdT(float amount);
-    // void CreatePaper
-    // int SubmitPaper(float risk) 1 if successful, paper returned, out returned to zero, then currpaper is null. 0 if not successful.
+    void CreatePaper();
+    int SubmitPaper(float risk); //1 if successful, paper returned, out returned to zero, then currpaper is null. 0 if not successful.
+    void GeneratePaperAfterSuccess(float risk); //aftersuccess
+    char GetName();
 };
+
+char GradStudent::GetName(){
+    return name;
+}
+
+int GradStudent::GetNameLength(){
+    return namelength;
+}
 
 void GradStudent::CleanUp(){
     if (nullptr != name){
         delete [] name;
         name = nullptr;
         year = 0;
-        color = {0,0,0}
+        color = {0,0,0};
         focus = 0;
     }
 }
@@ -57,37 +67,36 @@ GradStudent::GradStudent(){
     year = 0;
     color = {0,0,0}
     focus = 0;
-    currpaper=NULL;
 }
 
-GradStudent::GradStudent(GradStudent &from){
-    if(from.name != this->name){
-        name = new char [from.namelength];
-        for(int i=0; i<from.namelength;i++){
-            name[i]=from.name[i];
+GradStudent::GradStudent(const GradStudent &from){
+    if(from.GetName() != this->name){
+        name = new char [from.GetNameLength()];
+        for(int i=0; i<from.GetNameLength();i++){
+            name[i]=from.GetName()[i];
         }
-        namelength = from.namelength;
+        namelength = from.GetNameLength();
     }
 }
 
-const GradStudent &operator=(const GradStudent &from){
-    if(from.name!=this->name){
+GradStudent &GradStudent::operator=(const GradStudent &from){
+    if(from.GetName() !=this->name){
         CleanUp();
-        for(int i=0; i<from.namelength;i++){
-            name[i]=from.name[i];
+        for(int i=0; i<from.GetNameLength();i++){
+            name[i]=from.GetName()[i];
         }
-        namelength = from.namelength;
+        namelength = from.GetNameLength();
     }
     return *this;
 }
 
 GradStudent::~GradStudent(){
-    Cleanup();
+    CleanUp();
 }
 
 void GradStudent::AssignPersonality(float knowledge, float prestige, float mentoring){
     //Initialize personality object AND initialize 2 counters with values
-    newpersonality = Personality();
+    Personality newpersonality = Personality();
     newpersonality.generatePersonality(knowledge,prestige,mentoring);
     this->personality = newpersonality;
     out = Counter();
@@ -96,6 +105,14 @@ void GradStudent::AssignPersonality(float knowledge, float prestige, float mento
     happiness = Counter();
     happiness.basedt = this->personality.getOptimism();
     happiness.currdt = happiness.basedt;
+}
+
+void GradStudent::CreatePaper(){
+    Paper pape = Paper();
+    currpaper = pape;
+}
+
+int GradStudent::SubmitPaper(float risk){
 }
 
 void GradStudent::SetResearchFocus(){
