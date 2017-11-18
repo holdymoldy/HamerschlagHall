@@ -1,43 +1,14 @@
+#include "Paper_and_personality.h"
 #include <random>
 
 using namespace std;
-
-class Personality{
-public:
-    Personality();
-    ~Personality();
-    void generatePersonality(float knowledge, float prestige, float mentoring);
-    float getIntelligence();
-    float getOptimism();
-    float getStamina();
-    
-private:
-    float intelligence;
-    float optimism;
-    float stamina;
-};
-
-class Paper{
-public:
-    Paper();
-    ~Paper();
-    int generateCitations(float intelligence, int focus, float risk);
-    int SubmitPaper(float intelligence, int focus, float risk);
-    void GeneratePaperAfterSuccess(float intelligence, int focus, float risk);
-    int getCitations();
-    string getJournal();
-    
-private:
-    int citations;
-    string journal;
-    string title;
-};
 
 Personality::Personality(){
     this->intelligence = 0;
     this->optimism = 0;
     this->stamina = 0;
 }
+
 
 Personality::~Personality(){
 
@@ -87,7 +58,31 @@ float Personality::getStamina(){
     return this->stamina;
 }
 
+void Personality::setIntelligence(float i){
+    this->intelligence = i;
+}
+
+void Personality::setOptimism(float o){
+    this->optimism = o;
+}
+
+void Personality::setStamina(float s){
+    this->stamina = s;
+}
+
+
+Paper::Paper(){
+    this->citations = 0;
+    this->journal = new char[20];
+    this->title = new char[20];
+}
+
+
 Paper::~Paper(){
+    delete [] journal;
+    journal = NULL;
+    delete [] title;
+    title = NULL;
 }
 
 int Paper::SubmitPaper(float intelligence, int focus, float risk){
@@ -109,45 +104,51 @@ int Paper::SubmitPaper(float intelligence, int focus, float risk){
     return 0;
 }
 
-Paper::Paper(){
-    this->citations = 0;
-    this->journal = "";
-    this->title = "";
-}
+
 
 void Paper::GeneratePaperAfterSuccess(float intelligence, int focus, float risk){
 
     this->citations = generateCitations(intelligence, focus, risk);
 
     if(risk>=0 && risk<0.1){
-        this->journal = "The Tartan";
+        char str1[] = "The Tartan";
+        strcpy(journal, str1);
     }
     if(risk>=0.1 && risk<0.2){
-        this->journal = "Buzzfeed News";
+        char str1[] = "Buzzfeed News";
+        strcpy(journal, str1);
     }
     if(risk>=0.2 && risk<0.3){
-        this->journal = "Journal of Tourism Resarch and Hospitality";
+        char str1[] = "Journal of Tourism Resarch and Hospitality";
+        strcpy(journal, str1);
     }
     if(risk>=0.3 && risk<0.4){
-        this->journal = "Magazine of Concrete Research";
+         char str1[] = "Magazine of Concrete Research";
+        strcpy(journal, str1);
     }
     if(risk>=0.4 && risk<0.5){
-        this->journal = "arXiv";
+        char str1[] = "arXiv";
+        strcpy(journal, str1);
     }
     if(risk>=0.5 && risk<0.6){
-        this->journal = "Proceedings of the Royal Society";
+        char str1[] = "Proceedings of the Royal Society";
+        strcpy(journal, str1);
     }
     if(risk>=0.6 && risk<0.7){
-        this->journal = "Reviews of Modern Science";
+         char str1[] = "Reviews of Modern Science";
+        strcpy(journal, str1);
     }
     if(risk>=0.7 && risk<0.8){
-        this->journal = "Cell";
+        char str1[] = "Cell";
+        strcpy(journal, str1);
     }
     if(risk>=0.8 && risk<0.9){
-        this->journal = "Science";
+         char str1[] = "Science";
+        strcpy(journal, str1);
     }
     if(risk>=0.9 && risk<1.0){
-        this->journal = "Nature";
+        char str1[] = "Nature";
+        strcpy(journal, str1);
     }
 
 }
@@ -168,10 +169,5 @@ int Paper::generateCitations(float intelligence, int focus, float risk){
 int Paper::getCitations(){
     // getter for number of citations
     return citations;
-}
-
-string Paper::getJournal(){
-    // getter for name of journal
-    return journal;
 }
 
