@@ -43,7 +43,6 @@ class GradStudent {
 protected:
     int year;
     int *color;
-    Personality personality;
     Counter happiness,out;
     Paper currpaper;
     int focus;
@@ -57,7 +56,8 @@ public:
     
     char *name;
     int namelength;
-    
+    Personality personality;
+
     void AssignPersonality(float knowledge, float prestige, float mentoring);     //Initialize personality object AND initialize 2 counters with values
     void PrintPersonality();
     void SetResearchFocus();    //Set focus int to one of x research focuses, buff/neg relevant counters

@@ -40,7 +40,7 @@ Personality::Personality(){
 }
 
 Personality::~Personality(){
-    
+
 }
 
 
@@ -92,20 +92,20 @@ Paper::~Paper(){
 
 int Paper::SubmitPaper(float intelligence, int focus, float risk){
     // risk is a value between 0 and 1 (from lowest risk paper submission to highest risk (1 is Nature))
-    
+
     default_random_engine generator;
     float multiplier = 0;
     if(focus){
         multiplier += 0.2;
     }
     // other multipliers here
-    
+
     normal_distribution<float> accept_distribution(intelligence + multiplier*8, 20.0 - risk*5.0);
     float acceptance = accept_distribution(generator);
     if(acceptance > risk*100.0){
         return 1;
     }
-    
+
     return 0;
 }
 
@@ -154,14 +154,14 @@ void Paper::GeneratePaperAfterSuccess(float intelligence, int focus, float risk)
 
 int Paper::generateCitations(float intelligence, int focus, float risk){
     // will need to be changed later for balancing
-    
+
     default_random_engine generator;
     float mean = intelligence + risk*500;
     if(focus){
         mean *= 2;
     }
     normal_distribution<float> cit_distribution(mean, 20);
-    
+
     return (int)cit_distribution(generator);
 }
 
