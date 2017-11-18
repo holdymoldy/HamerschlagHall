@@ -25,7 +25,8 @@ Counter::Counter(){
 }
 
 Counter::Counter(const Counter &from){
-    value = from.value;
+    //value = from.value;
+    value = 0 //Value never copied!
     currdt = from.currdt;
     basedt = from.basedt;
 }
@@ -140,12 +141,16 @@ GradStudent::GradStudent(const GradStudent &from){
     }
     if(from.personality != this->personality){
         Personality *personality = new Personality;
-        personality = Personality(&from.personality); //use Personality class copy constructor
+        //personality = Personality(&from.personality); //use Personality setters instead
+        personality.setIntelligence(from.personality.getIntelligence());
+        personality.setOptimism(from.personality.getOptimism());
+        personality.setStamina(from.personality.getStamina());
     }
+    /*
     if(from.currpaper != this->currpaper){
         Paper *currpaper = new Paper;
         currpaper = Paper(&from.currpaper); //use Paper class copy constructor
-    }
+    }*/ //no copying of papers ever - always null until instantiated by Paper methods.
     if(from.happiness != this->happiness){
         Counter *happiness = new Counter;
         happiness = Counter(&from.happiness); //use Counter class copy constructor
@@ -172,13 +177,20 @@ GradStudent &GradStudent::operator=(const GradStudent &from){
         }
         namelength = from.namelength;
         Personality *personality = new Personality;
-        personality = Personality(&from.personality); //use Personality class copy constructor
-        Paper *currpaper = new Paper;
-        currpaper = Paper(&from.currpaper); //use Paper class copy constructor
+        //personality = Personality(&from.personality); //use Personality class copy constructor
+        personality.setIntelligence(from.personality.getIntelligence());
+        personality.setOptimism(from.personality.getOptimism());
+        personality.setStamina(from.personality.getStamina());
+        
+        //Paper *currpaper = new Paper; // PAPERS ARE NEVER COPIED
+        //currpaper = Paper(&from.currpaper); //use Paper class copy constructor
+        
         Counter *happiness = new Counter;
         happiness = Counter(&from.happiness); //use Counter class copy constructor
+        
         Counter *out = new Counter;
         out = Counter(&from.out); //use Counter class copy constructor
+        
         color = new int [3];
         for(int i=0; i<3; i+=1){
             color[i] = from.color[i];
