@@ -23,8 +23,8 @@ public:
     void Conference(GradStudent &student);
     void SendtoCompany(double Money, double Prestige, GradStudent &student);
     void Push(double &Prestige, GradStudent &student, double mentoring);
-    void SetResearchFocus(GradStudent &student);
-    void RandomEvent(double Money, GradStudent &student, Paper &paper, Drawing &draw);
+    //void SetResearchFocus(GradStudent &student);
+    //void RandomEvent(double Money, GradStudent &student, Paper &paper, Drawing &draw);
     void Time(Drawing Draw); //if advisor-door is True, next semester.
     //void GetFunding();
     void GetExperience();
