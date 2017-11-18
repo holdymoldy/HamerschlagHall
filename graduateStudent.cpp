@@ -11,37 +11,91 @@
 
 class GradStudent {
 protected:
-    char name[32];
+    char *name;
+    int namelength;
     int year;
     int color[3];
     Personality personality;
-    Counter happiness,GPA,out;
+    Counter happiness,out;
+    Paper currpaper;
     int focus;
 
 public:
     GradStudent();
-    GradStudent(GradStudent &from);
-    void AssignPersonality();
-    void PrintPersonality();
-    void SetResearchFocus();
-    void CheckIn();
-    void IncYear();
+    GradStudent(const GradStudent &from);
+    const GradStudent &operator=(const GradStudent &from);
+    void CleanUp();
+    ~GradStudent();
+    
+    void AssignPersonality();     //Initialize personality object AND initialize 2 counters with values
+    void PrintPersonality(); 
+    void SetResearchFocus();    //Set focus int to one of x research focuses, buff/neg relevant counters
+    void CheckIn();     //Get student vitals + imp. att. on interaction
+    void IncYear();     //Increment year of student after 3 semesters
     void ChangeHappinessLevel(float amount);
     void ChangeHappinessdT(float amount);
+    void ChangeResearchLevel(float amount);
+    void ChangeResearchdT(float amount);
+    // void CreatePaper
+    // int SubmitPaper(float risk) 1 if successful, paper returned, out returned to zero, then currpaper is null. 0 if not successful.
 };
 
-GradStudent::GradStudent(){
-    //Initialize all with null values
-    /*
-     Name = NULL char array of length 32
-     Year = 0
-     Color = 0,0,0
-     Focus = 0
-     */
+void GradStudent::CleanUp(){
+    if (nullptr != name){
+        delete [] name;
+        name = nullptr;
+        year = 0;
+        color = {0,0,0}
+        focus = 0;
+    }
 }
 
-void GradStudent::AssignPersonality(){
-    //Initialize personality object AND initialize 3 counters with values
+GradStudent::GradStudent(){
+    //Initialize all with null/zero values
+    name = nullptr;
+    namelength = 0;
+    year = 0;
+    color = {0,0,0}
+    focus = 0;
+    currpaper=NULL;
+}
+
+GradStudent::GradStudent(GradStudent &from){
+    if(from.name != this->name){
+        name = new char [from.namelength];
+        for(int i=0; i<from.namelength;i++){
+            name[i]=from.name[i];
+        }
+        namelength = from.namelength;
+    }
+}
+
+const GradStudent &operator=(const GradStudent &from){
+    if(from.name!=this->name){
+        CleanUp();
+        for(int i=0; i<from.namelength;i++){
+            name[i]=from.name[i];
+        }
+        namelength = from.namelength;
+    }
+    return *this;
+}
+
+GradStudent::~GradStudent(){
+    Cleanup();
+}
+
+void GradStudent::AssignPersonality(float knowledge, float prestige, float mentoring){
+    //Initialize personality object AND initialize 2 counters with values
+    newpersonality = Personality();
+    newpersonality.generatePersonality(knowledge,prestige,mentoring);
+    this->personality = newpersonality;
+    out = Counter();
+    out.basedt = this->personality.getIntelligence();
+    out.currdt = out.basedt;
+    happiness = Counter();
+    happiness.basedt = this->personality.getOptimism();
+    happiness.currdt = happiness.basedt;
 }
 
 void GradStudent::SetResearchFocus(){
@@ -60,19 +114,33 @@ void GradStudent::ChangeHappinessLevel(float amount){
     
 }
 
-class Counter { private:
-    float currval,baseval,currdt, basedt;
-
+class Counter {
 public:
     Counter();
-    void decay();
+    float value,currdt, basedt;
+    void turn();
 };
 
 Counter::Counter(){
-    //Initialize each counter attribute to null
+    value=0;
+    currdt=0;
+    basedt=0;
 }
 
-void Counter::decay(){
-    //Decays currval of counter closer to baseval (in either direction)
+void Counter::turn(){
+    value += currdt;
+    if(currdt>basedt){
+        currdt -= 5;
+        if((currdt-basedt)<5){
+            currdt = basedt;
+        }
+    }
+    if(currdt<basedt){
+        currdt += 5;
+        if((currdt-basedt)<5){
+            currdt=basedt;
+        }
+    }
+    
 }
 
