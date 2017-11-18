@@ -13,6 +13,7 @@ using namespace std;
 class Counter {
 public:
     Counter();
+    Counter(const Counter &from);
     float value,currdt, basedt;
     void turn();
 };
@@ -21,6 +22,12 @@ Counter::Counter(){
     value=0;
     currdt=0;
     basedt=0;
+}
+
+Counter::Counter(const Counter &from){
+    value = from.value;
+    currdt = from.currdt;
+    basedt = from.basedt;
 }
 
 void Counter::turn(){
