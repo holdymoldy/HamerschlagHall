@@ -142,7 +142,7 @@ void GradStudent::CreatePaper(){
 }
 
 int GradStudent::SubmitPaper(float risk){
-    return currpaper.SubmitPaper(Personality.getIntelligence(),focus,risk);
+    return currpaper.SubmitPaper(personality.getIntelligence(),focus,risk);
 }
 
 void GradStudent::SetResearchFocus(){
