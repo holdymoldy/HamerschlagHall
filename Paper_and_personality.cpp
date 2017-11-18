@@ -90,7 +90,7 @@ float Personality::getStamina(){
 Paper::~Paper(){
 }
 
-int SubmitPaper(float intelligence, float focus, float risk){
+int Paper::SubmitPaper(float intelligence, float focus, float risk){
     // risk is a value between 0 and 1 (from lowest risk paper submission to highest risk (1 is Nature))
     
     default_random_engine generator;
@@ -115,12 +115,12 @@ Paper::Paper(){
     this->title = "";
 }
 
-void GeneratePaperAfterSuccess(float intelligence, int focus, float risk){
+void Paper::GeneratePaperAfterSuccess(float intelligence, int focus, float risk){
 
     this->citations = generateCitations(intelligence, focus, risk);
 
     if(risk>=0 && risk<0.1){
-        this->journal = "The Tartan"
+        this->journal = "The Tartan";
     }
     if(risk>=0.1 && risk<0.2){
         this->journal = "Buzzfeed News";
