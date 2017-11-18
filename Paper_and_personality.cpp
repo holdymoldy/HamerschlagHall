@@ -1,8 +1,37 @@
 #include <random>
-#include "Paper_and_personality.hpp"
 
 using namespace std;
 
+class Personality{
+public:
+    Personality();
+    ~Personality();
+    void generatePersonality(float knowledge, float prestige, float mentoring);
+    float getIntelligence();
+    float getOptimism();
+    float getStamina();
+    
+private:
+    float intelligence;
+    float optimism;
+    float stamina;
+};
+
+class Paper{
+public:
+    Paper();
+    ~Paper();
+    int generateCitations(float intelligence, int focus, float risk);
+    int SubmitPaper(float intelligence, int focus, float risk);
+    void GeneratePaperAfterSuccess(float intelligence, int focus, float risk);
+    int getCitations();
+    string getJournal();
+    
+private:
+    int citations;
+    string journal;
+    string title;
+};
 
 Personality::Personality(){
     this->intelligence = 0;
@@ -61,8 +90,7 @@ float Personality::getStamina(){
 Paper::~Paper(){
 }
 
-// other modifiers? GPA?
-Paper::Paper(float intelligence, int focus, float risk){
+int SubmitPaper(float intelligence, float focus, float risk){
     // risk is a value between 0 and 1 (from lowest risk paper submission to highest risk (1 is Nature))
     
     default_random_engine generator;
@@ -75,38 +103,51 @@ Paper::Paper(float intelligence, int focus, float risk){
     normal_distribution<float> accept_distribution(intelligence + multiplier*8, 20.0 - risk*5.0);
     float acceptance = accept_distribution(generator);
     if(acceptance > risk*100.0){
-        this->citations = generateCitations(intelligence, focus, risk);
+        return 1;
     }
     
+    return 0;
+}
+
+Paper::Paper(){
+    this->citations = 0;
+    this->journal = "";
+    this->title = "";
+}
+
+void GeneratePaperAfterSuccess(float intelligence, int focus, float risk){
+
+    this->citations = generateCitations(intelligence, focus, risk);
+
     if(risk>=0 && risk<0.1){
-        this->journal = this->journals[0];
+        this->journal = "The Tartan"
     }
     if(risk>=0.1 && risk<0.2){
-        this->journal = this->journals[1];
+        this->journal = "Buzzfeed News";
     }
     if(risk>=0.2 && risk<0.3){
-        this->journal = this->journals[2];
+        this->journal = "Journal of Tourism Resarch and Hospitality";
     }
     if(risk>=0.3 && risk<0.4){
-        this->journal = this->journals[3];
+        this->journal = "Magazine of Concrete Research";
     }
     if(risk>=0.4 && risk<0.5){
-        this->journal = this->journals[4];
+        this->journal = "arXiv";
     }
     if(risk>=0.5 && risk<0.6){
-        this->journal = this->journals[5];
+        this->journal = "Proceedings of the Royal Society";
     }
     if(risk>=0.6 && risk<0.7){
-        this->journal = this->journals[6];
+        this->journal = "Reviews of Modern Science";
     }
     if(risk>=0.7 && risk<0.8){
-        this->journal = this->journals[7];
+        this->journal = "Cell";
     }
     if(risk>=0.8 && risk<0.9){
-        this->journal = this->journals[8];
+        this->journal = "Science";
     }
     if(risk>=0.9 && risk<1.0){
-        this->journal = this->journals[9];
+        this->journal = "Nature";
     }
 
 }
