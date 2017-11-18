@@ -45,7 +45,6 @@ protected:
     int year;
     int *color;
     Counter happiness,out;
-    Paper currpaper;
     int focus;
     
 public:
@@ -58,6 +57,7 @@ public:
     char *name;
     int namelength;
     Personality personality;
+    Paper currpaper;
 
     void AssignPersonality(float knowledge, float prestige, float mentoring);     //Initialize personality object AND initialize 2 counters with values
     void PrintPersonality();
