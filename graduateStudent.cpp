@@ -79,6 +79,7 @@ void GradStudent::CleanUp(){
 
 GradStudent::GradStudent(){
     //Initialize all with null/zero values
+	printf("new grad students are initilized");
     name = nullptr;
     namelength = 0;
     year = 0;
@@ -95,6 +96,7 @@ GradStudent::GradStudent(){
 
 
 GradStudent* GradStudent::copy(){
+	printf("Copy constractor is called\n");
     GradStudent *toReturn = new GradStudent;
     toReturn->name = new char[namelength];
     for(int i=0; i<namelength; i++){
@@ -193,7 +195,9 @@ GradStudent* GradStudent::copy(){
 // }
 
 GradStudent::~GradStudent(){
+	printf("3");
     CleanUp();
+	printf("2");
 }
 
 void GradStudent::AssignPersonality(float knowledge, float prestige, float mentoring){
