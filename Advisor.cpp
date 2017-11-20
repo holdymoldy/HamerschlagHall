@@ -139,10 +139,10 @@ void Advisor::Recruit(GradStudent student[], int StudentCounter) {
 		MyFgets(Selection, 2, stdin);
 		
 			
-			//if (Selection[0] == 'A' || Selection[0] == 'B' || Selection[0] == 'C' || Selection[0] == 'D' || Selection[0] == 'E' || Selection[0] == 'F' || Selection[0] == 'G') {
-				//student[StudentCounter] = Hire[Selection[0] - 65];
+            if (Selection[0] == 'A' || Selection[0] == 'B' || Selection[0] == 'C' || Selection[0] == 'D' || Selection[0] == 'E' || Selection[0] == 'F' || Selection[0] == 'G') {
+//                student[StudentCounter] = Hire[Selection[0] - 65].copy();
 				printf("Congrats you selected: Student %c \n", Selection[0]);
-		//}
+        }
 			//printf("1");
 	//}	
 				
