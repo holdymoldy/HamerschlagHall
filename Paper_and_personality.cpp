@@ -1,7 +1,12 @@
 #include "Paper_and_personality.h"
 #include <random>
+#include <time.h>
 
 using namespace std;
+
+int generateRand(void){
+    return rand();
+}
 
 Personality::Personality(){
     this->intelligence = 0;
@@ -24,14 +29,14 @@ void Personality::generatePersonality(float knowledge, float prestige, float men
     float opt_mean = 50 + (mentoring*0.2);
     float int_dev=10, stam_dev=10, opt_dev=10;
 
-    default_random_engine generator;
+    default_random_engine gen(generateRand());
     normal_distribution<float> int_distribution(int_mean, int_dev);
     normal_distribution<float> stam_distribution(stam_mean, stam_dev);
     normal_distribution<float> opt_distribution(opt_mean, opt_dev);
 
-    this->intelligence = int_distribution(generator);
-    this->stamina = stam_distribution(generator);
-    this->optimism = opt_distribution(generator);
+    this->intelligence = int_distribution(gen);
+    this->stamina = stam_distribution(gen);
+    this->optimism = opt_distribution(gen);
 
     float attrs[3] = {this->intelligence, this->stamina, this->optimism};
     for(int i=0; i<3; i+=1){
