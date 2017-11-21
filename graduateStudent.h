@@ -6,9 +6,13 @@
 class Counter {
 public:
     Counter();
-    Counter copy();
+    //Counter copy();
+    Counter(const Counter &from);
     float value,currdt, basedt;
     void turn();
+    void SetValue(float i);
+    void SetCurrdT(float i);
+    void SetBasedT(float i);
 };
 
 
@@ -23,8 +27,8 @@ protected:
     
 public:
     GradStudent();
-    GradStudent* copy();
-    // GradStudent(const GradStudent &from);
+//    GradStudent* copy();
+     GradStudent(const GradStudent &from);
     // GradStudent &operator=(const GradStudent &from);
     void CleanUp();
     ~GradStudent();
@@ -48,6 +52,13 @@ public:
     void CreatePaper();
     int SubmitPaper(float risk); //1 if successful, paper returned, out returned to zero, then currpaper is null. 0 if not successful.
     void GeneratePaperAfterSuccess(float risk); //after success
+    void NameStudent(char desired[], int desiredlength);
+    void PrintName();
+    void PrintHappiness();
+    void SetColor(int arr[]);
+    void GetColor(int result[]);
+    int GetYear();
+    int GetFocus();
 };
 
 
