@@ -84,7 +84,67 @@ void Counter::SetBasedT(float i){
      year = 0;
      focus = 0;
  }
-// GradStudent &GradStudent::operator=(const GradStudent &from){//     if(from.name !=this->name){//         CleanUp();//         for(int i=0; i<from.namelength;i++){//             name[i]=from.name[i];//         }//         namelength = from.namelength;//         Personality *personality = new Personality;//         //personality = Personality(&from.personality); //use Personality class copy constructor//         personality.setIntelligence(from.personality.getIntelligence());//         personality.setOptimism(from.personality.getOptimism());//         personality.setStamina(from.personality.getStamina());        //         //Paper *currpaper = new Paper; // PAPERS ARE NEVER COPIED//         //currpaper = Paper(&from.currpaper); //use Paper class copy constructor        //         Counter *happiness = new Counter;//         happiness = Counter(&from.happiness); //use Counter class copy constructor        //         Counter *out = new Counter;//         out = Counter(&from.out); //use Counter class copy constructor        //         color = new int [3];//         for(int i=0; i<3; i+=1){//             color[i] = from.color[i];//         }//         year = from.year;//         focus = from.focus;//     }//     return *this;// }GradStudent::~GradStudent(){    CleanUp();}void GradStudent::AssignPersonality(float knowledge, float prestige, float mentoring){    //Initialize personality object AND initialize 2 counters with values    Personality *newpersonality = new Personality;    newpersonality->generatePersonality(knowledge,prestige,mentoring);    this->personality = newpersonality;    out = new Counter;    out->basedt = this->personality->getIntelligence();    out->currdt = out->basedt;    happiness = new Counter;    happiness->basedt = this->personality->getOptimism();    happiness->currdt = happiness->basedt;}void GradStudent::PrintPersonality(){    cout<<"Personality: intelligence="<<personality->getIntelligence()<<" | optimism="<<personality->getOptimism()<<" | stamina="<<personality->getStamina()<<endl;}void GradStudent::CreatePaper(){    Paper *pape = new Paper;    currpaper = pape;}int GradStudent::SubmitPaper(float risk){    return currpaper->SubmitPaper(personality->getIntelligence(),focus,risk);}void GradStudent::GeneratePaperAfterSuccess(float risk){    currpaper->GeneratePaperAfterSuccess(personality->getIntelligence(),focus,risk);}void GradStudent::SetResearchFocus(int focustoset){    //Set focus int to one of x research focuses, buff/neg relevant counters    if(focustoset != focus){ //only do something if desired focus if different from current focus        focus = focustoset;        if(focus==0){            out->basedt *= 2;        }        if(focus==1){            out->basedt *= 1/2;        }    }}void GradStudent::CheckIn(){    //Get student vitals + imp. att. on interaction    cout << "Checking in with ";    for(int i=0;i<namelength;i++){        cout<<name[i];    }    cout<<"..."<<endl;    cout<<"Vitals: year="<<year<<" | happiness="<<happiness->value<<" | research="<<out->value<<endl;    cout<<"Research focus is";    if(focus==1){        cout<<" Theory."<<endl;    }    else{        cout<<" Experiment."<<endl;    }    cout<<"Personality: intelligence="<<personality->getIntelligence()<<" | optimism="<<personality->getOptimism()<<" | stamina="<<personality->getStamina()<<endl;}void GradStudent::IncYear(){    //Increment year of student after 3 semesters    year += 1;}void GradStudent::ModifyHappinessValue(float amount){    happiness->value += amount;}void GradStudent::ModifyHappinessdT(float amount){    happiness->currdt += amount;}void GradStudent::ModifyResearchValue(float amount){    out->value += amount;}void GradStudent::ModifyResearchdT(float amount){    out->currdt += amount;}void GradStudent::ModifyHappinessBasedT(float amount){    happiness->basedt += amount;}void GradStudent::ModifyResearchBasedT(float amount){    out->basedt += amount;}
+
+ GradStudent &GradStudent::operator=(const GradStudent &from){
+     cout<<"copy operator called"<<endl;
+     CleanUp();
+     if(from.name != this->name){
+         if(from.name!=nullptr){
+             name = new char [from.namelength];
+             for(int i=0; i<from.namelength;i++){
+                 name[i]=from.name[i];
+             }
+             namelength = from.namelength;
+         }
+         else{
+             name = nullptr;
+         }
+     }
+     if(from.personality != this->personality){
+         if(from.personality!=nullptr){
+             personality = new Personality;
+             personality->setIntelligence(from.personality->getIntelligence());
+             personality->setOptimism(from.personality->getOptimism());
+             personality->setStamina(from.personality->getStamina());
+         }
+         else{
+             personality = nullptr;
+         }
+     }
+     if(from.happiness!=nullptr){
+         happiness = new Counter;
+         happiness->SetValue(from.happiness->value);
+         happiness->SetCurrdT(from.happiness->currdt);
+         happiness->SetBasedT(from.happiness->basedt);
+     }
+     else{
+         happiness = new Counter();
+     }
+     if(from.out!=nullptr){
+         out = new Counter;
+         out->SetValue(from.out->value);
+         out->SetCurrdT(from.out->currdt);
+         out->SetBasedT(from.out->basedt);
+         
+     }
+     else{
+         out = new Counter();
+     }
+     if(from.color!=nullptr){
+         color = new int[3];
+         for(int i=0;i<3;i++){
+             color[i]=from.color[i];
+         }
+     }
+     else{
+         color = nullptr;
+     }
+     currpaper = nullptr;
+     year = 0;
+     focus = 0;
+     return *this;
+ }
+GradStudent::~GradStudent(){    CleanUp();}void GradStudent::AssignPersonality(float knowledge, float prestige, float mentoring){    //Initialize personality object AND initialize 2 counters with values    Personality *newpersonality = new Personality;    newpersonality->generatePersonality(knowledge,prestige,mentoring);    this->personality = newpersonality;    out = new Counter;    out->basedt = this->personality->getIntelligence();    out->currdt = out->basedt;    happiness = new Counter;    happiness->basedt = this->personality->getOptimism();    happiness->currdt = happiness->basedt;}void GradStudent::PrintPersonality(){    cout<<"Personality: intelligence="<<personality->getIntelligence()<<" | optimism="<<personality->getOptimism()<<" | stamina="<<personality->getStamina()<<endl;}void GradStudent::CreatePaper(){    Paper *pape = new Paper;    currpaper = pape;}int GradStudent::SubmitPaper(float risk){    return currpaper->SubmitPaper(personality->getIntelligence(),focus,risk);}void GradStudent::GeneratePaperAfterSuccess(float risk){    currpaper->GeneratePaperAfterSuccess(personality->getIntelligence(),focus,risk);}void GradStudent::SetResearchFocus(int focustoset){    //Set focus int to one of x research focuses, buff/neg relevant counters    if(focustoset != focus){ //only do something if desired focus if different from current focus        focus = focustoset;        if(focus==0){            out->basedt *= 2;        }        if(focus==1){            out->basedt *= 1/2;        }    }}void GradStudent::CheckIn(){    //Get student vitals + imp. att. on interaction    cout << "Checking in with ";    for(int i=0;i<namelength;i++){        cout<<name[i];    }    cout<<"..."<<endl;    cout<<"Vitals: year="<<year<<" | happiness="<<happiness->value<<" | research="<<out->value<<endl;    cout<<"Research focus is";    if(focus==1){        cout<<" Theory."<<endl;    }    else{        cout<<" Experiment."<<endl;    }    cout<<"Personality: intelligence="<<personality->getIntelligence()<<" | optimism="<<personality->getOptimism()<<" | stamina="<<personality->getStamina()<<endl;}void GradStudent::IncYear(){    //Increment year of student after 3 semesters    year += 1;}void GradStudent::ModifyHappinessValue(float amount){    happiness->value += amount;}void GradStudent::ModifyHappinessdT(float amount){    happiness->currdt += amount;}void GradStudent::ModifyResearchValue(float amount){    out->value += amount;}void GradStudent::ModifyResearchdT(float amount){    out->currdt += amount;}void GradStudent::ModifyHappinessBasedT(float amount){    happiness->basedt += amount;}void GradStudent::ModifyResearchBasedT(float amount){    out->basedt += amount;}
 
 void GradStudent::PrintHappiness(){
     cout<<happiness->value<<','<<happiness->currdt<<','<<happiness->basedt<<endl;

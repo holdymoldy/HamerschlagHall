@@ -29,7 +29,7 @@ public:
     GradStudent();
 //    GradStudent* copy();
      GradStudent(const GradStudent &from);
-    // GradStudent &operator=(const GradStudent &from);
+     GradStudent &operator=(const GradStudent &from);
     void CleanUp();
     ~GradStudent();
     
