@@ -1,7 +1,6 @@
 #ifndef Drawing
 #define Drawing
 
-
 class Upgrade
 {
 public:
@@ -12,7 +11,8 @@ public:
 	void Draw_Print(void);
 	void Draw_Chem(void);
 	void Draw_Server(void);
-}; 
+};
+
 class Person
 {
 public:
@@ -38,11 +38,11 @@ public:
 	int state, x, y;
 	void Draw(void);
 };
-
 class Computer
 {
 public:
 	int state, x, y;
 	void Draw(void);
 };
+
 #endif

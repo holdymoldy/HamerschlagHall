@@ -1,7 +1,7 @@
-
 #include "Drawing.h"
 #include "fssimplewindow.h"
 #include <math.h>
+
 
 void DrawCircle(double cx, double cy, int rad, int fill)
 {
@@ -28,24 +28,390 @@ void DrawCircle(double cx, double cy, int rad, int fill)
 	glEnd();
 }
 
-int CheckHitTarget(
-	double missileX, double missileY,
-	double targetX, double targetY, double targetSizeX, double targetSizeY)
+void Upgrade::Draw_CNC(void)
 {
-	double relativeX, relativeY;
-	relativeX = missileX - targetX;
-	relativeY = missileY - targetY;
-	if (0 <= relativeX && relativeX<targetSizeX && 0 <= relativeY && relativeY<targetSizeY)
+	glColor3ub(255, 255, 255);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 40, y - 65);
+	glVertex2i(x + 40, y - 65);
+	glVertex2i(x + 40, y + 5);
+	glVertex2i(x - 40, y + 5);
+	glEnd();
+
+	glColor3ub(20, 20, 20);
+	DrawCircle(x - 40, y - 60, 4, 1);
+
+	glColor3ub(20, 20, 20);
+	DrawCircle(x - 40, y - 58, 4, 1);
+
+	glColor3ub(20, 20, 20);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 40, y - 60);
+	glVertex2i(x - 30, y - 60);
+	glVertex2i(x - 30, y - 58);
+	glVertex2i(x - 40, y - 58);
+	glEnd();
+
+	glColor3ub(20, 20, 20);
+	DrawCircle(x - 40, y - 48, 4, 1);
+
+	glColor3ub(20, 20, 20);
+	DrawCircle(x - 40, y - 46, 4, 1);
+
+	glColor3ub(20, 20, 20);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 40, y - 48);
+	glVertex2i(x - 25, y - 48);
+	glVertex2i(x - 25, y - 46);
+	glVertex2i(x - 40, y - 46);
+	glEnd();
+
+	glColor3ub(0, 0, 205);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 60, y - 95);
+	glVertex2i(x + 60, y - 95);
+	glVertex2i(x + 60, y - 65);
+	glVertex2i(x - 60, y - 65);
+	glEnd();
+
+	glColor3ub(0, 0, 128);
+	glBegin(GL_QUADS);
+	glVertex2d((double)x - 57.5, (double)y - 115);
+	glVertex2d((double)x + 57.5, (double)y - 115);
+	glVertex2i(x + 60, y - 95);
+	glVertex2i(x - 60, y - 95);
+	glEnd();
+
+	glColor3ub(0, 0, 205);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 60, y - 65);
+	glVertex2i(x - 40, y - 65);
+	glVertex2i(x - 40, y + 100);
+	glVertex2i(x - 60, y + 100);
+	glEnd();
+
+	glColor3ub(0, 0, 205);
+	glBegin(GL_QUADS);
+	glVertex2i(x + 60, y - 65);
+	glVertex2i(x + 40, y - 65);
+	glVertex2i(x + 40, y + 100);
+	glVertex2i(x + 60, y + 100);
+	glEnd();
+
+	glColor3ub(0, 0, 205);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 60, y + 5);
+	glVertex2i(x + 60, y + 5);
+	glVertex2i(x + 60, y + 100);
+	glVertex2i(x - 60, y + 100);
+	glEnd();
+
+	glColor3ub(105, 105, 105);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 35, y - 5);
+	glVertex2i(x + 35, y - 5);
+	glVertex2i(x + 35, y + 5);
+	glVertex2i(x - 35, y + 5);
+	glEnd();
+
+	glColor3ub(105, 105, 105);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 20, y - 65);
+	glVertex2i(x + 20, y - 65);
+	glVertex2i(x + 20, y - 35);
+	glVertex2i(x - 20, y - 35);
+	glEnd();
+
+	glColor3ub(20, 20, 20);
+	DrawCircle(x - 2, y - 20, 4, 1);
+
+	glColor3ub(20, 20, 20);
+	DrawCircle(x + 2, y - 20, 4, 1);
+
+	glColor3ub(0, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 10, y - 35);
+	glVertex2i(x + 10, y - 35);
+	glVertex2i(x + 10, y - 20);
+	glVertex2i(x - 10, y - 20);
+	glEnd();
+
+	glColor3ub(20, 20, 20);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 2, y - 20);
+	glVertex2i(x + 2, y - 20);
+	glVertex2i(x + 2, y - 10);
+	glVertex2i(x - 2, y - 10);
+	glEnd();
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glColor4ub(201, 219, 220, 125);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 40, y - 65);
+	glVertex2i(x + 40, y - 65);
+	glVertex2i(x + 40, y + 5);
+	glVertex2i(x - 40, y + 5);
+	glEnd();
+
+	glColor4ub(0, 0, 0, 125);
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(x - 40, y - 65);
+	glVertex2i(x, y - 65);
+	glVertex2i(x, y + 5);
+	glVertex2i(x - 40, y + 5);
+	glEnd();
+
+	glColor4ub(0, 0, 0, 125);
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(x + 40, y - 65);
+	glVertex2i(x, y - 65);
+	glVertex2i(x, y + 5);
+	glVertex2i(x + 40, y + 5);
+	glEnd();
+
+	glDisable(GL_BLEND);
+
+	glColor3ub(105, 105, 105);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 40, y + 10);
+	glVertex2i(x + 40, y + 10);
+	glVertex2i(x + 40, y + 52);
+	glVertex2i(x - 40, y + 52);
+	glEnd();
+
+	glColor3ub(0, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 38, y + 12);
+	glVertex2i(x + 1, y + 12);
+	glVertex2i(x + 1, y + 40);
+	glVertex2i(x - 38, y + 40);
+	glEnd();
+
+	for (int i = 0; i < 8; i++)
 	{
-		return 1;
+		for (int j = 0; j < 2; j++)
+		{
+			glColor3ub(255, 255, 255);
+			glBegin(GL_QUADS);
+			glVertex2i(x - 38 + 5 * i, y + 41 + 5 * j);
+			glVertex2i(x - 34 + 5 * i, y + 41 + 5 * j);
+			glVertex2i(x - 34 + 5 * i, y + 45 + 5 * j);
+			glVertex2i(x - 38 + 5 * i, y + 45 + 5 * j);
+			glEnd();
+		}
 	}
-	else
+
+	glColor3ub(255, 255, 0);
+	DrawCircle(x + 8, y + 19, 6, 1);
+
+	glColor3ub(255, 0, 0);
+	DrawCircle(x + 8, y + 19, 4, 1);
+
+	glColor3ub(0, 0, 0);
+	DrawCircle(x + 8, y + 30, 4, 1);
+
+	glColor3ub(0, 0, 0);
+	DrawCircle(x + 8, y + 39, 4, 1);
+
+	glColor3ub(0, 0, 0);
+	DrawCircle(x + 8, y + 48, 4, 1);
+
+	for (int i = 0; i < 5; i++)
 	{
-		return 0;
+		for (int j = 0; j < 5; j++)
+		{
+			glColor3ub(255, 255, 255);
+			glBegin(GL_QUADS);
+			glVertex2i(x + 14 + 5 * i, y + 12 + 5 * j);
+			glVertex2i(x + 18 + 5 * i, y + 12 + 5 * j);
+			glVertex2i(x + 18 + 5 * i, y + 16 + 5 * j);
+			glVertex2i(x + 14 + 5 * i, y + 16 + 5 * j);
+			glEnd();
+		}
 	}
+
+	glColor3ub(255, 255, 255);
+	glBegin(GL_QUADS);
+	glVertex2i(x + 24, y + 39);
+	glVertex2i(x + 28, y + 39);
+	glVertex2i(x + 28, y + 43);
+	glVertex2i(x + 24, y + 43);
+	glEnd();
+
+	glColor3ub(255, 255, 255);
+	glBegin(GL_QUADS);
+	glVertex2i(x + 24, y + 44);
+	glVertex2i(x + 28, y + 44);
+	glVertex2i(x + 28, y + 48);
+	glVertex2i(x + 24, y + 48);
+	glEnd();
+
+	glColor3ub(255, 255, 255);
+	glBegin(GL_QUADS);
+	glVertex2i(x + 19, y + 42);
+	glVertex2i(x + 23, y + 42);
+	glVertex2i(x + 23, y + 46);
+	glVertex2i(x + 19, y + 46);
+	glEnd();
+
+	glColor3ub(255, 255, 255);
+	glBegin(GL_QUADS);
+	glVertex2i(x + 29, y + 42);
+	glVertex2i(x + 33, y + 42);
+	glVertex2i(x + 33, y + 46);
+	glVertex2i(x + 29, y + 46);
+	glEnd();
 }
 
+void Upgrade::Draw_Print(void)
+{
+	glColor3ub(139, 69, 19);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x - 57.5, (double)y);
+	glVertex2d((double)x + 57.5, (double)y);
+	glVertex2i(x + 60, y + 40);
+	glVertex2i(x - 60, y + 40);
+	glEnd();
 
+	glColor3ub(0, 0, 0);
+	glBegin(GL_LINE_LOOP);
+	glVertex2d((double)x - 57.5, (double)y);
+	glVertex2d((double)x + 57.5, (double)y);
+	glVertex2i(x + 60, y + 40);
+	glVertex2i(x - 60, y + 40);
+	glEnd();
+
+	glColor3ub(160, 82, 45);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 60, y + 40);
+	glVertex2i(x + 60, y + 40);
+	glVertex2i(x + 60, y + 60);
+	glVertex2i(x - 60, y + 60);
+	glEnd();
+
+	glColor3ub(160, 82, 45);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 50, y + 60);
+	glVertex2i(x - 30, y + 60);
+	glVertex2i(x - 30, y + 100);
+	glVertex2i(x - 50, y + 100);
+	glEnd();
+
+	glColor3ub(160, 82, 45);
+	glBegin(GL_QUADS);
+	glVertex2i(x + 50, y + 60);
+	glVertex2i(x + 30, y + 60);
+	glVertex2i(x + 30, y + 100);
+	glVertex2i(x + 50, y + 100);
+	glEnd();
+
+	glColor3ub(0, 0, 0);
+	glBegin(GL_LINES);
+	glVertex2i(x - 60, y + 60);
+	glVertex2i(x + 60, y + 60);
+	glEnd();
+
+	glColor3ub(160, 82, 45);
+	glBegin(GL_QUADS);
+	glVertex2i(x + 50, y + 60);
+	glVertex2i(x + 30, y + 60);
+	glVertex2i(x + 30, y + 100);
+	glVertex2i(x + 50, y + 100);
+	glEnd();
+
+	glColor3ub(0, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 55, y - 65);
+	glVertex2i(x + 55, y - 65);
+	glVertex2i(x + 55, y - 45);
+	glVertex2i(x - 55, y - 45);
+	glEnd();
+
+	glColor3ub(0, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 55, y - 45);
+	glVertex2i(x - 35, y - 45);
+	glVertex2i(x - 35, y + 35);
+	glVertex2i(x - 55, y + 35);
+	glEnd();
+
+	glColor3ub(0, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex2i(x + 55, y - 45);
+	glVertex2i(x + 35, y - 45);
+	glVertex2i(x + 35, y + 35);
+	glVertex2i(x + 55, y + 35);
+	glEnd();
+
+	glColor3ub(0, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 35, y + 15);
+	glVertex2i(x + 35, y + 15);
+	glVertex2i(x + 35, y + 35);
+	glVertex2i(x - 35, y + 35);
+	glEnd();
+
+	glColor3ub(255, 255, 255);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 35, y - 45);
+	glVertex2i(x + 35, y - 45);
+	glVertex2i(x + 35, y + 15);
+	glVertex2i(x - 35, y + 15);
+	glEnd();
+
+	glColor3ub(31, 31, 31);
+	glBegin(GL_QUADS);
+	glVertex2d((double)x - 52.5, (double)y - 85);
+	glVertex2d((double)x + 52.5, (double)y - 85);
+	glVertex2i(x + 55, y - 65);
+	glVertex2i(x - 55, y - 65);
+	glEnd();
+
+	glColor3ub(0, 255, 0);
+	DrawCircle(x - 15, y, 5, 1);
+
+	glColor3ub(0, 255, 0);
+	DrawCircle(x + 15, y, 5, 1);
+
+	glColor3ub(0, 255, 0);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 25, y - 13);
+	glVertex2i(x + 25, y - 13);
+	glVertex2i(x + 25, y - 3);
+	glVertex2i(x - 25, y - 3);
+	glEnd();
+
+	glColor3ub(0, 255, 0);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 18, y - 30);
+	glVertex2i(x + 18, y - 30);
+	glVertex2i(x + 18, y - 13);
+	glVertex2i(x - 18, y - 13);
+	glEnd();
+
+	glColor3ub(105, 105, 105);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 25, y + 5);
+	glVertex2i(x + 25, y + 5);
+	glVertex2i(x + 25, y + 15);
+	glVertex2i(x - 25, y + 15);
+	glEnd();
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glColor4ub(201, 219, 220, 175);
+	glBegin(GL_QUADS);
+	glVertex2i(x - 35, y - 45);
+	glVertex2i(x + 35, y - 45);
+	glVertex2i(x + 35, y + 15);
+	glVertex2i(x - 35, y + 15);
+	glEnd();
+
+	glDisable(GL_BLEND);
+}
 
 void Upgrade::Draw_Clone(void)
 {
@@ -916,6 +1282,8 @@ void Person::Draw_up_still(void)
 	DrawCircle(x, y, 40, 1);
 }
 
+
+
 void Desk::Draw(void)
 {
 	glColor3ub(139, 69, 19);
@@ -964,6 +1332,8 @@ void Desk::Draw(void)
 	glVertex2i(x + 90, y + 60);
 	glEnd();
 }
+
+
 
 void Computer::Draw(void)
 {
@@ -1029,4 +1399,3 @@ void Computer::Draw(void)
 	glVertex2i(x - 45, y - 30);
 	glEnd();
 }
-

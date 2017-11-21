@@ -1,6 +1,7 @@
 #include "graduateStudent.h"
 #include "Advisor.h"
 #include <random>
+#include <string>
 #include <time.h>
 #include "Drawing.h"
 
@@ -33,12 +34,12 @@ char *MyFgets(char str[], int limit, FILE *fp)
 
 Advisor::Advisor()
 {
-	Experience = 70;
-	Prestige = 90;
-	Knowledge = 80;
-	Mentoring = 90;
-	Semester = 0;
-	/*printf("You have 300 points to distribute to advisor`s personalities, write down the distribution in a range of 0-100\n  Experience\n  Prestige\n  Knowledge\n  Mentoring\n");
+	//Experience = 70;
+	//Prestige = 90;
+	//Knowledge = 80;
+	//Mentoring = 90;
+	//Semester = 0;
+	printf("You have 300 points to distribute to advisor`s personalities, write down the distribution in a range of 0-100\n  Experience\n  Prestige\n  Knowledge\n  Mentoring\n");
 	char Exp[4];
 	MyFgets(Exp, 3, stdin);
 	Experience = atof(Exp);
@@ -54,7 +55,7 @@ Advisor::Advisor()
 	char Ment[4];
 	MyFgets(Ment, 3, stdin);
 	Mentoring = atof(Ment);
-	printf("%f\n", Mentoring);*/
+	printf("%f\n", Mentoring);
 
 }
 Advisor::~Advisor()
@@ -74,7 +75,9 @@ float Advisor::GetMentoring() {
 	return this->Mentoring;
 }
 void Advisor::WriteGrant() {
-	if (Semester % 3 == 1) {  //Draw.CheckMouseWriteGrand() is in the drawing function and checks if the user is clicking WriteGrand button.
+	
+	
+		//Draw.CheckMouseWriteGrand() is in the drawing function and checks if the user is clicking WriteGrand button.
 		double inherent_probability = Prestige * (Knowledge + Experience);// This math needs tuning to fall in (1,2)
 		double accept_probability = (double)rand() / (double)RAND_MAX;         //We will add the weight of the level of the grand to it so that this also falls to 1 to 2, and the higher the level, the harder it is to get
 		printf("Initial_Money:%f\n", Money);
@@ -88,7 +91,7 @@ void Advisor::WriteGrant() {
 		}
 		if (LevelInput[0] == 'A' || LevelInput[0] == 'a') {
 			accept_probability += 0.2;
-			if (inherent_probability> accept_probability) {
+			if (inherent_probability > accept_probability) {
 				Money += levelmoneyA;
 				printf("Congrates! The proposal isaccepted!\n");
 			}
@@ -97,7 +100,7 @@ void Advisor::WriteGrant() {
 		}
 		if (LevelInput[0] == 'B' || LevelInput[0] == 'b') {
 			accept_probability += 0.4;
-			if (inherent_probability> accept_probability) {
+			if (inherent_probability > accept_probability) {
 				Money += levelmoneyB;
 				printf("Congrates! The proposal isaccepted!\n");
 			}
@@ -106,7 +109,7 @@ void Advisor::WriteGrant() {
 
 		if (LevelInput[0] == 'C' || LevelInput[0] == 'c') {
 			accept_probability += 0.6;
-			if (inherent_probability> accept_probability) {
+			if (inherent_probability > accept_probability) {
 				Money += levelmoneyC;
 				printf("Congrates! The proposal isaccepted!\n");
 			}
@@ -115,19 +118,20 @@ void Advisor::WriteGrant() {
 
 		if (LevelInput[0] == 'D' || LevelInput[0] == 'd') {
 			accept_probability += 0.8;
-			if (inherent_probability> accept_probability) {
+			if (inherent_probability > accept_probability) {
 				Money += levelmoneyD;
 				printf("Congrates! The proposal isaccepted!\n");
 			}
 			else printf("Ooops! Empty shot.  :(");
 		}
-	}
-	printf("Updated_Money:%f\n", Money);
+		printf("Updated_Money:%f\n", Money);
+	
+	
 }
 void Advisor::Recruit(GradStudent student[], int StudentCounter) { 
 	char Selection[3];
 	char A = 'A';
-	//if (Semester % 3 == 0) {
+
 		int j = 3;     //Prestige / 25 + rand() % 2;  //If Prestige is out of 100;   
 		GradStudent Hire[3];
 		for (int i = 0; i < j; i++) {
@@ -137,16 +141,10 @@ void Advisor::Recruit(GradStudent student[], int StudentCounter) {
 			A++;
 		}
 		MyFgets(Selection, 2, stdin);
-		
-			
             if (Selection[0] == 'A' || Selection[0] == 'B' || Selection[0] == 'C' || Selection[0] == 'D' || Selection[0] == 'E' || Selection[0] == 'F' || Selection[0] == 'G') {
-//                student[StudentCounter] = Hire[Selection[0] - 65].copy();
+                student[StudentCounter] = Hire[Selection[0] - 65];
 				printf("Congrats you selected: Student %c \n", Selection[0]);
         }
-			//printf("1");
-	//}	
-				
-				printf("1");
 }
 
 void Advisor::UpgradeLab(GradStudent student[], Upgrade upgrade[], Person people[], int StudentCounter) {
@@ -373,3 +371,17 @@ void Advisor::SetResearchFocus(GradStudent student[], int StudentCounter) {
 	scanf("> %d\n", &focus);
 	student[ChosenStu].SetResearchFocus(focus);
 }
+
+void Advisor::SendtoCompany(GradStudent student[],int inter) {
+	// we should decide on Students Gains.
+	printf("Which company would you like your student to be working in during summer term\n ");
+	printf("A: Your student works in GOOGLE to create AI that might destroy the humanity.\nB: Your student works in UBER for Self-driving cars in Pittsburgh.\nHe can also be an UBER driver for some extra bucks.\nC: Your Student will takea part in a super secret CIA project even you don't know.\n");
+	printf("D: TESLA needs some fast-charging, lightweight batteries for the cars.\nE: SPACEX is looking for Rocket drivers.\nF: Your student seems to need a vacation. Give him a Mars trip with NASA.\n");
+	printf("G: FACEBOOK needs more advertisement and news-feed algorithms to alienate people.\nH: Let's save the planet with Wind and Solar Power.\nI: Wants to be a librarian in AMAZON.\n");
+	printf("J: You are just sick of student's question and want not to see him at least a semester, so anywhere is ok.\nK: Let's do some Fusion Energy.\nL: CERN is looking for geniuses.\n");
+		char decision[2];
+		MyFgets(decision, 1, stdin);
+		char CheckInput[24] = { 'A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','h','I','i','J','j','K','k','L','l' };
+		student[inter].ModifyHappinessValue(20.0);
+		}
+	
