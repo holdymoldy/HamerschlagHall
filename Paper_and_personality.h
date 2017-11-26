@@ -2,7 +2,6 @@
 #ifndef PapPer_h
 #define PapPer_h
 
-
 class Paper{
 public:
     Paper();
@@ -12,6 +11,7 @@ public:
     int generateCitations(float intelligence, int focus, float risk);
     int SubmitPaper(float intelligence, int focus, float risk);
     void GeneratePaperAfterSuccess(float intelligence, int focus, float risk);
+    void GenerateTitle();
     int getCitations();
     
 private:
