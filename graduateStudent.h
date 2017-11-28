@@ -19,17 +19,17 @@ public:
 
 class GradStudent {
 protected:
-
+    
     int year;
     int *color;
-    Counter *happiness,*out;
+    Counter *happiness,*rout;
     int focus;
     
 public:
-    GradStudent();
-//    GradStudent* copy();
-     GradStudent(const GradStudent &from);
-     GradStudent &operator=(const GradStudent &from);
+    GradStudent(float knowledge, float prestige, float mentoring);
+    //    GradStudent* copy();
+    GradStudent(const GradStudent &from);
+    GradStudent &operator=(const GradStudent &from);
     void CleanUp();
     ~GradStudent();
     
@@ -37,7 +37,7 @@ public:
     int namelength;
     Personality *personality;
     Paper *currpaper;
-
+    
     void AssignPersonality(float knowledge, float prestige, float mentoring);     //Initialize personality object AND initialize 2 counters with values
     void PrintPersonality();
     void SetResearchFocus(int focus);    //Set focus int to one of x research focuses, buff/neg relevant counters
@@ -59,6 +59,7 @@ public:
     void GetColor(int result[]);
     int GetYear();
     int GetFocus();
+    void turn();
 };
 
 

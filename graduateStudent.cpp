@@ -84,145 +84,151 @@ void GradStudent::CleanUp(){
         delete happiness;
         happiness = nullptr;
     }
-    if(nullptr!=out){
-        delete out;
-        out = nullptr;
+    if(nullptr!=rout){
+        delete rout;
+        rout = nullptr;
     }
     year = 0;
     focus = 0;
 }
 
-GradStudent::GradStudent(){
+GradStudent::GradStudent(float knowledge, float prestige, float mentoring){
     //Initialize all with null/zero values
-	
-	name = nullptr;       //!!!! for TRIAL
-    namelength = 1;
-    year = 300;
-    focus = 100;
-    color = nullptr;     //// !!!! for TRIAL
+    printf("new grad students are initialized");
+    name = nullptr;
+    namelength = 0;
+    year = 0;
+    focus = 0;
+    color = nullptr;
     personality = nullptr;
     currpaper = nullptr;
     happiness = nullptr;
-    out = nullptr;
+    rout = nullptr;
+    
+    char desired[] = "HOLDENPARKS";
+    this->NameStudent(desired,11);
+    int colorarr[3]={100,100,250};
+    this->SetColor(colorarr);
+    this->AssignPersonality(knowledge,prestige,mentoring);
 }
 
- GradStudent::GradStudent(const GradStudent &from){
-    
-     if(from.name != this->name){
-         if(from.name!=nullptr){
-             name = new char [from.namelength];
-             for(int i=0; i<from.namelength;i++){
-                 name[i]=from.name[i];
-             }
-             namelength = from.namelength;
-         }
-         else{
-             name = nullptr;
-         }
-     }
-     if(from.personality != this->personality){
-         if(from.personality!=nullptr){
-             personality = new Personality;
-             personality->setIntelligence(from.personality->getIntelligence());
-             personality->setOptimism(from.personality->getOptimism());
-             personality->setStamina(from.personality->getStamina());
-         }
-         else{
-             personality = nullptr;
-         }
-     }
-     if(from.happiness!=nullptr){
-         happiness = new Counter;
-         happiness->SetValue(from.happiness->value);
-         happiness->SetCurrdT(from.happiness->currdt);
-         happiness->SetBasedT(from.happiness->basedt);
-     }
-     else{
-         happiness = new Counter();
-     }
-     if(from.out!=nullptr){
-         out = new Counter;
-         out->SetValue(from.out->value);
-         out->SetCurrdT(from.out->currdt);
-         out->SetBasedT(from.out->basedt);
+GradStudent::GradStudent(const GradStudent &from){
+    cout<<"copy constructor called"<<endl;
+    if(from.name != this->name){
+        if(from.name!=nullptr){
+            name = new char [from.namelength];
+            for(int i=0; i<from.namelength;i++){
+                name[i]=from.name[i];
+            }
+            namelength = from.namelength;
+        }
+        else{
+            name = nullptr;
+        }
+    }
+    if(from.personality != this->personality){
+        if(from.personality!=nullptr){
+            personality = new Personality;
+            personality->setIntelligence(from.personality->getIntelligence());
+            personality->setOptimism(from.personality->getOptimism());
+            personality->setStamina(from.personality->getStamina());
+        }
+        else{
+            personality = nullptr;
+        }
+    }
+    if(from.happiness!=nullptr){
+        happiness = new Counter;
+        happiness->SetValue(from.happiness->value);
+        happiness->SetCurrdT(from.happiness->currdt);
+        happiness->SetBasedT(from.happiness->basedt);
+    }
+    else{
+        happiness = new Counter();
+    }
+    if(from.rout!=nullptr){
+        rout = new Counter;
+        rout->SetValue(from.rout->value);
+        rout->SetCurrdT(from.rout->currdt);
+        rout->SetBasedT(from.rout->basedt);
+        
+    }
+    else{
+        rout = new Counter();
+    }
+    if(from.color!=nullptr){
+        color = new int[3];
+        for(int i=0;i<3;i++){
+            color[i]=from.color[i];
+        }
+    }
+    else{
+        color = nullptr;
+    }
+    currpaper = nullptr;
+    year = 0;
+    focus = 0;
+}
 
-     }
-     else{
-         out = new Counter();
-     }
-     if(from.color!=nullptr){
-         color = new int[3];
-         for(int i=0;i<3;i++){
-             color[i]=from.color[i];
-         }
-     }
-     else{
-         color = nullptr;
-     }
-     currpaper = nullptr;
-     year = 0;
-     focus = 0;
- }
-
- GradStudent &GradStudent::operator=(const GradStudent &from){
-     //cout<<"copy operator called"<<endl;
-     CleanUp();
-     if(from.name != this->name){
-         if(from.name!=nullptr){
-             name = new char [from.namelength];
-             for(int i=0; i<from.namelength;i++){
-                 name[i]=from.name[i];
-             }
-             namelength = from.namelength;
-         }
-         else{
-             name = nullptr;
-         }
-     }
-     if(from.personality != this->personality){
-         if(from.personality!=nullptr){
-             personality = new Personality;
-             personality->setIntelligence(from.personality->getIntelligence());
-             personality->setOptimism(from.personality->getOptimism());
-             personality->setStamina(from.personality->getStamina());
-         }
-         else{
-             personality = nullptr;
-         }
-     }
-     if(from.happiness!=nullptr){
-         happiness = new Counter;
-         happiness->SetValue(from.happiness->value);
-         happiness->SetCurrdT(from.happiness->currdt);
-         happiness->SetBasedT(from.happiness->basedt);
-     }
-     else{
-         happiness = new Counter();
-     }
-     if(from.out!=nullptr){
-         out = new Counter;
-         out->SetValue(from.out->value);
-         out->SetCurrdT(from.out->currdt);
-         out->SetBasedT(from.out->basedt);
-         
-     }
-     else{
-         out = new Counter();
-     }
-     if(from.color!=nullptr){
-         color = new int[3];
-         for(int i=0;i<3;i++){
-             color[i]=from.color[i];
-         }
-     }
-     else{
-         color = nullptr;
-     }
-     currpaper = nullptr;
-     year = 0;
-     focus = 0;
-     return *this;
- }
+GradStudent &GradStudent::operator=(const GradStudent &from){
+    cout<<"copy operator called"<<endl;
+    CleanUp();
+    if(from.name != this->name){
+        if(from.name!=nullptr){
+            name = new char [from.namelength];
+            for(int i=0; i<from.namelength;i++){
+                name[i]=from.name[i];
+            }
+            namelength = from.namelength;
+        }
+        else{
+            name = nullptr;
+        }
+    }
+    if(from.personality != this->personality){
+        if(from.personality!=nullptr){
+            personality = new Personality;
+            personality->setIntelligence(from.personality->getIntelligence());
+            personality->setOptimism(from.personality->getOptimism());
+            personality->setStamina(from.personality->getStamina());
+        }
+        else{
+            personality = nullptr;
+        }
+    }
+    if(from.happiness!=nullptr){
+        happiness = new Counter;
+        happiness->SetValue(from.happiness->value);
+        happiness->SetCurrdT(from.happiness->currdt);
+        happiness->SetBasedT(from.happiness->basedt);
+    }
+    else{
+        happiness = new Counter();
+    }
+    if(from.rout!=nullptr){
+        rout = new Counter;
+        rout->SetValue(from.rout->value);
+        rout->SetCurrdT(from.rout->currdt);
+        rout->SetBasedT(from.rout->basedt);
+        
+    }
+    else{
+        rout = new Counter();
+    }
+    if(from.color!=nullptr){
+        color = new int[3];
+        for(int i=0;i<3;i++){
+            color[i]=from.color[i];
+        }
+    }
+    else{
+        color = nullptr;
+    }
+    currpaper = nullptr;
+    year = 0;
+    focus = 0;
+    return *this;
+}
 
 GradStudent::~GradStudent(){
     CleanUp();
@@ -233,12 +239,15 @@ void GradStudent::AssignPersonality(float knowledge, float prestige, float mento
     Personality *newpersonality = new Personality;
     newpersonality->generatePersonality(knowledge,prestige,mentoring);
     this->personality = newpersonality;
-    out = new Counter;
-    out->basedt = this->personality->getIntelligence();
-    out->currdt = out->basedt;
+    rout = new Counter;
+    rout->basedt = this->personality->getIntelligence()/2;
+    rout->currdt = rout->basedt;
     happiness = new Counter;
-    happiness->basedt = this->personality->getOptimism();
+    float dt = this->personality->getOptimism();
+    happiness->basedt = -1*(100-dt);
     happiness->currdt = happiness->basedt;
+    happiness->value = 100;
+    rout-> value = 0;
 }
 void GradStudent::PrintPersonality(){
     cout<<"Personality: intelligence="<<personality->getIntelligence()<<" | optimism="<<personality->getOptimism()<<" | stamina="<<personality->getStamina()<<endl;
@@ -262,10 +271,10 @@ void GradStudent::SetResearchFocus(int focustoset){
     if(focustoset != focus){ //only do something if desired focus if different from current focus
         focus = focustoset;
         if(focus==0){
-            out->basedt *= 2;
+            rout->basedt *= 2;
         }
         if(focus==1){
-            out->basedt *= 1/2;
+            rout->basedt *= 1/2;
         }
     }
 }
@@ -277,7 +286,7 @@ void GradStudent::CheckIn(){
         cout<<name[i];
     }
     cout<<"..."<<endl;
-    cout<<"Vitals: year="<<year<<" | happiness="<<happiness->value<<" | research="<<out->value<<endl;
+    cout<<"Vitals: year="<<year<<" | happiness="<<happiness->value<<" | research="<<rout->value<<endl;
     cout<<"Research focus is";
     if(focus==1){
         cout<<" Theory."<<endl;
@@ -300,10 +309,10 @@ void GradStudent::ModifyHappinessdT(float amount){
     happiness->currdt += amount;
 }
 void GradStudent::ModifyResearchValue(float amount){
-    out->value += amount;
+    rout->value += amount;
 }
 void GradStudent::ModifyResearchdT(float amount){
-    out->currdt += amount;
+    rout->currdt += amount;
 }
 
 void GradStudent::ModifyHappinessBasedT(float amount){
@@ -311,7 +320,7 @@ void GradStudent::ModifyHappinessBasedT(float amount){
 }
 
 void GradStudent::ModifyResearchBasedT(float amount){
-    out->basedt += amount;
+    rout->basedt += amount;
 }
 
 void GradStudent::PrintHappiness(){
@@ -357,5 +366,10 @@ int GradStudent::GetYear(){
 
 int GradStudent::GetFocus(){
     return focus;
+}
+
+void GradStudent::turn(){
+    happiness->turn();
+    rout->turn();
 }
 
