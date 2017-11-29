@@ -100,30 +100,11 @@ Paper::~Paper(){
     }
 }
 
-int Paper::SubmitPaper(float intelligence, int focus, float risk){
-    // risk is a value between 0 and 1 (from lowest risk paper submission to highest risk (1 is Nature))
-
-    default_random_engine generator;
-    float multiplier = 0;
-    if(focus){
-        multiplier += 0.2;
-    }
-    // other multipliers here
-
-    normal_distribution<float> accept_distribution(intelligence + multiplier*8, 20.0 - risk*5.0);
-    float acceptance = accept_distribution(generator);
-    if(acceptance > risk*100.0){
-        return 1;
-    }
-
-    return 0;
-}
-
 void Paper::GenerateTitle(){
     char *name = new char[256];
 
     int sub_len = 22;
-    int meth_len = 26;
+    int meth_len = 29;
     int adj_len = 32;
     int prep_len = 2;
     int verb_len = 12;
@@ -134,11 +115,11 @@ void Paper::GenerateTitle(){
                             "Predictive Analytics", "Unstructured Data", "Ecosystem Services", "Dark Data", "Trophic Cascades",
                             "Life History", "Ecological Networks"};
     char methods[][30] = {"Neural Networks", "Hilbert Spaces", "Ecological Networks", "Game Theory", "Cayley Graphs", 
-                        "Signal Processing", "Machine Learning", "Naive Bayes ML", "Random Forest ML", "K-Means ML",
+                        "Signal Processing", "Unsupervised Machine Learning", "Naive Bayes ML", "Random Forest ML", "K-Means ML",
                         "Logit Regression", "Meta-analysis", "Ethnographic Analysis", "Metapopulation Approach", "Random Sampling", 
                         "Monte Carlo", "Density Functional Theory", "Phylogenetic Reconstruction","Least-Squares Regression", "Pourbaix Analysis", 
                         "Functional Analysis", "Gene Knockout", "Optimization", "Modeling", "Path Analysis"
-                        "Microscopy"};
+                        "Microscopy", "Gaussian Process Regression", "Lie Algebra", "Deep Learning"};
     char adj[][30] = {"Randomized", "Stochastic", "Computable", "Equivalent", "Connected", 
                         "Compact", "Continuous", "Degenerate", "Nondeterministic", "Resiliant", 
                         "Sesquilinear", "Invertible", "Topological", "Holistic", "Robust", 
@@ -175,48 +156,48 @@ void Paper::GenerateTitle(){
 
 
 
-void Paper::GeneratePaperAfterSuccess(float intelligence, int focus, float risk){
+void Paper::GeneratePaperAfterSuccess(float intelligence, int focus){
 
-    this->citations = generateCitations(intelligence, focus, risk);
+    this->citations = generateCitations(intelligence, focus);
 
-    if(risk>=0 && risk<0.1){
+    if(this->getCitations()< 100){
         char str1[] = "The Tartan";
         strcpy(journal, str1);
     }
-    if(risk>=0.1 && risk<0.2){
+    if(this->getCitations() >= 100 && this->getCitations() < 300){
         char str1[] = "Buzzfeed News";
         strcpy(journal, str1);
     }
-    if(risk>=0.2 && risk<0.3){
-        char str1[] = "Journal of Tourism Resarch and Hospitality";
+	if (this->getCitations() >= 300 && this->getCitations() < 400) {
+		char str1[] = "Journal of Tourism Resarch and Hospitality";
         strcpy(journal, str1);
     }
-    if(risk>=0.3 && risk<0.4){
-         char str1[] = "Magazine of Concrete Research";
+	if (this->getCitations() >= 400 && this->getCitations() < 500) {
+		char str1[] = "Magazine of Concrete Research";
         strcpy(journal, str1);
     }
-    if(risk>=0.4 && risk<0.5){
-        char str1[] = "arXiv";
+	if (this->getCitations() >= 500 && this->getCitations() < 600) {
+		char str1[] = "arXiv";
         strcpy(journal, str1);
     }
-    if(risk>=0.5 && risk<0.6){
-        char str1[] = "Proceedings of the Royal Society";
+	if (this->getCitations() >= 600 && this->getCitations() < 700) {
+		char str1[] = "Proceedings of the Royal Society";
         strcpy(journal, str1);
     }
-    if(risk>=0.6 && risk<0.7){
-         char str1[] = "Reviews of Modern Science";
+	if (this->getCitations() >= 700 && this->getCitations() < 800) {
+		char str1[] = "Reviews of Modern Science";
         strcpy(journal, str1);
     }
-    if(risk>=0.7 && risk<0.8){
-        char str1[] = "Cell";
+	if (this->getCitations() >= 800 && this->getCitations() < 900) {
+		char str1[] = "Cell";
         strcpy(journal, str1);
     }
-    if(risk>=0.8 && risk<0.9){
-         char str1[] = "Science";
+	if (this->getCitations() >= 900 && this->getCitations() < 1000) {
+		char str1[] = "Science";
         strcpy(journal, str1);
     }
-    if(risk>=0.9 && risk<1.0){
-        char str1[] = "Nature";
+	if (this->getCitations() >= 1000) {
+		char str1[] = "Nature";
         strcpy(journal, str1);
     }
 
@@ -224,11 +205,11 @@ void Paper::GeneratePaperAfterSuccess(float intelligence, int focus, float risk)
 
 }
 
-int Paper::generateCitations(float intelligence, int focus, float risk){
+int Paper::generateCitations(float intelligence, int focus){
     // will need to be changed later for balancing
 
     default_random_engine generator;
-    float mean = intelligence + risk*500;
+    float mean = intelligence;
     if(focus){
         mean *= 2;
     }

@@ -8,9 +8,8 @@ public:
     ~Paper();
     char* journal;
     char* title;
-    int generateCitations(float intelligence, int focus, float risk);
-    int SubmitPaper(float intelligence, int focus, float risk);
-    void GeneratePaperAfterSuccess(float intelligence, int focus, float risk);
+    int generateCitations(float intelligence, int focus);
+    void GeneratePaperAfterSuccess(float intelligence, int focus);
     void GenerateTitle();
     int getCitations();
     

@@ -112,6 +112,18 @@ GradStudent::GradStudent(float knowledge, float prestige, float mentoring){
     this->AssignPersonality(knowledge,prestige,mentoring);
 }
 
+GradStudent::GradStudent(void) {
+	name = nullptr;
+	namelength = 0;
+	year = 0;
+	focus = 0;
+	color = nullptr;
+	personality = nullptr;
+	currpaper = nullptr;
+	happiness = nullptr;
+	rout = nullptr;
+}
+
 GradStudent::GradStudent(const GradStudent &from){
     cout<<"copy constructor called"<<endl;
     if(from.name != this->name){
@@ -258,12 +270,9 @@ void GradStudent::CreatePaper(){
     currpaper = pape;
 }
 
-int GradStudent::SubmitPaper(float risk){
-    return currpaper->SubmitPaper(personality->getIntelligence(),focus,risk);
-}
 
-void GradStudent::GeneratePaperAfterSuccess(float risk){
-    currpaper->GeneratePaperAfterSuccess(personality->getIntelligence(),focus,risk);
+void GradStudent::GeneratePaperAfterSuccess(){
+    currpaper->GeneratePaperAfterSuccess(personality->getIntelligence(),focus);
 }
 
 void GradStudent::SetResearchFocus(int focustoset){
@@ -341,11 +350,9 @@ void GradStudent::NameStudent(char *desired, int desiredlength){
 }
 
 void GradStudent::PrintName(){
-    cout<<"\n";
     for(int i=0;i<namelength;i++){
         cout<<name[i];
     }
-    cout<<endl;
 }
 void GradStudent::SetColor(int arr[]){
     color = new int[3];
@@ -371,5 +378,13 @@ int GradStudent::GetFocus(){
 void GradStudent::turn(){
     happiness->turn();
     rout->turn();
+}
+
+float GradStudent::GetResearchVal() {
+	return rout->value;
+}
+
+float GradStudent::GetHappinessVal() {
+	return happiness->value;
 }
 

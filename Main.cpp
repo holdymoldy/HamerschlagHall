@@ -501,12 +501,12 @@ int main(void)
 	GradStudent Student[6];
     GenerateSetup(nDesk, desk, computer, people, upgrade, setup_flag);
     setup_flag = 1;
-    
+
     for (i = 0; i < nDesk; i++)
     {
         desk[i].state = 1;
         computer[i].state = 1;
-        upgrade[i].state = 1;
+        upgrade[i].state = 0;
     }
     
     people[0].state_person = 1;
@@ -527,6 +527,24 @@ int main(void)
     people[0].r_shoes = 139;
     people[0].g_shoes = 69;
     people[0].b_shoes = 19;
+	for (int i = 1; i < nPerson; i++) {
+
+		people[i].r_skin = 255;
+		people[i].g_skin = 205;
+		people[i].b_skin = 148;
+		people[i].r_hair = i*10+rand()%80;
+		people[i].g_hair = i*30;
+		people[i].b_hair = rand()%255;
+		people[i].r_shirt = 192;
+		people[i].g_shirt = 192;
+		people[i].b_shirt = 192;
+		people[i].r_pants = 71;
+		people[i].g_pants = 111;
+		people[i].b_pants = 181;
+		people[i].r_shoes = 139;
+		people[i].g_shoes = 69;
+		people[i].b_shoes = 19;
+}
     
     nShot = 0;
     while (game_term != 1)
@@ -546,6 +564,25 @@ int main(void)
             printf("Spring Semester, %d\n", year);
         }
         
+		// if happiness < 0: drop out
+		// if output >= 100: write paper
+		for (int i = 0; i < nDesk; i += 1) {
+			if (people[i + 1].state_person == 1) {
+				if (Student[i].GetResearchVal() > 100){
+					Student[i].CreatePaper();
+					Student[i].currpaper->GeneratePaperAfterSuccess(Student[i].personality->getIntelligence(), Student[i].GetFocus());
+					printf("Congratulations! Your student ");
+					Student[i].PrintName();
+					printf(" has published a paper!\n");
+					printf("The title is %s\n", Student[i].currpaper->title);
+					printf("It was published in %s\n", Student[i].currpaper->journal);
+					Student[i].ModifyHappinessValue(20);
+					Student[i].ModifyResearchValue(-Student[i].GetResearchVal());
+				}
+			}
+		}
+
+
         while (window_term != 1)
         {
             FsPollDevice();
@@ -706,20 +743,29 @@ int main(void)
                 else if (inter == 7)
                 {
 					if (semester_state % 3 == 0) {
-						char choice[2];
-						printf("Would you like to hire a new student?[Y/N]\n");
-						My2Fgets(choice, 1, stdin);
-						if (choice[0] == 'Y') {
+						char choice1[10];
+						char choice2[10];
+						printf("A:Would you like to hire a new student?[Y/N]\n");
+						My2Fgets(choice1, 9, stdin);
+						if (choice1[0] == 'Y') {
 							ADV.Recruit(Student, StudentCounter);
 							people[StudentCounter + 1].state_person = 1;
+							//char desired[] = "HOLDENPARKS";
+							//Student[StudentCounter].NameStudent(desired, 11);
+							//int colorarr[3] = { 100,100,250 };
+							//Student[StudentCounter].SetColor(colorarr);
 							StudentCounter++;
 						}
-						
+						printf("A:Do you want to upgrade the office and lab ?[Y/N]\n");
+						My2Fgets(choice2, 9, stdin);
+						if (choice2[0] == 'Y') {
+							ADV.UpgradeLab(Student,upgrade,people,StudentCounter);
+						}
 					}
 					if (semester_state % 3 == 1) {
 						printf("Would you like to write a grant?[Y/N]\n");
-						char a[2];
-						My2Fgets(a, 1, stdin);
+						char a[5];
+						My2Fgets(a, 4, stdin);
 						if (a[0] == 'Y') {
 							ADV.WriteGrant();
 						}
@@ -735,16 +781,16 @@ int main(void)
                 }
                 else
                 {
-					printf("interacting with Student\n");
+					printf("interacting with Student\n"); //add name, print student name
 					char actionn = actionforStudent();
 					if (actionn == 'A') {
 						printf("YEAR:%d\n",Student[inter -1].GetYear());
 						printf("Focus:%d\n", Student[inter - 1].GetFocus());
 						Student[inter - 1].PrintPersonality();
-						//Student[inter + 1].CheckIn();
+						Student[inter - 1].CheckIn();
 					}
 					if (actionn == 'B') {
-						ADV.SendtoCompany(Student,inter-1);
+						ADV.SendtoCompany(Student, inter-1);
 					}
 					if (actionn == 'C') {
 						ADV.SetResearchFocus(Student, inter - 1);
@@ -901,6 +947,11 @@ int main(void)
         window_term = 0;
         inter_state = 0;
         // ADD OTHER UPDATES AT END OF A SEMESTER HERE
+		for (int i = 0; i < nDesk; i += 1){
+			if (people[i + 1].state_person == 1) {
+				Student[i].turn();
+			}
+		}
     }
     return 0;
 }
