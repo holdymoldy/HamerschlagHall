@@ -62,6 +62,8 @@ public:
     int GetYear();
     int GetFocus();
     void turn();
+    void GenerateName();
+    void GenerateColor();
 };
 
 

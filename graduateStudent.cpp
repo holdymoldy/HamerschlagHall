@@ -8,9 +8,17 @@
 
 #include "Paper_and_personality.h"
 #include "graduateStudent.h"
+#include <random>
 #include <iostream>
 using namespace std;
 
+int generateRand(void){
+    return rand();
+}
+
+int generateRand(int val){
+    return rand()%val;
+}
 
 Counter::Counter(){
     value=0;
@@ -386,5 +394,38 @@ float GradStudent::GetResearchVal() {
 
 float GradStudent::GetHappinessVal() {
 	return happiness->value;
+}
+
+void GradStudent::GenerateName(){
+    char *tobenamed = new char[256];
+    int first_len = 17;
+    char first[][30] = {"Ali","Addie","Benyamin", "Bey","Carla","Carlo","Denver", "Darlene", "Frankie", "Felicia","Yian", "Maurice", "Mohammed","Misty", "Jie",
+        "Hochen", "Zulu"};
+    int last_len = 17;
+    char last[][30] = {"Gurer","Malone","Spilsbury", "Johnson", "Peroni", "Wang", "Ray", "Harris", "Parks","Xi","Zhang","Kotha","Viswanathan","Gates","Wean","Cohen","Hamerschlag"};
+    
+    // test structure
+    strcpy(tobenamed, first[generateRand(first_len)]);
+    strcat(tobenamed, " ");
+    strcat(tobenamed, last[generateRand(last_len)]);
+    
+    if(this->name!=NULL){
+        delete [] name;
+        name = NULL;
+        namelength = 0;
+    }
+    
+    this->name = tobenamed;
+    namelength = strlen(tobenamed);
+    //cout<<'\n'<<strlen(tobenamed)<<'\n';
+    //cout<<name;
+}
+
+void GradStudent::GenerateColor(){
+    int i = generateRand(255);
+    int j = generateRand(255);
+    int k = generateRand(255);
+    int colorarr[3]={i,j,k};
+    this->SetColor(colorarr);
 }
 
