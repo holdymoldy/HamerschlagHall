@@ -30,9 +30,9 @@ Personality::~Personality(){
 void Personality::generatePersonality(float knowledge, float prestige, float mentoring){
 
     // This function will need to be changed for game balancing
-    float int_mean=50 + (knowledge*0.1) + (prestige*0.2) + (mentoring*0.15);
-    float stam_mean=50;
-    float opt_mean = 50 + (mentoring*0.2);
+    float int_mean=30 + (knowledge*0.1) + (prestige*0.2) + (mentoring*0.1);
+    float stam_mean=30;
+    float opt_mean = 30 + (mentoring*0.2);
     float int_dev=10, stam_dev=10, opt_dev=10;
 
     default_random_engine gen(generateRand());
@@ -46,7 +46,7 @@ void Personality::generatePersonality(float knowledge, float prestige, float men
 
     float attrs[3] = {this->intelligence, this->stamina, this->optimism};
     for(int i=0; i<3; i+=1){
-        if(attrs[i] > 100){
+        if(attrs[i] > 100.0){
             attrs[i] = 100;
         }
         else if(attrs[i]<0){
@@ -208,14 +208,12 @@ void Paper::GeneratePaperAfterSuccess(float intelligence, int focus){
 int Paper::generateCitations(float intelligence, int focus){
     // will need to be changed later for balancing
 
-    default_random_engine generator;
-    float mean = intelligence;
+    float mean = 8*intelligence;
     if(focus){
         mean *= 2;
     }
-    normal_distribution<float> cit_distribution(mean, 20);
 
-    return (int)cit_distribution(generator);
+    return generateRand(mean+200)-200
 }
 
 int Paper::getCitations(){
