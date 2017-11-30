@@ -298,4 +298,7 @@ void Advisor::SetResearchFocus(GradStudent &student[],Drawing &draw) {
 	scanf("> %d\n", &focus);
 	student[ChosenStu].SetResearchFocus(focus);
 }
+void Advisor::RandomEvents(GradStudent student[]) {
+}
+
 
