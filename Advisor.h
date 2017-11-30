@@ -15,6 +15,7 @@ public:
 	void Party(GradStudent student[], int StudentCounter);
 	void Conference(GradStudent student[], int StudentCounter);
 	void SendtoCompany(GradStudent student[], int inter);
+	void RandomEvents(GradStudent student[], int StudentCounter);
 	void Push(double &Prestige, GradStudent &student, double mentoring);
 	void SetResearchFocus(GradStudent student[], int StudentCounter);
 	//void RandomEvent(double Money, GradStudent &student, Paper &paper, Drawing &draw);

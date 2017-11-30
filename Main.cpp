@@ -558,7 +558,7 @@ int main(void)
 		people[i].g_skin = 205;
 		people[i].b_skin = 148;
 		people[i].r_hair = i*10+rand()%80;
-		people[i].g_hair = i*30;
+		people[i].g_hair = i*10+rand()%150;
 		people[i].b_hair = rand()%255;
 		people[i].r_shirt = 192;
 		people[i].g_shirt = 192;
@@ -1015,7 +1015,10 @@ int main(void)
         
         window_term = 0;
         inter_state = 0;
-        // ADD OTHER UPDATES AT END OF A SEMESTER HERE
+		int RandomEventlikelyHood = rand() % 2;
+		if (RandomEventlikelyHood == 1) {
+			ADV.RandomEvents(Student, StudentCounter);
+		}
 		for (int i = 0; i < nDesk; i += 1){
 			if (people[i + 1].state_person == 1) {
 				
