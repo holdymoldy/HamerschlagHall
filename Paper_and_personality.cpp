@@ -120,7 +120,7 @@ Paper::~Paper(){
 }
 
 void Paper::GenerateTitle(){
-    char *name = new char[256];
+    char *name = new char[400];
 
     int sub_len = 22;
     int meth_len = 29;
@@ -171,6 +171,12 @@ void Paper::GenerateTitle(){
     }
 
     this->title = name;
+}
+
+void Paper::PrintTitle(){
+    for(int i=0; i<strlen(title); i+=1){
+        printf("%c\n", title[i]);
+    }
 }
 
 

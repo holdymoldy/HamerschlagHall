@@ -12,6 +12,7 @@ public:
     int generateCitations(float intelligence, int focus);
     void GeneratePaperAfterSuccess(float intelligence, int focus);
     void GenerateTitle();
+    void PrintTitle();
     int getCitations();
     int citations;
 
