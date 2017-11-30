@@ -127,6 +127,9 @@ GradStudent::GradStudent(float knowledge, float prestige, float mentoring){
     //char desired[] = "HOLDENPARKS";
     //this->NameStudent(desired,11);
     this->GenerateName();
+    this->GenerateSkinColor();
+    this->GenerateHairColor();
+    this->GenerateEyeColor();
     //this->GenerateColor();
     //int colorarr[3]={100,100,250};
     //this->SetColor(colorarr);
