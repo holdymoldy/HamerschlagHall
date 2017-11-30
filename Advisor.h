@@ -24,7 +24,7 @@ public:
 	float GetPrestige();
 	float GetKnowledge();
 	float GetMentoring();
-	
+
 private:
 	float Knowledge;
 	float Experience;

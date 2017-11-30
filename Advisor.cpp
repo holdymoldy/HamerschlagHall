@@ -40,22 +40,27 @@ Advisor::Advisor()
 	//Mentoring = 90;
 	//Semester = 0;
 	printf("You have 300 points to distribute to advisor`s personalities, write down the distribution in a range of 0-100\n  Experience\n  Prestige\n  Knowledge\n  Mentoring\n");
-	char Exp[4];
-	MyFgets(Exp, 3, stdin);
+	printf("If you try to exceed 300, the rest will be assigned as 0\n");
+	printf("After Entering number, Press ENTER\n");
+	char Exp[5];
+	MyFgets(Exp, 4, stdin);
 	Experience = atof(Exp);
-	printf("%f\n", Experience);
-	char Pres[4];
-	MyFgets(Pres, 3, stdin);
+	printf("%f LEFT to Distribute\n", 300 - Experience);
+	char Pres[5];
+	MyFgets(Pres, 4, stdin);
 	Prestige = atof(Pres);
-	printf("%f\n", Prestige);
-	char Know[4];
-	MyFgets(Know, 3, stdin);
+	printf("%f LEFT to Distribute\n", 300 - (Prestige+Experience));
+	char Know[5];
+	MyFgets(Know, 4, stdin);
 	Knowledge = atof(Know);
-	printf("%f\n", Knowledge);
-	char Ment[4];
-	MyFgets(Ment, 3, stdin);
-	Mentoring = atof(Ment);
-	printf("%f\n", Mentoring);
+	printf("%f LEFT to Distribute\n",300-(Knowledge+Prestige+Experience));
+	char Ment[5];
+	MyFgets(Ment, 4, stdin);
+	Mentoring = 300 - (Knowledge + Prestige + Experience);
+	printf("Experience:%f\n", Experience);
+	printf("Prestige:%f\n", Prestige);
+	printf("Knowledge:%f\n", Knowledge);
+	printf("Mentoring:%f\n", Mentoring);
 
 }
 Advisor::~Advisor()
@@ -63,16 +68,16 @@ Advisor::~Advisor()
 
 }
 float Advisor::GetExperience() {
-	return this->Experience;
+	return Experience;
 }
 float Advisor::GetPrestige() {
-	return this->Prestige;
+	return Prestige;
 }
 float Advisor::GetKnowledge() {
-	return this->Knowledge;
+	return Knowledge;
 }
 float Advisor::GetMentoring() {
-	return this->Mentoring;
+	return Mentoring;
 }
 void Advisor::WriteGrant() {
 	
@@ -149,82 +154,87 @@ void Advisor::Recruit(GradStudent student[], int StudentCounter) {
 
 void Advisor::UpgradeLab(GradStudent student[], Upgrade upgrade[], Person people[], int StudentCounter) {
 	char LevelInput[100];
-	int levelmoneyA = 10000, levelmoneyB = 20000, levelmoneyC = 50000, levelmoneyD = 100000, levelmoneyE = 200000, levelmoneyF = 500000;
-	printf("How do you like to upgrade your lab?\n Level A: Just buy a coffee machine\t Investment Amount: %d\nLevel B: A Printer\t Investment Amount: %d\nLevel C: Chemicals\t Investment Amount: %d\nLevel D: CNC machine\t Investment Amount: %d\nLevel E: Computer Servers\t Investment Amount: %d\nLevel F: A clone machine\t Investment Amount: %d\n", levelmoneyA, levelmoneyB, levelmoneyC, levelmoneyD, levelmoneyE, levelmoneyF);
+	int levelmoney[6] = { 10000,20000,50000,100000,200000,500000};
+	printf("How do you like to upgrade your lab?\n Level A: Just buy a coffee machine\t Investment Amount: %d\nLevel B: A Printer\t Investment Amount: %d\nLevel C: Chemicals\t Investment Amount: %d\nLevel D: CNC machine\t Investment Amount: %d\nLevel E: Computer Servers\t Investment Amount: %d\nLevel F: A clone machine\t Investment Amount: %d\n", levelmoney[0], levelmoney[1], levelmoney[2], levelmoney[3], levelmoney[4], levelmoney[5]);
 	MyFgets(LevelInput, 99, stdin);
 	while (LevelInput[0] != 'A' && LevelInput[0] != 'a' && LevelInput[0] != 'B'&&LevelInput[0] != 'b' && LevelInput[0] != 'C' && LevelInput[0] != 'c' && LevelInput[0] != 'D' && LevelInput[0] != 'd' && LevelInput[0] != 'E' && LevelInput[0] != 'e'&&LevelInput[0] != 'F' && LevelInput[0] != 'f') {
 		printf("!!!Uhuh, bro, That I cannot help you. Go choose another one!>");
 		MyFgets(LevelInput, 99, stdin);
 	}
-	if (LevelInput[0] == 'F' || LevelInput[0] == 'f') {
-		upgrade[0].state = 1;//This is for Drawing Class!
-							 //Increase GradStudent happiness and research a little. From A to F, the increment increase.
-		Money -= levelmoneyF;
-		for (int i = 1; i < StudentCounter; i++) {		//Because people[0] is advisor
-			if (people[i].state_person == 1) {
-				student[i].ModifyHappinessValue(10);
-				student[i].ModifyResearchdT(1.0);
+	if (Money > levelmoney[65 - LevelInput[0]]) {
+		if (LevelInput[0] == 'F' || LevelInput[0] == 'f') {
+			upgrade[0].state = 1;//This is for Drawing Class!
+								 //Increase GradStudent happiness and research a little. From A to F, the increment increase.
+			Money -= levelmoney[5];
+			for (int i = 0; i < StudentCounter; i++) {		//Because people[0] is advisor
+				if (people[i + 1].state_person == 1) {
+					student[i].ModifyHappinessValue(100.0);
+					student[i].ModifyResearchdT(12.0);
+				}
+			}
+		}
+		if (LevelInput[0] == 'E' || LevelInput[0] == 'e') {
+			upgrade[5].state = 1;//This is for Drawing Class!
+			Money -= levelmoney[4];
+			for (int i = 0; i < StudentCounter; i++) {		//Because people[0] is advisor
+				if (people[i + 1].state_person == 1) {
+					student[i].ModifyHappinessValue(80.0);
+					student[i].ModifyResearchdT(10.0);
+				}
+			}
+		}
+		if (LevelInput[0] == 'D' || LevelInput[0] == 'd') {
+			upgrade[2].state = 1;//This is for Drawing Class!
+			Money -= levelmoney[3];
+			for (int i = 0; i < StudentCounter; i++) {		//Because people[0] is advisor
+				if (people[i + 1].state_person == 1) {
+					student[i].ModifyHappinessValue(40.0);
+					student[i].ModifyResearchdT(7.0);
+				}
+			}
+		}
+		if (LevelInput[0] == 'C' || LevelInput[0] == 'c') {
+			upgrade[4].state = 1;//This is for Drawing Class!
+			Money -= levelmoney[2];
+			for (int i = 0; i < StudentCounter; i++) {		//Because people[0] is advisor
+				if (people[i + 1].state_person == 1) {
+					student[i].ModifyHappinessValue(30.0);
+					student[i].ModifyResearchdT(4.0);
+				}
+			}
+		}
+		if (LevelInput[0] == 'B' || LevelInput[0] == 'b') {
+			upgrade[1].state = 1;//This is for Drawing Class!
+			Money -= levelmoney[1];
+			for (int i = 0; i < StudentCounter; i++) {		//Because people[0] is advisor
+				if (people[i + 1].state_person == 1) {
+					student[i].ModifyHappinessValue(10.0);
+					student[i].ModifyResearchdT(5.0);
+				}
+			}
+		}
+		if (LevelInput[0] == 'A' || LevelInput[0] == 'a') {
+			upgrade[3].state = 1;//This is for Drawing Class!
+			Money -= levelmoney[0];
+			for (int i = 0; i < StudentCounter; i++) {		//Because people[0] is advisor
+				if (people[i + 1].state_person == 1) {
+					student[i].ModifyHappinessValue(6.0);
+					student[i].ModifyResearchdT(6.0);
+				}
 			}
 		}
 	}
-	if (LevelInput[0] == 'E' || LevelInput[0] == 'e') {
-		upgrade[5].state = 1;//This is for Drawing Class!
-		Money -= levelmoneyE;
-		for (int i = 1; i < StudentCounter; i++) {		//Because people[0] is advisor
-			if (people[i].state_person == 1) {
-				student[i].ModifyHappinessValue(20);
-				student[i].ModifyResearchdT(2.0);
-			}
-		}
-	}
-	if (LevelInput[0] == 'D' || LevelInput[0] == 'd') {
-		upgrade[2].state = 1;//This is for Drawing Class!
-		Money -= levelmoneyD;
-		for (int i = 1; i < StudentCounter; i++) {		//Because people[0] is advisor
-			if (people[i].state_person == 1) {
-				student[i].ModifyHappinessValue(30);
-				student[i].ModifyResearchdT(3.0);
-			}
-		}
-	}
-	if (LevelInput[0] == 'C' || LevelInput[0] == 'c') {
-		upgrade[4].state = 1;//This is for Drawing Class!
-		Money -= levelmoneyC;
-		for (int i = 1; i < StudentCounter; i++) {		//Because people[0] is advisor
-			if (people[i].state_person == 1) {
-				student[i].ModifyHappinessValue(40);
-				student[i].ModifyResearchdT(4.0);
-			}
-		}
-	}
-	if (LevelInput[0] == 'B' || LevelInput[0] == 'b') {
-		upgrade[1].state = 1;//This is for Drawing Class!
-		Money -= levelmoneyB;
-		for (int i = 0; i < StudentCounter; i++) {		//Because people[0] is advisor
-			if (people[i+1].state_person == 1) {
-				student[i].ModifyHappinessValue(50);
-				student[i].ModifyResearchdT(5.0);
-			}
-		}
-	}
-	if (LevelInput[0] == 'A' || LevelInput[0] == 'a') {
-		upgrade[3].state = 1;//This is for Drawing Class!
-		Money -= levelmoneyA;
-		for (int i = 1; i < StudentCounter; i++) {		//Because people[0] is advisor
-			if (people[i].state_person == 1) {
-				student[i].ModifyHappinessValue(6.0);
-				student[i].ModifyResearchdT(6.0);
-			}
-		}
+	else {
+		printf("Sorry!! You and your students need to work harder to buy it\n");
 	}
 }
 void Advisor::Party(GradStudent student[], int StudentCounter) {
 	//Increase GradStudent happiness for some amount.
-	for (int i = 1; i <StudentCounter; i++) {		//Because people[0] is advisor
-		student[i].ModifyHappinessValue(10);
-		student[i].ModifyResearchdT(1.0);
+	for (int i = 0; i <StudentCounter; i++) {		//Because people[0] is advisor
+		student[i].ModifyHappinessValue(20);
+		student[i].ModifyResearchdT(2.0);
 	}
-	Money -= 50000;
+	Money -= 5000;
 }
 void Advisor::Conference(GradStudent people[],int StudentCounter)
 {
@@ -249,7 +259,7 @@ void Advisor::Conference(GradStudent people[],int StudentCounter)
 	if (Prestige > 0.7*PresThresh) {
 		LevelState[1] = 1;
 	}
-	if (Prestige > 1 * PresThresh) {
+	if (Prestige > 0.98 * PresThresh) {
 		LevelState[2] = 1;
 	}
 	if (Prestige > 1.3 * PresThresh) {
@@ -401,6 +411,6 @@ void Advisor::SendtoCompany(GradStudent student[],int inter) {
 		char decision[10];
 		MyFgets(decision, 9, stdin);
 		char CheckInput[24] = { 'A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','h','I','i','J','j','K','k','L','l' };
-		student[inter].ModifyHappinessValue(20.0);
+		student[inter].ModifyHappinessValue(80.0);
 		}
 	

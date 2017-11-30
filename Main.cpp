@@ -41,7 +41,25 @@ char actionforStudent() {
 	My2Fgets(choice, 2, stdin);
 	return choice[0];
 }
-
+char actionforSummer() {
+	
+	printf("A: A:Would you like to hire a new student?\nB: Do you want to upgrade the office and lab?\nC: Let`s get Crazy!! Party Time\n");
+	char choice[3];
+	My2Fgets(choice, 2, stdin);
+	return choice[0];
+}
+char actionforFall() {
+	printf("A: Would you like to write a grant?\nB: Do you want to upgrade the office and lab?\nC: Let`s get Crazy!! Party Time\n");
+	char choice[3];
+	My2Fgets(choice, 2, stdin);
+	return choice[0];
+}
+char actionforSpring() {
+	printf("A: Would you like to go to a Conference?\nB: Do you want to upgrade the office and lab?\nC: Let`s get Crazy!! Party Time\n");
+	char choice[3];
+	My2Fgets(choice, 2, stdin);
+	return choice[0];
+}
 void GenerateSetup(int nDesk, Desk desk[6], Computer computer[6], Person people[7], Upgrade upgrade[6], int flag)
 {
     int i;
@@ -585,6 +603,7 @@ int main(void)
 
         while (window_term != 1)
         {
+			
             FsPollDevice();
             key = FsInkey();
             
@@ -726,10 +745,13 @@ int main(void)
             {
                 if (inter == 0)
                 {
-                    printf("Are you sure you want to leave? [Y/N]\n");
+                    printf("Are you sure you want to leave? [Y/N]\+n");
                     scanf("%c", &decision_leave);
                     if (decision_leave == 'Y')
                     {
+						for (int i = 0; i <= StudentCounter; i++) {
+							people[i].state_person = 1;
+						}
                         window_term = 1;
                     }
                 }
@@ -743,39 +765,46 @@ int main(void)
                 else if (inter == 7)
                 {
 					if (semester_state % 3 == 0) {
-						char choice1[10];
-						char choice2[10];
-						printf("A:Would you like to hire a new student?[Y/N]\n");
-						My2Fgets(choice1, 9, stdin);
-						if (choice1[0] == 'Y') {
+						char actionSummer = actionforSummer();
+						if (actionSummer == 'A') {
 							ADV.Recruit(Student, StudentCounter);
 							people[StudentCounter + 1].state_person = 1;
-							//char desired[] = "HOLDENPARKS";
-							//Student[StudentCounter].NameStudent(desired, 11);
-							//int colorarr[3] = { 100,100,250 };
-							//Student[StudentCounter].SetColor(colorarr);
+							
 							StudentCounter++;
 						}
-						printf("A:Do you want to upgrade the office and lab ?[Y/N]\n");
-						My2Fgets(choice2, 9, stdin);
-						if (choice2[0] == 'Y') {
+						
+						
+						if (actionSummer == 'B') {
 							ADV.UpgradeLab(Student,upgrade,people,StudentCounter);
+						}
+						if (actionSummer == 'C') {
+							ADV.Party(Student, StudentCounter);
 						}
 					}
 					if (semester_state % 3 == 1) {
-						printf("Would you like to write a grant?[Y/N]\n");
-						char a[5];
-						My2Fgets(a, 4, stdin);
-						if (a[0] == 'Y') {
+						char actionFall = actionforFall();
+						
+						if (actionFall == 'A') {
 							ADV.WriteGrant();
 						}
-						else {
-							printf("You don`t want to write a grant huh, then how are you gonna feed these poor grads!!\n");
+						if (actionFall == 'B') {
+							ADV.UpgradeLab(Student, upgrade, people, StudentCounter);
+						}
+						if (actionFall == 'C') {
+							ADV.Party(Student, StudentCounter);
 						}
 					}
 					if (semester_state % 3 == 2) {
-						printf("Do you wanna party\n");
-						ADV.Party(Student, StudentCounter);
+						char actionSpring = actionforSpring();
+						if (actionSpring == 'A') {
+							ADV.Conference(Student,StudentCounter);
+						}
+						if (actionSpring == 'B') {
+							ADV.UpgradeLab(Student, upgrade, people, StudentCounter);
+						}
+						if (actionSpring == 'C') {
+							ADV.Party(Student, StudentCounter);
+						}
 					}
                     inter_state = 0;
                 }
@@ -786,11 +815,17 @@ int main(void)
 					if (actionn == 'A') {
 						printf("YEAR:%d\n",Student[inter -1].GetYear());
 						printf("Focus:%d\n", Student[inter - 1].GetFocus());
-						Student[inter - 1].PrintPersonality();
+						//Student[inter - 1].PrintPersonality();
 						Student[inter - 1].CheckIn();
 					}
 					if (actionn == 'B') {
-						ADV.SendtoCompany(Student, inter-1);
+						if (ADV.GetPrestige() > 85.0 && ADV.GetExperience() >85.0 ) {
+							ADV.SendtoCompany(Student, inter - 1);
+							people[inter - 1].state_person = 0;
+						}
+						else {
+							printf("You don`t have enough epxerience and prestige to send your student any company you want?\n");
+						}
 					}
 					if (actionn == 'C') {
 						ADV.SetResearchFocus(Student, inter - 1);
@@ -949,6 +984,7 @@ int main(void)
         // ADD OTHER UPDATES AT END OF A SEMESTER HERE
 		for (int i = 0; i < nDesk; i += 1){
 			if (people[i + 1].state_person == 1) {
+				
 				Student[i].turn();
 			}
 		}
