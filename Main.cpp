@@ -5,6 +5,7 @@
 #include <math.h>
 #include<iostream>
 #include <random>
+#include <vector>
 #include "fssimplewindow.h"
 #include "Drawing.h"
 #include "graduateStudent.h"
@@ -43,19 +44,25 @@ char actionforStudent() {
 }
 char actionforSummer() {
 	
-	printf("A: A:Would you like to hire a new student?\nB: Do you want to upgrade the office and lab?\nC: Let`s get Crazy!! Party Time\n");
+	printf("A: A:Would you like to hire a new student?\nB: Do you want to upgrade the office and lab?\n
+        C: Let`s get Crazy!! Party Time\n
+        D: Check your papers\n");
 	char choice[3];
 	My2Fgets(choice, 2, stdin);
 	return choice[0];
 }
 char actionforFall() {
-	printf("A: Would you like to write a grant?\nB: Do you want to upgrade the office and lab?\nC: Let`s get Crazy!! Party Time\n");
+	printf("A: Would you like to write a grant?\nB: Do you want to upgrade the office and lab?\n
+        C: Let`s get Crazy!! Party Time\n
+        D: Check your papers\n");
 	char choice[3];
 	My2Fgets(choice, 2, stdin);
 	return choice[0];
 }
 char actionforSpring() {
-	printf("A: Would you like to go to a Conference?\nB: Do you want to upgrade the office and lab?\nC: Let`s get Crazy!! Party Time\n");
+	printf("A: Would you like to go to a Conference?\nB: Do you want to upgrade the office and lab?\n
+        C: Let`s get Crazy!! Party Time\n
+        D: Check your papers\n");
 	char choice[3];
 	My2Fgets(choice, 2, stdin);
 	return choice[0];
@@ -565,6 +572,7 @@ int main(void)
 }
     
     nShot = 0;
+    std::vector<Paper> papers;
     while (game_term != 1)
     {
         GenerateSetup(nDesk, desk, computer, people, upgrade, setup_flag);
@@ -596,6 +604,11 @@ int main(void)
 					printf("It was published in %s\n", Student[i].currpaper->journal);
 					Student[i].ModifyHappinessValue(20);
 					Student[i].ModifyResearchValue(-Student[i].GetResearchVal());
+                    Paper new_paper(Student.currpaper);
+                    papers.push_back(new_paper);
+
+                    ADV.AddPrestige(new_paper.getCitations()/100.0);
+
 				}
 			}
 		}
@@ -780,6 +793,13 @@ int main(void)
 						if (actionSummer == 'C') {
 							ADV.Party(Student, StudentCounter);
 						}
+                        if (actionSummer == 'D'){
+                            printf("Your papers are as followed: \n\n");
+                            for(int i=0; i<papers.size(); i+=1){
+                                printf("%s (%d citations)\n", papers[i].title, papers.getCitations());
+                            }
+                            printf("\n");
+                        }
 					}
 					if (semester_state % 3 == 1) {
 						char actionFall = actionforFall();
@@ -793,6 +813,13 @@ int main(void)
 						if (actionFall == 'C') {
 							ADV.Party(Student, StudentCounter);
 						}
+                        if (actionSummer == 'D'){
+                            printf("Your papers are as followed: \n\n");
+                            for(int i=0; i<papers.size(); i+=1){
+                                printf("%s (%d citations)\n", papers[i].title, papers.getCitations());
+                            }
+                            printf("\n");
+                        }
 					}
 					if (semester_state % 3 == 2) {
 						char actionSpring = actionforSpring();
@@ -805,6 +832,13 @@ int main(void)
 						if (actionSpring == 'C') {
 							ADV.Party(Student, StudentCounter);
 						}
+                        if (actionSummer == 'D'){
+                            printf("Your papers are as followed: \n\n");
+                            for(int i=0; i<papers.size(); i+=1){
+                                printf("%s (%d citations)\n", papers[i].title, papers.getCitations());
+                            }
+                            printf("\n");
+                        }
 					}
                     inter_state = 0;
                 }

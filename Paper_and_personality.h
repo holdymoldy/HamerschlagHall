@@ -5,6 +5,7 @@
 class Paper{
 public:
     Paper();
+    Paper(const Paper &from);
     ~Paper();
     char* journal;
     char* title;
@@ -12,8 +13,6 @@ public:
     void GeneratePaperAfterSuccess(float intelligence, int focus);
     void GenerateTitle();
     int getCitations();
-    
-private:
     int citations;
 
 };

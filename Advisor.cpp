@@ -73,12 +73,18 @@ float Advisor::GetExperience() {
 float Advisor::GetPrestige() {
 	return Prestige;
 }
+
 float Advisor::GetKnowledge() {
 	return Knowledge;
 }
 float Advisor::GetMentoring() {
 	return Mentoring;
 }
+
+void Advisor::AddPrestige(float p){
+	Prestige += p;
+}
+
 void Advisor::WriteGrant() {
 	
 	

@@ -133,7 +133,6 @@ GradStudent::GradStudent(void) {
 }
 
 GradStudent::GradStudent(const GradStudent &from){
-    cout<<"copy constructor called"<<endl;
     if(from.name != this->name){
         if(from.name!=nullptr){
             name = new char [from.namelength];
@@ -191,7 +190,6 @@ GradStudent::GradStudent(const GradStudent &from){
 }
 
 GradStudent &GradStudent::operator=(const GradStudent &from){
-    cout<<"copy operator called"<<endl;
     CleanUp();
     if(from.name != this->name){
         if(from.name!=nullptr){

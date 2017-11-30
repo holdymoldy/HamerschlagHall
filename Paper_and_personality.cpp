@@ -89,6 +89,25 @@ Paper::Paper(){
 }
 
 
+
+
+Paper::Paper(const Paper &from){
+    journal = nullptr;
+    title = nullptr;
+
+    if(from.journal!=nullptr){
+        journal = new char[50];
+        strcpy(journal, from.journal);
+    }
+    if(from.title!=nullptr){
+        title = new char[256];
+        strcpy(title, from.title);
+    }
+
+    citations = from.citations;
+}
+
+
 Paper::~Paper(){
     if(journal!=NULL){
         delete [] journal;
@@ -213,7 +232,7 @@ int Paper::generateCitations(float intelligence, int focus){
         mean *= 2;
     }
 
-    return generateRand(mean+200)-200
+    return generateRand(mean+100);
 }
 
 int Paper::getCitations(){

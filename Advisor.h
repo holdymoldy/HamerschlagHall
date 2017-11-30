@@ -24,6 +24,7 @@ public:
 	float GetPrestige();
 	float GetKnowledge();
 	float GetMentoring();
+	void AddPrestige(float p);
 
 private:
 	float Knowledge;
