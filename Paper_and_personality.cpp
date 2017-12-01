@@ -120,7 +120,7 @@ Paper::~Paper(){
 }
 
 void Paper::GenerateTitle(){
-    char *name = new char[256];
+    char *name = new char[400];
 
     int sub_len = 22;
     int meth_len = 29;
@@ -129,7 +129,7 @@ void Paper::GenerateTitle(){
     int verb_len = 12;
 
     char subjects[][30] = {"Lithium-ion Batteries", "3D Printing", "Space Travel", "Big Data Trends", "Climate Change", 
-                            "CRISPR", "Biodiversity", "Data Resolution", "Epigentic Effects", "Gene Editing", 
+                            "CRISPR", "Biodiversity", "Data Resolution", "Epigenetic Effects", "Gene Editing", 
                             "Scaling Relations", "Dark Matter", "Synthetic Biology", "Ecological Conservation", "Ecological Restoration", 
                             "Predictive Analytics", "Unstructured Data", "Ecosystem Services", "Dark Data", "Trophic Cascades",
                             "Life History", "Ecological Networks"};
@@ -173,6 +173,12 @@ void Paper::GenerateTitle(){
     this->title = name;
 }
 
+void Paper::PrintTitle(){
+    for(int i=0; i<strlen(title); i+=1){
+        printf("%c\n", title[i]);
+    }
+}
+
 
 
 void Paper::GeneratePaperAfterSuccess(float intelligence, int focus){
@@ -188,7 +194,7 @@ void Paper::GeneratePaperAfterSuccess(float intelligence, int focus){
         strcpy(journal, str1);
     }
 	if (this->getCitations() >= 300 && this->getCitations() < 400) {
-		char str1[] = "Journal of Tourism Resarch and Hospitality";
+		char str1[] = "Journal of Tourism Research and Hospitality";
         strcpy(journal, str1);
     }
 	if (this->getCitations() >= 400 && this->getCitations() < 500) {
