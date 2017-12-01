@@ -52,6 +52,8 @@ public:
     void ModifyResearchBasedT(float amount);
 	float GetResearchVal();
 	float GetHappinessVal();
+	void GenerateName();
+	void GenerateColor();
     void CreatePaper();
     void GeneratePaperAfterSuccess(); //after success
     void NameStudent(char *desired, int desiredlength);
@@ -62,8 +64,6 @@ public:
     int GetYear();
     int GetFocus();
     void turn();
-    void GenerateName();
-    void GenerateColor();
 };
 
 

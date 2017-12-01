@@ -12,11 +12,11 @@
 #include <iostream>
 using namespace std;
 
-int generateRand(void){
+int generateRand1(void){
     return rand();
 }
 
-int generateRand(int val){
+int generateRand1(int val){
     return rand()%val;
 }
 
@@ -101,8 +101,7 @@ void GradStudent::CleanUp(){
 }
 
 GradStudent::GradStudent(float knowledge, float prestige, float mentoring){
-    //Initialize all with null/zero values
-    printf("new grad students are initialized");
+   
     name = nullptr;
     namelength = 0;
     year = 0;
@@ -113,11 +112,11 @@ GradStudent::GradStudent(float knowledge, float prestige, float mentoring){
     happiness = nullptr;
     rout = nullptr;
     
-    char desired[] = "HOLDENPARKS";
-    this->NameStudent(desired,11);
+    
     int colorarr[3]={100,100,250};
     this->SetColor(colorarr);
     this->AssignPersonality(knowledge,prestige,mentoring);
+	GenerateName();
 }
 
 GradStudent::GradStudent(void) {
@@ -403,9 +402,9 @@ void GradStudent::GenerateName(){
     char last[][30] = {"Gurer","Malone","Spilsbury", "Johnson", "Peroni", "Wang", "Ray", "Harris", "Parks","Xi","Zhang","Kotha","Viswanathan","Gates","Wean","Cohen","Hamerschlag"};
     
     // test structure
-    strcpy(tobenamed, first[generateRand(first_len)]);
+    strcpy(tobenamed, first[generateRand1(first_len)]);
     strcat(tobenamed, " ");
-    strcat(tobenamed, last[generateRand(last_len)]);
+    strcat(tobenamed, last[generateRand1(last_len)]);
     
     if(this->name!=NULL){
         delete [] name;
@@ -420,9 +419,9 @@ void GradStudent::GenerateName(){
 }
 
 void GradStudent::GenerateColor(){
-    int i = generateRand(255);
-    int j = generateRand(255);
-    int k = generateRand(255);
+    int i = generateRand1(255);
+    int j = generateRand1(255);
+    int k = generateRand1(255);
     int colorarr[3]={i,j,k};
     this->SetColor(colorarr);
 }
