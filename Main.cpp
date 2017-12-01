@@ -10,6 +10,7 @@
 #include "Drawing.h"
 #include "graduateStudent.h"
 #include "Advisor.h"
+#include "Effects.h"
 char *My2Fgets(char str[], int limit, FILE *fp)
 {
 	if (nullptr != fgets(str, 255, fp))
@@ -518,6 +519,7 @@ int main(void)
     Person people[nPerson];
     Upgrade upgrade[nUpgrade];
 	GradStudent Student[6];
+	Effect efx;
     GenerateSetup(nDesk, desk, computer, people, upgrade, setup_flag);
     setup_flag = 1;
 
@@ -761,6 +763,7 @@ int main(void)
 						}
 						
                         window_term = 1;
+						efx.initTransition();
                     }
                 }
                 else if (inter == 8)
@@ -991,6 +994,11 @@ int main(void)
                     }
                 }
             }
+			efx.DrawMoney(ADV.Money);
+			if (efx.tState != 0)
+			{
+				efx.DrawTransition();
+			}
             FsSwapBuffers();
             
             FsSleep(30);

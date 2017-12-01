@@ -26,6 +26,7 @@ protected:
     int focus;
     
 public:
+	GradStudent();
     GradStudent(float knowledge, float prestige, float mentoring);
     //    GradStudent* copy();
     GradStudent(const GradStudent &from);

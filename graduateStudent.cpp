@@ -108,6 +108,22 @@ void GradStudent::CleanUp(){
     focus = 0;
 }
 
+GradStudent::GradStudent()
+{
+	name = nullptr;
+	namelength = 0;
+	year = 0;
+	focus = 0;
+	haircolor = nullptr;
+	skincolor = nullptr;
+	eyecolor = nullptr;
+
+	personality = nullptr;
+	currpaper = nullptr;
+	happiness = nullptr;
+	rout = nullptr;
+}
+
 GradStudent::GradStudent(float knowledge, float prestige, float mentoring){
 
     name = nullptr;
@@ -312,12 +328,12 @@ void GradStudent::CreatePaper(){
     currpaper = pape;
 }
 
-int GradStudent::SubmitPaper(float risk){
+/*int GradStudent::SubmitPaper(float risk){
     return currpaper->SubmitPaper(personality->getIntelligence(),focus,risk);
-}
+}*/
 
 void GradStudent::GeneratePaperAfterSuccess(float risk){
-    currpaper->GeneratePaperAfterSuccess(personality->getIntelligence(),focus,risk);
+    currpaper->GeneratePaperAfterSuccess(personality->getIntelligence(),focus);
 }
 
 void GradStudent::SetResearchFocus(int focustoset){
@@ -475,21 +491,21 @@ void GradStudent::GenerateName(){
 
 
 void GradStudent::GenerateHairColor(){
-    int i = generateRand(255);
-    int j = generateRand(255);
-    int k = generateRand(255);
+    int i = generateRand1(255);
+    int j = generateRand1(255);
+    int k = generateRand1(255);
     int colorarr[3]={i,j,k};
     this->SetHairColor(colorarr);
 }
 void GradStudent::GenerateEyeColor(){
-    int i = generateRand(255);
-    int j = generateRand(255);
-    int k = generateRand(255);
+    int i = generateRand1(255);
+    int j = generateRand1(255);
+    int k = generateRand1(255);
     int colorarr[3]={i,j,k};
     this->SetEyeColor(colorarr);
 }
 void GradStudent::GenerateSkinColor(){
-    int s = generateRand(6);
+    int s = generateRand1(6);
     int colorarr[3]={0,0,0};
     switch (s) {
         case 0: {
@@ -532,5 +548,8 @@ void GradStudent::GenerateSkinColor(){
     this->SetSkinColor(colorarr);
 }
 
-
+float GradStudent::GetResearchVal()
+{
+	return rout->value;
+}
 
