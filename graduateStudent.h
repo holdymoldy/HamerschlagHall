@@ -21,13 +21,13 @@ class GradStudent {
 protected:
     
     int year;
-    int *haircolor,*eyecolor,*skincolor;
+    int *color;
     Counter *happiness,*rout;
     int focus;
     
 public:
-	GradStudent();
     GradStudent(float knowledge, float prestige, float mentoring);
+	GradStudent();
     //    GradStudent* copy();
     GradStudent(const GradStudent &from);
     GradStudent &operator=(const GradStudent &from);
@@ -52,27 +52,18 @@ public:
     void ModifyResearchBasedT(float amount);
 	float GetResearchVal();
 	float GetHappinessVal();
-
+	void GenerateName();
+	void GenerateColor();
     void CreatePaper();
-    int SubmitPaper(float risk); //1 if successful, paper returned, out returned to zero, then currpaper is null. 0 if not successful.
-    void GeneratePaperAfterSuccess(float risk); //after success
-    void NameStudent(char desired[], int desiredlength);
+    void GeneratePaperAfterSuccess(); //after success
+    void NameStudent(char *desired, int desiredlength);
     void PrintName();
     void PrintHappiness();
-    void SetHairColor(int arr[]);
-    void GetHairColor(int result[]);
-    void SetEyeColor(int arr[]);
-    void GetEyeColor(int result[]);
-    void SetSkinColor(int arr[]);
-    void GetSkinColor(int result[]);
+    void SetColor(int arr[]);
+    void GetColor(int result[]);
     int GetYear();
     int GetFocus();
     void turn();
-    void GenerateName();
-    void GenerateHairColor();
-    void GenerateEyeColor();
-    void GenerateSkinColor();
-
 };
 
 

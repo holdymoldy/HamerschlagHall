@@ -10,7 +10,6 @@
 #include "Drawing.h"
 #include "graduateStudent.h"
 #include "Advisor.h"
-#include "Effects.h"
 char *My2Fgets(char str[], int limit, FILE *fp)
 {
 	if (nullptr != fgets(str, 255, fp))
@@ -38,7 +37,7 @@ char *My2Fgets(char str[], int limit, FILE *fp)
 	}
 }
 char actionforStudent() {
-	printf("A: You want to check in on the student\nB: You want to send the student to an internship\nC: You want to set research focus for the student\n");
+	printf("A: You want to check in on the student\nB: You want to send the student to an internship\nC: You want to set research focus for the student\nD: Push the student to make more progress in Research\n");
 	char choice[3];
 	My2Fgets(choice, 2, stdin);
 	return choice[0];
@@ -519,7 +518,6 @@ int main(void)
     Person people[nPerson];
     Upgrade upgrade[nUpgrade];
 	GradStudent Student[6];
-	Effect efx;
     GenerateSetup(nDesk, desk, computer, people, upgrade, setup_flag);
     setup_flag = 1;
 
@@ -596,30 +594,22 @@ int main(void)
 					printf("Congratulations! Your student ");
 					Student[i].PrintName();
 					printf(" has published a paper!\n");
-					printf("The title is %s\n", Student[i].currpaper->title);
-					printf("It was published in %s\n", Student[i].currpaper->journal);
-					Student[i].ModifyHappinessValue(20);
+					printf("The title is ");
+					Student[i].currpaper->PrintTitle();
+					printf("\n");
+					printf("It was published in ");
+					Student[i].currpaper->PrintJournal();
+					printf("\n\n");
+					Student[i].ModifyHappinessValue(35.0);
 					Student[i].ModifyResearchValue(-Student[i].GetResearchVal());
                     Paper new_paper(*Student[i].currpaper);
                     papers.push_back(new_paper);
 
                     ADV.AddPrestige(new_paper.getCitations()/100.0);
+					ADV.AddExperience(new_paper.getCitations() / 150.0);
+					ADV.AddKnowledge(new_paper.getCitations() / 200.0);
 
 				}
-                if(Student[i].GetHappinessVal()<0){
-                    printf("Your student - ");
-                    Student[i].PrintName();
-                    printf(" - is too unhappy and is dropping out! Do better!");
-                    people[i+1].state_person = 0;
-                    Student[i].~GradStudent();
-                }
-                if(Student[i].GetYear()==6){
-                    printf("Your student - ");
-                    Student[i].PrintName();
-                    printf(" - has defended! They're graduated!");
-                    people[i+1].state_person = 0;
-                    Student[i].~GradStudent();
-                }
 			}
 		}
 
@@ -777,7 +767,6 @@ int main(void)
 						}
 						
                         window_term = 1;
-						efx.initTransition();
                     }
                 }
                 else if (inter == 8)
@@ -872,11 +861,18 @@ int main(void)
 							people[inter - 1].state_person = 0;
 						}
 						else {
-							printf("You don`t have enough epxerience and prestige to send your student any company you want?\n");
+							printf("You don`t have enough experience and prestige to send your student to any company you want?\n");
 						}
 					}
 					if (actionn == 'C') {
 						ADV.SetResearchFocus(Student, inter - 1);
+					}
+					if (actionn == 'D') {
+						printf("Student progress BEFORE you being pushy\n");
+						Student[inter - 1].CheckIn();
+						ADV.Push(Student, inter - 1);
+						printf("Student progress AFTER you being pushy\n");
+						Student[inter - 1].CheckIn();
 					}
                     // LEAVE LINE BELOW
                     inter_state = 0;
@@ -1008,11 +1004,6 @@ int main(void)
                     }
                 }
             }
-			efx.DrawMoney(ADV.Money);
-			if (efx.tState != 0)
-			{
-				efx.DrawTransition();
-			}
             FsSwapBuffers();
             
             FsSleep(30);

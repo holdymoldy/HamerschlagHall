@@ -82,15 +82,21 @@ float Advisor::GetMentoring() {
 void Advisor::AddPrestige(float p) {
 	Prestige += p;
 }
+void Advisor::AddExperience(float p) {
+	Experience += p;
+}
+void Advisor::AddKnowledge(float p) {
+	Knowledge += p;
+}
 void Advisor::WriteGrant() {
 	
 	
 		//Draw.CheckMouseWriteGrand() is in the drawing function and checks if the user is clicking WriteGrand button.
-		double inherent_probability = Prestige * (Knowledge + Experience);// This math needs tuning to fall in (1,2)
-		double accept_probability = (double)rand() / (double)RAND_MAX;         //We will add the weight of the level of the grand to it so that this also falls to 1 to 2, and the higher the level, the harder it is to get
+		double inherent_probability = ((Prestige*0.4)+(Knowledge*0.3) +(Experience*0.1))/100.0;// This math needs tuning to fall in (1,2)
+		double accept_probability = (1.0*(rand()% 14))/100.0;         //We will add the weight of the level of the grand to it so that this also falls to 1 to 2, and the higher the level, the harder it is to get
 		printf("Initial Money:%.2f\n", Money);
 		char LevelInput[10];
-		int levelmoneyA = 10000, levelmoneyB = 50000, levelmoneyC = 100000, levelmoneyD = 500000;
+		int levelmoneyA = 30000, levelmoneyB = 100000, levelmoneyC = 200000, levelmoneyD = 500000;
 		printf("What grant do you want to apply for this year?\nLevel A: Neighborhood Support Foundation\t Grant Amount: %d\nLevel B: Small Company Research Foundation\t Grant Amount: %d\nLevel C: The United States Department of Energy\t Grant Amount: %d\nLevel D: National Science Foudation\t Grant Amount: %d\n", levelmoneyA, levelmoneyB, levelmoneyC, levelmoneyD);
 		MyFgets(LevelInput, 9, stdin);
 		while (LevelInput[0] != 'A' && LevelInput[0] != 'a' && LevelInput[0] != 'B' && LevelInput[0] != 'b' && LevelInput[0] != 'C' && LevelInput[0] != 'c' && LevelInput[0] != 'D' && LevelInput[0] != 'd') {
@@ -98,7 +104,7 @@ void Advisor::WriteGrant() {
 			MyFgets(LevelInput, 9, stdin);
 		}
 		if (LevelInput[0] == 'A' || LevelInput[0] == 'a') {
-			accept_probability += 0.2;
+			accept_probability += 0.1;
 			if (inherent_probability > accept_probability) {
 				Money += levelmoneyA;
 				printf("Congrats! The proposal is accepted!\n");
@@ -107,7 +113,7 @@ void Advisor::WriteGrant() {
 
 		}
 		if (LevelInput[0] == 'B' || LevelInput[0] == 'b') {
-			accept_probability += 0.4;
+			accept_probability += 0.35;
 			if (inherent_probability > accept_probability) {
 				Money += levelmoneyB;
 				printf("Congrats! The proposal is accepted!\n");
@@ -116,7 +122,7 @@ void Advisor::WriteGrant() {
 		}
 
 		if (LevelInput[0] == 'C' || LevelInput[0] == 'c') {
-			accept_probability += 0.6;
+			accept_probability += 0.555;
 			if (inherent_probability > accept_probability) {
 				Money += levelmoneyC;
 				printf("Congrats! The proposal is accepted!\n");
@@ -125,7 +131,7 @@ void Advisor::WriteGrant() {
 		}
 
 		if (LevelInput[0] == 'D' || LevelInput[0] == 'd') {
-			accept_probability += 0.8;
+			accept_probability += 0.73;
 			if (inherent_probability > accept_probability) {
 				Money += levelmoneyD;
 				printf("Congrats! The proposal is accepted!\n");
@@ -138,6 +144,7 @@ void Advisor::WriteGrant() {
 }
 void Advisor::Recruit(GradStudent student[], int &StudentCounter, int &flag) { 
 	char Selection[3];
+	int j;
 	char A = 'A';
 	bool canhire = true;
 	printf("%d\n", StudentCounter);
@@ -146,8 +153,25 @@ void Advisor::Recruit(GradStudent student[], int &StudentCounter, int &flag) {
 		canhire = false;
 	}
 	if (canhire==true) {
-		int j = 3;     //Prestige / 25 + rand() % 2;  //If Prestige is out of 100;   
+		/*if (Prestige / 25 + rand() % 4 > 5) {
+			GradStudent Hire[5];
+			j = 5;
+		}
+		else if (Prestige / 25 + rand() % 4 >4) {
+			GradStudent Hire[4];
+			j = 4;
+		}
+		else if (Prestige / 25 + rand() % 4 >3) {
+			GradStudent Hire[3];
+			j = 3;
+		}
+		else if (Prestige / 25 + rand() % 4 > 2) {
+			GradStudent Hire[2];
+			j = 2;
+		}*/
+		//j = Prestige / 25 + rand() % 4;
 		GradStudent Hire[3];
+		j = 3;
 		for (int i = 0; i < j; i++) {
 			Hire[i] = GradStudent(Knowledge, Prestige, Mentoring);
 			printf("%c: ", A);
@@ -191,7 +215,7 @@ void Advisor::UpgradeLab(GradStudent student[], Upgrade upgrade[], Person people
 			Money -= levelmoney[5];
 			for (int i = 0; i < StudentCounter; i++) {		//Because people[0] is advisor
 				if (people[i + 1].state_person == 1) {
-					student[i].ModifyHappinessValue(100.0);
+					student[i].ModifyHappinessValue(120.0);
 					student[i].ModifyResearchdT(12.0);
 				}
 			}
@@ -201,7 +225,7 @@ void Advisor::UpgradeLab(GradStudent student[], Upgrade upgrade[], Person people
 			Money -= levelmoney[4];
 			for (int i = 0; i < StudentCounter; i++) {		//Because people[0] is advisor
 				if (people[i + 1].state_person == 1) {
-					student[i].ModifyHappinessValue(80.0);
+					student[i].ModifyHappinessValue(95.0);
 					student[i].ModifyResearchdT(10.0);
 				}
 			}
@@ -211,7 +235,7 @@ void Advisor::UpgradeLab(GradStudent student[], Upgrade upgrade[], Person people
 			Money -= levelmoney[3];
 			for (int i = 0; i < StudentCounter; i++) {		//Because people[0] is advisor
 				if (people[i + 1].state_person == 1) {
-					student[i].ModifyHappinessValue(40.0);
+					student[i].ModifyHappinessValue(45.0);
 					student[i].ModifyResearchdT(7.0);
 				}
 			}
@@ -221,7 +245,7 @@ void Advisor::UpgradeLab(GradStudent student[], Upgrade upgrade[], Person people
 			Money -= levelmoney[2];
 			for (int i = 0; i < StudentCounter; i++) {		//Because people[0] is advisor
 				if (people[i + 1].state_person == 1) {
-					student[i].ModifyHappinessValue(30.0);
+					student[i].ModifyHappinessValue(35.0);
 					student[i].ModifyResearchdT(4.0);
 				}
 			}
@@ -231,7 +255,7 @@ void Advisor::UpgradeLab(GradStudent student[], Upgrade upgrade[], Person people
 			Money -= levelmoney[1];
 			for (int i = 0; i < StudentCounter; i++) {		//Because people[0] is advisor
 				if (people[i + 1].state_person == 1) {
-					student[i].ModifyHappinessValue(10.0);
+					student[i].ModifyHappinessValue(25.0);
 					student[i].ModifyResearchdT(5.0);
 				}
 			}
@@ -241,7 +265,7 @@ void Advisor::UpgradeLab(GradStudent student[], Upgrade upgrade[], Person people
 			Money -= levelmoney[0];
 			for (int i = 0; i < StudentCounter; i++) {		//Because people[0] is advisor
 				if (people[i + 1].state_person == 1) {
-					student[i].ModifyHappinessValue(6.0);
+					student[i].ModifyHappinessValue(15.0);
 					student[i].ModifyResearchdT(6.0);
 				}
 			}
@@ -253,11 +277,18 @@ void Advisor::UpgradeLab(GradStudent student[], Upgrade upgrade[], Person people
 }
 void Advisor::Party(GradStudent student[], int StudentCounter) {
 	//Increase GradStudent happiness for some amount.
-	for (int i = 0; i <StudentCounter; i++) {		//Because people[0] is advisor
-		student[i].ModifyHappinessValue(20);
-		student[i].ModifyResearchdT(2.0);
+	if (Money > 5000) {
+		printf("You are cracking jokes to break the ice, and your students are having a good time.\n");
+		printf("Their Happiness is boosted\n");
+		for (int i = 0; i < StudentCounter; i++) {		//Because people[0] is advisor
+			student[i].ModifyHappinessValue(20);
+			student[i].ModifyResearchdT(2.0);
+		}
+		Money -= 5000;
 	}
-	Money -= 5000;
+	else if (Money < 5000) {
+		printf("you are so poor that you can't even throw a party, Apply fo a grant on Fall Semester\n");
+	}
 }
 void Advisor::Conference(GradStudent people[],int StudentCounter)
 {
@@ -296,7 +327,7 @@ void Advisor::Conference(GradStudent people[],int StudentCounter)
 	}
 	for (int i = 0; i < 6; i++) {
 		if (LevelState[i] == 1) {
-			printf("%s\t \t\t\t \t\t which will cost you %d.\n", ConferenceLevel[i], MoneyLevel[i]);
+			printf("%s\t \t\t\t \t\t which will cost you %d per student\n", ConferenceLevel[i], MoneyLevel[i]);
 		}
 	}
 	printf("What kind of conference do you want to go to?\n");
@@ -336,13 +367,14 @@ void Advisor::Conference(GradStudent people[],int StudentCounter)
 	}
 	k = (k - (k % 2)) / 2;//This is the index of the user's choice.
 						  //--Mark User Choice End
-	printf("You chose the NO.%d\n Conference", k);
+	printf("You chose the NO:%d. Conference", k+1);
 
 	//--Take NumofStu to conference
 	NumofStu = 0;
 	//We alreay have StudentCounter for this int numAvailable = 0;	//Records the number of students that are already there (recruited)
 	for (int i = 0; i < StudentCounter; i++) {
-		
+		people[i].PrintName();
+		printf(" ");
 			//Print personality so that the user knows who to choose from
 			people[i].PrintPersonality();
 			//numAvailable++;
@@ -357,7 +389,7 @@ void Advisor::Conference(GradStudent people[],int StudentCounter)
 	}
 	Money -= NumofStu*MoneyLevel[k];
 	//---From here we are taking selected students to conference
-	printf("Money, %d", Money);
+	printf("Money: %.2f\n", Money);
 	for (int i = 0; i < 6; i++) {
 		StuTakenToConference[i] = 0;
 		printf("%d,\t", i);
@@ -365,7 +397,8 @@ void Advisor::Conference(GradStudent people[],int StudentCounter)
 
 	int ithTaken;
 	for (int i = 0; i < NumofStu; i++) {
-		printf("Who do you want to take with? >");
+		printf("Who do you want to take with?\n");
+		printf(">");
 		scanf("%d", &ithTaken);
 
 		while (0 > ithTaken || ithTaken >= StudentCounter || StuTakenToConference[ithTaken] == 1) {
@@ -406,12 +439,9 @@ void Advisor::Conference(GradStudent people[],int StudentCounter)
 }
 
 void Advisor::SetResearchFocus(GradStudent student[], int inter) {
+	char a[5];
 	int focus;
-	
-
-	
-
-		//  !!! student[inter].CheckIn();   !!!  INCLUDE
+	//  !!! student[inter].CheckIn();   !!!  INCLUDE
 	
 	/*scanf("Whose focus do you want to set? %d\n", &ChosenStu);*/
 	/*while (ChosenStu<0 || ChosenStu > StudentCounter) {
@@ -420,7 +450,9 @@ void Advisor::SetResearchFocus(GradStudent student[], int inter) {
 	printf("Which focuse do you want to set this student's focus on?\n");
 	printf("0: Experiment\n");
 	printf("1: Theory\n");
-	scanf("> %d\n", &focus);
+	MyFgets(a, 4, stdin);
+	focus = atoi(a);
+	printf("%d\n", focus);
 	student[inter].SetResearchFocus(focus);
 }
 
@@ -489,4 +521,18 @@ void Advisor::RandomEvents(GradStudent student[], int StudentCounter) {
 	}
 
 
+}
+
+void Advisor::Push(GradStudent student[], int inter)
+{
+
+	float ResearchValueChange = 0.0025*student[inter].personality->getStamina()*Mentoring + 0.003*student[inter].personality->getIntelligence()*Knowledge+ 0.08*student[inter].GetResearchVal();
+	float HappinessValueChange = 0.008*student[inter].personality->getOptimism()*(120.0 - Experience) - Prestige*student[inter].personality->getOptimism()*0.001;
+	student[inter].ModifyResearchValue(ResearchValueChange);
+	student[inter].ModifyHappinessValue(-HappinessValueChange);
+	float ResearchDT = (ResearchValueChange*0.025)*(rand() % 5);
+	float HappinessDT = (100 - student[inter].GetResearchVal())*HappinessValueChange*0.001*(rand()%4);
+	student[inter].ModifyResearchdT(ResearchDT);
+	student[inter].ModifyHappinessdT(1.00);
+	
 }

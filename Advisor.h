@@ -16,17 +16,19 @@ public:
 	void Conference(GradStudent student[], int StudentCounter);
 	void SendtoCompany(GradStudent student[], int inter);
 	void RandomEvents(GradStudent student[], int StudentCounter);
-	void Push(double &Prestige, GradStudent &student, double mentoring);
+	void Push(GradStudent student[],int inter);
 	void SetResearchFocus(GradStudent student[], int StudentCounter);
 	//void RandomEvent(double Money, GradStudent &student, Paper &paper, Drawing &draw);
-	void Time(); //if advisor-door is True, next semester.
-				 //void GetFunding();
 	float GetExperience();
 	float GetPrestige();
 	float GetKnowledge();
 	float GetMentoring();
 
 	void AddPrestige(float p);
+
+	void AddExperience(float p);
+
+	void AddKnowledge(float p);
 
 private:
 	float Knowledge;
