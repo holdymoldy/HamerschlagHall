@@ -37,32 +37,26 @@ char *My2Fgets(char str[], int limit, FILE *fp)
 	}
 }
 char actionforStudent() {
-	printf("A: You want to check in on the student\nB: You want to send the student to an internship\nC: You want to set research focus for the student\n");
+	printf("A: You want to check in on the student\nB: You want to send the student to an internship\nC: You want to set research focus for the student\nD: Push the student to make more progress in Research\n");
 	char choice[3];
 	My2Fgets(choice, 2, stdin);
 	return choice[0];
 }
 char actionforSummer() {
 	
-	printf("A: A:Would you like to hire a new student?\nB: Do you want to upgrade the office and lab?\n
-        C: Let`s get Crazy!! Party Time\n
-        D: Check your papers\n");
+	printf("A: A:Would you like to hire a new student?\nB: Do you want to upgrade the office and lab?\nC: Let`s get Crazy!! Party Time\nD: Check your papers\n");
 	char choice[3];
 	My2Fgets(choice, 2, stdin);
 	return choice[0];
 }
 char actionforFall() {
-	printf("A: Would you like to write a grant?\nB: Do you want to upgrade the office and lab?\n
-        C: Let`s get Crazy!! Party Time\n
-        D: Check your papers\n");
+	printf("A: Would you like to write a grant?\nB: Do you want to upgrade the office and lab?\nC: Let`s get Crazy!! Party Time\nD: Check your papers\n");
 	char choice[3];
 	My2Fgets(choice, 2, stdin);
 	return choice[0];
 }
 char actionforSpring() {
-	printf("A: Would you like to go to a Conference?\nB: Do you want to upgrade the office and lab?\n
-        C: Let`s get Crazy!! Party Time\n
-        D: Check your papers\n");
+	printf("A: Would you like to go to a Conference?\nB: Do you want to upgrade the office and lab?\nC: Let`s get Crazy!! Party Time\nD: Check your papers\n");
 	char choice[3];
 	My2Fgets(choice, 2, stdin);
 	return choice[0];
@@ -600,14 +594,20 @@ int main(void)
 					printf("Congratulations! Your student ");
 					Student[i].PrintName();
 					printf(" has published a paper!\n");
-					printf("The title is %s\n", Student[i].currpaper->title);
-					printf("It was published in %s\n", Student[i].currpaper->journal);
-					Student[i].ModifyHappinessValue(20);
+					printf("The title is ");
+					Student[i].currpaper->PrintTitle();
+					printf("\n");
+					printf("It was published in ");
+					Student[i].currpaper->PrintJournal();
+					printf("\n\n");
+					Student[i].ModifyHappinessValue(35.0);
 					Student[i].ModifyResearchValue(-Student[i].GetResearchVal());
-                    Paper new_paper(Student.currpaper);
+                    Paper new_paper(*Student[i].currpaper);
                     papers.push_back(new_paper);
 
                     ADV.AddPrestige(new_paper.getCitations()/100.0);
+					ADV.AddExperience(new_paper.getCitations() / 150.0);
+					ADV.AddKnowledge(new_paper.getCitations() / 200.0);
 
 				}
 			}
@@ -758,13 +758,14 @@ int main(void)
             {
                 if (inter == 0)
                 {
-                    printf("Are you sure you want to leave? [Y/N]\+n");
+                    printf("Are you sure you want to leave? [Y/N]\n");
                     scanf("%c", &decision_leave);
                     if (decision_leave == 'Y')
                     {
 						for (int i = 0; i <= StudentCounter; i++) {
 							people[i].state_person = 1;
 						}
+						
                         window_term = 1;
                     }
                 }
@@ -780,10 +781,12 @@ int main(void)
 					if (semester_state % 3 == 0) {
 						char actionSummer = actionforSummer();
 						if (actionSummer == 'A') {
-							ADV.Recruit(Student, StudentCounter);
-							people[StudentCounter + 1].state_person = 1;
-							
-							StudentCounter++;
+							int flag=0;
+							ADV.Recruit(Student, StudentCounter, flag);
+							if (flag == 1) {
+								people[StudentCounter].state_person = 1;
+							}
+							//StudentCounter++;
 						}
 						
 						
@@ -794,9 +797,9 @@ int main(void)
 							ADV.Party(Student, StudentCounter);
 						}
                         if (actionSummer == 'D'){
-                            printf("Your papers are as followed: \n\n");
+                            printf("Your papers are as follows: \n\n");
                             for(int i=0; i<papers.size(); i+=1){
-                                printf("%s (%d citations)\n", papers[i].title, papers.getCitations());
+                                printf("%s (%d citations)\n", papers[i].title, papers[i].getCitations());
                             }
                             printf("\n");
                         }
@@ -813,10 +816,10 @@ int main(void)
 						if (actionFall == 'C') {
 							ADV.Party(Student, StudentCounter);
 						}
-                        if (actionSummer == 'D'){
-                            printf("Your papers are as followed: \n\n");
+                        if (actionFall == 'D'){
+                            printf("Your papers are as follows: \n\n");
                             for(int i=0; i<papers.size(); i+=1){
-                                printf("%s (%d citations)\n", papers[i].title, papers.getCitations());
+                                printf("%s (%d citations)\n", papers[i].title, papers[i].getCitations());
                             }
                             printf("\n");
                         }
@@ -832,10 +835,10 @@ int main(void)
 						if (actionSpring == 'C') {
 							ADV.Party(Student, StudentCounter);
 						}
-                        if (actionSummer == 'D'){
-                            printf("Your papers are as followed: \n\n");
+                        if (actionSpring == 'D'){
+                            printf("Your papers are as follows: \n\n");
                             for(int i=0; i<papers.size(); i+=1){
-                                printf("%s (%d citations)\n", papers[i].title, papers.getCitations());
+                                printf("%s (%d citations)\n", papers[i].title, papers[i].getCitations());
                             }
                             printf("\n");
                         }
@@ -858,11 +861,18 @@ int main(void)
 							people[inter - 1].state_person = 0;
 						}
 						else {
-							printf("You don`t have enough epxerience and prestige to send your student any company you want?\n");
+							printf("You don`t have enough experience and prestige to send your student to any company you want?\n");
 						}
 					}
 					if (actionn == 'C') {
 						ADV.SetResearchFocus(Student, inter - 1);
+					}
+					if (actionn == 'D') {
+						printf("Student progress BEFORE you being pushy\n");
+						Student[inter - 1].CheckIn();
+						ADV.Push(Student, inter - 1);
+						printf("Student progress AFTER you being pushy\n");
+						Student[inter - 1].CheckIn();
 					}
                     // LEAVE LINE BELOW
                     inter_state = 0;
@@ -1018,6 +1028,7 @@ int main(void)
 		int RandomEventlikelyHood = rand() % 2;
 		if (RandomEventlikelyHood == 1) {
 			ADV.RandomEvents(Student, StudentCounter);
+	
 		}
 		for (int i = 0; i < nDesk; i += 1){
 			if (people[i + 1].state_person == 1) {

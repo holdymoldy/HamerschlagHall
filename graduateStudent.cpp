@@ -12,11 +12,11 @@
 #include <iostream>
 using namespace std;
 
-int generateRand(void){
+int generateRand1(void){
     return rand();
 }
 
-int generateRand(int val){
+int generateRand1(int val){
     return rand()%val;
 }
 
@@ -76,17 +76,9 @@ void GradStudent::CleanUp(){
         name = nullptr;
     }
     
-    if(nullptr!=haircolor){
-        delete [] haircolor;
-        haircolor = nullptr;
-    }
-    if(nullptr!=eyecolor){
-        delete [] eyecolor;
-        eyecolor = nullptr;
-    }
-    if(nullptr!=skincolor){
-        delete [] skincolor;
-        skincolor = nullptr;
+    if(nullptr!=color){
+        delete [] color;
+        color = nullptr;
     }
     if(nullptr!=personality){
         delete personality;
@@ -109,35 +101,37 @@ void GradStudent::CleanUp(){
 }
 
 GradStudent::GradStudent(float knowledge, float prestige, float mentoring){
-    //Initialize all with null/zero values
-    //printf("new grad students are initialized");
+   
     name = nullptr;
     namelength = 0;
     year = 0;
     focus = 0;
-    haircolor = nullptr;
-    skincolor = nullptr;
-    eyecolor = nullptr;
-    
+    color = nullptr;
     personality = nullptr;
     currpaper = nullptr;
     happiness = nullptr;
     rout = nullptr;
     
-    //char desired[] = "HOLDENPARKS";
-    //this->NameStudent(desired,11);
-    this->GenerateName();
-    this->GenerateSkinColor();
-    this->GenerateHairColor();
-    this->GenerateEyeColor();
-    //this->GenerateColor();
-    //int colorarr[3]={100,100,250};
-    //this->SetColor(colorarr);
+    
+    int colorarr[3]={100,100,250};
+    this->SetColor(colorarr);
     this->AssignPersonality(knowledge,prestige,mentoring);
+	GenerateName();
+}
+
+GradStudent::GradStudent(void) {
+	name = nullptr;
+	namelength = 0;
+	year = 0;
+	focus = 0;
+	color = nullptr;
+	personality = nullptr;
+	currpaper = nullptr;
+	happiness = nullptr;
+	rout = nullptr;
 }
 
 GradStudent::GradStudent(const GradStudent &from){
-    //cout<<"copy constructor called"<<endl;
     if(from.name != this->name){
         if(from.name!=nullptr){
             name = new char [from.namelength];
@@ -180,32 +174,14 @@ GradStudent::GradStudent(const GradStudent &from){
     else{
         rout = new Counter();
     }
-    if(from.haircolor!=nullptr){
-        haircolor = new int[3];
+    if(from.color!=nullptr){
+        color = new int[3];
         for(int i=0;i<3;i++){
-            haircolor[i]=from.haircolor[i];
+            color[i]=from.color[i];
         }
     }
     else{
-        haircolor = nullptr;
-    }
-    if(from.skincolor!=nullptr){
-        skincolor = new int[3];
-        for(int i=0;i<3;i++){
-            skincolor[i]=from.skincolor[i];
-        }
-    }
-    else{
-        skincolor = nullptr;
-    }
-    if(from.eyecolor!=nullptr){
-        eyecolor = new int[3];
-        for(int i=0;i<3;i++){
-            eyecolor[i]=from.eyecolor[i];
-        }
-    }
-    else{
-        eyecolor = nullptr;
+        color = nullptr;
     }
     currpaper = nullptr;
     year = 0;
@@ -213,7 +189,6 @@ GradStudent::GradStudent(const GradStudent &from){
 }
 
 GradStudent &GradStudent::operator=(const GradStudent &from){
-    //cout<<"copy operator called"<<endl;
     CleanUp();
     if(from.name != this->name){
         if(from.name!=nullptr){
@@ -257,32 +232,14 @@ GradStudent &GradStudent::operator=(const GradStudent &from){
     else{
         rout = new Counter();
     }
-    if(from.haircolor!=nullptr){
-        haircolor = new int[3];
+    if(from.color!=nullptr){
+        color = new int[3];
         for(int i=0;i<3;i++){
-            haircolor[i]=from.haircolor[i];
+            color[i]=from.color[i];
         }
     }
     else{
-        haircolor = nullptr;
-    }
-    if(from.eyecolor!=nullptr){
-        eyecolor = new int[3];
-        for(int i=0;i<3;i++){
-            eyecolor[i]=from.eyecolor[i];
-        }
-    }
-    else{
-        eyecolor = nullptr;
-    }
-    if(from.skincolor!=nullptr){
-        skincolor = new int[3];
-        for(int i=0;i<3;i++){
-            skincolor[i]=from.skincolor[i];
-        }
-    }
-    else{
-        skincolor = nullptr;
+        color = nullptr;
     }
     currpaper = nullptr;
     year = 0;
@@ -318,12 +275,9 @@ void GradStudent::CreatePaper(){
     currpaper = pape;
 }
 
-int GradStudent::SubmitPaper(float risk){
-    return currpaper->SubmitPaper(personality->getIntelligence(),focus,risk);
-}
 
-void GradStudent::GeneratePaperAfterSuccess(float risk){
-    currpaper->GeneratePaperAfterSuccess(personality->getIntelligence(),focus,risk);
+void GradStudent::GeneratePaperAfterSuccess(){
+    currpaper->GeneratePaperAfterSuccess(personality->getIntelligence(),focus);
 }
 
 void GradStudent::SetResearchFocus(int focustoset){
@@ -401,43 +355,20 @@ void GradStudent::NameStudent(char *desired, int desiredlength){
 }
 
 void GradStudent::PrintName(){
-    cout<<"\n";
     for(int i=0;i<namelength;i++){
         cout<<name[i];
     }
-    cout<<endl;
 }
-void GradStudent::SetHairColor(int arr[]){
-    haircolor = new int[3];
+void GradStudent::SetColor(int arr[]){
+    color = new int[3];
     for(int i=0;i<3;i++){
-        haircolor[i] = arr[i];
+        color[i] = arr[i];
     }
 }
-void GradStudent::SetEyeColor(int arr[]){
-    eyecolor = new int[3];
+
+void GradStudent::GetColor(int result[]){
     for(int i=0;i<3;i++){
-        eyecolor[i] = arr[i];
-    }
-}
-void GradStudent::SetSkinColor(int arr[]){
-    skincolor = new int[3];
-    for(int i=0;i<3;i++){
-        skincolor[i] = arr[i];
-    }
-}
-void GradStudent::GetHairColor(int result[]){
-    for(int i=0;i<3;i++){
-        result[i]=haircolor[i];
-    }
-}
-void GradStudent::GetEyeColor(int result[]){
-    for(int i=0;i<3;i++){
-        result[i]=eyecolor[i];
-    }
-}
-void GradStudent::GetSkinColor(int result[]){
-    for(int i=0;i<3;i++){
-        result[i]=skincolor[i];
+        result[i]=color[i];
     }
 }
 
@@ -454,6 +385,14 @@ void GradStudent::turn(){
     rout->turn();
 }
 
+float GradStudent::GetResearchVal() {
+	return rout->value;
+}
+
+float GradStudent::GetHappinessVal() {
+	return happiness->value;
+}
+
 void GradStudent::GenerateName(){
     char *tobenamed = new char[256];
     int first_len = 17;
@@ -463,9 +402,9 @@ void GradStudent::GenerateName(){
     char last[][30] = {"Gurer","Malone","Spilsbury", "Johnson", "Peroni", "Wang", "Ray", "Harris", "Parks","Xi","Zhang","Kotha","Viswanathan","Gates","Wean","Cohen","Hamerschlag"};
     
     // test structure
-    strcpy(tobenamed, first[generateRand(first_len)]);
+    strcpy(tobenamed, first[generateRand1(first_len)]);
     strcat(tobenamed, " ");
-    strcat(tobenamed, last[generateRand(last_len)]);
+    strcat(tobenamed, last[generateRand1(last_len)]);
     
     if(this->name!=NULL){
         delete [] name;
@@ -479,63 +418,11 @@ void GradStudent::GenerateName(){
     //cout<<name;
 }
 
-void GradStudent::GenerateHairColor(){
-    int i = generateRand(255);
-    int j = generateRand(255);
-    int k = generateRand(255);
+void GradStudent::GenerateColor(){
+    int i = generateRand1(255);
+    int j = generateRand1(255);
+    int k = generateRand1(255);
     int colorarr[3]={i,j,k};
-    this->SetHairColor(colorarr);
+    this->SetColor(colorarr);
 }
-void GradStudent::GenerateEyeColor(){
-    int i = generateRand(255);
-    int j = generateRand(255);
-    int k = generateRand(255);
-    int colorarr[3]={i,j,k};
-    this->SetEyeColor(colorarr);
-}
-void GradStudent::GenerateSkinColor(){
-    int s = generateRand(6);
-    int colorarr[3]={0,0,0};
-    switch (s) {
-        case 0: {
-            colorarr[0]=141;
-            colorarr[1]=85;
-            colorarr[2]=36;
-            break;
-        }
-        case 1:{
-            colorarr[0]=198;
-            colorarr[1]=134;
-            colorarr[2]=66;
-            break;
-        }
-        case 2:{
-            colorarr[0]=224;
-            colorarr[1]=172;
-            colorarr[2]=105;
-            break;
-        }
-        case 3:{
-            colorarr[0]=241;
-            colorarr[1]=194;
-            colorarr[2]=125;
-            break;
-        }
-        case 4:{
-            colorarr[0]=255;
-            colorarr[1]=219;
-            colorarr[2]=172;
-            break;
-        }
-        case 5:{
-            colorarr[0]=255;
-            colorarr[1]=205;
-            colorarr[2]=148;
-            break;
-        }
-    }
-    this->SetSkinColor(colorarr);
-}
-
-
 
