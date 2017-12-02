@@ -1,4 +1,3 @@
-
 #include "Paper_and_personality.h"
 #include <random>
 #include <time.h>
@@ -251,3 +250,4 @@ int Paper::getCitations() {
 	// getter for number of citations
 	return citations;
 }
+

@@ -1,3 +1,5 @@
+
+
 #ifndef PapPer_h
 #define PapPer_h
 
@@ -35,3 +37,6 @@ private:
 	float optimism;
 	float stamina;
 };
+
+
+#endif

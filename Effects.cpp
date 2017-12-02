@@ -2,12 +2,13 @@
 #include "fssimplewindow.h"
 #include "ysglfontdata.h"
 #include <stdio.h>
+#include "Advisor.h"
 
-void Effect::DrawMoney(float money)
+void Effect::DrawMoney(float money, float pres, float know, float ment, float exp)
 {
-	char moneyStr[100];
-	sprintf_s(moneyStr, "Money: $%.2f", money);
-	glRasterPos2i(50, 50);
+	char moneyStr[255];
+	sprintf_s(moneyStr, "Money: $%.2f   Prestige: %.2f   Knowledge: %.2f   Mentoring: %.2f   Experience: %.2f", money, pres, know, ment, exp);
+	glRasterPos2i(20, 20);
 	glColor3ub(0, 0, 255);
 	YsGlDrawFontBitmap10x14(moneyStr);
 }

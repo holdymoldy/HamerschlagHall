@@ -527,7 +527,7 @@ void Advisor::Push(GradStudent student[], int inter)
 {
 
 	float ResearchValueChange = 0.0025*student[inter].personality->getStamina()*Mentoring + 0.003*student[inter].personality->getIntelligence()*Knowledge+ 0.08*student[inter].GetResearchVal();
-	float HappinessValueChange = 0.008*student[inter].personality->getOptimism()*(120.0 - Experience) - Prestige*student[inter].personality->getOptimism()*0.001;
+	float HappinessValueChange = 0.01*student[inter].personality->getOptimism()*(150.0 - Experience)*2.0 - Prestige*student[inter].personality->getOptimism()*0.001;
 	student[inter].ModifyResearchValue(ResearchValueChange);
 	student[inter].ModifyHappinessValue(-HappinessValueChange);
 	float ResearchDT = (ResearchValueChange*0.025)*(rand() % 5);

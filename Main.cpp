@@ -1,5 +1,5 @@
-<stdio.h>
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
@@ -10,6 +10,8 @@
 #include "Drawing.h"
 #include "graduateStudent.h"
 #include "Advisor.h"
+#include "Effects.h"
+
 char *My2Fgets(char str[], int limit, FILE *fp)
 {
 	if (nullptr != fgets(str, 255, fp))
@@ -508,6 +510,7 @@ int main(void)
     int i, key, nShot, inter_state = 0, inter = 9, year = 2017, semester_state = 0, window_term = 0, game_term = 0, setup_flag = 0;
     double x_prof = 600, y_prof = 700, x_profdesk = 600, y_profdesk = 125;
     char decision_leave;
+	Effect EFF;
 	Advisor ADV;
     srand(time(NULL));
 	int StudentCounter = 0;
@@ -583,11 +586,22 @@ int main(void)
         {
             printf("Spring Semester, %d\n", year);
         }
-        
-		// if happiness < 0: drop out
-		// if output >= 100: write paper
+
 		for (int i = 0; i < nDesk; i += 1) {
 			if (people[i + 1].state_person == 1) {
+				if (Student[i].GetHappinessVal()<0) {
+					printf("Your student - ");
+					Student[i].PrintName();
+					printf(" - is too unhappy and is dropping out! Do better!");
+					break;
+				}
+				if (Student[i].GetYear() == 6) {
+					printf("Your student - ");
+					Student[i].PrintName();
+					printf(" - has defended! They're graduated!");
+					people[i + 1].state_person = 0;
+					break;
+				}
 				if (Student[i].GetResearchVal() > 100){
 					Student[i].CreatePaper();
 					Student[i].currpaper->GeneratePaperAfterSuccess(Student[i].personality->getIntelligence(), Student[i].GetFocus());
@@ -610,23 +624,10 @@ int main(void)
 					ADV.AddKnowledge(new_paper.getCitations() / 200.0);
 
 				}
-
-                if(Student[i].GetHappinessVal()<0){
-                    printf("Your student - ");
-                    Student[i].PrintName();
-                    printf(" - is too unhappy and is dropping out! Do better!");
-                    people[i+1].state_person = 0;
-                    Student[i].~GradStudent();
-                }
-                if(Student[i].GetYear()==6){
-                    printf("Your student - ");
-                    Student[i].PrintName();
-                    printf(" - has defended! They're graduated!");
-                    people[i+1].state_person = 0;
-                    Student[i].~GradStudent();
+				
+				
 			}
 		}
-
 
         while (window_term != 1)
         {
@@ -781,6 +782,7 @@ int main(void)
 						}
 						
                         window_term = 1;
+						EFF.initTransition();
                     }
                 }
                 else if (inter == 8)
@@ -1018,6 +1020,13 @@ int main(void)
                     }
                 }
             }
+
+
+			EFF.DrawMoney(ADV.Money, ADV.GetPrestige(), ADV.GetKnowledge(), ADV.GetMentoring(), ADV.GetExperience());
+			if (EFF.tState != 0) {
+				EFF.DrawTransition();
+			}
+
             FsSwapBuffers();
             
             FsSleep(30);
