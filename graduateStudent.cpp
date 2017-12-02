@@ -1,4 +1,4 @@
-﻿//
+//
 //  graduateStudent.cpp
 //  Hamerschlag Hall
 //
@@ -314,7 +314,7 @@ void GradStudent::AssignPersonality(float knowledge, float prestige, float mento
     rout->currdt = rout->basedt;
     happiness = new Counter;
     float dt = this->personality->getOptimism();
-    happiness->basedt = -1*(100-dt);
+    happiness->basedt = -1*(100-dt)/3;
     happiness->currdt = happiness->basedt;
     happiness->value = 100;
     rout-> value = 0;
