@@ -66,6 +66,3 @@ public:
     void turn();
 };
 
-
-#endif
-

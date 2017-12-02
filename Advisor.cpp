@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include "graduateStudent.h"
 #include "Advisor.h"
 #include <random>
