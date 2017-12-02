@@ -1,5 +1,5 @@
+<stdio.h>
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
@@ -610,6 +610,20 @@ int main(void)
 					ADV.AddKnowledge(new_paper.getCitations() / 200.0);
 
 				}
+
+                if(Student[i].GetHappinessVal()<0){
+                    printf("Your student - ");
+                    Student[i].PrintName();
+                    printf(" - is too unhappy and is dropping out! Do better!");
+                    people[i+1].state_person = 0;
+                    Student[i].~GradStudent();
+                }
+                if(Student[i].GetYear()==6){
+                    printf("Your student - ");
+                    Student[i].PrintName();
+                    printf(" - has defended! They're graduated!");
+                    people[i+1].state_person = 0;
+                    Student[i].~GradStudent();
 			}
 		}
 
