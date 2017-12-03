@@ -65,48 +65,54 @@ char actionforSpring() {
 }
 void GenerateSetup(int nDesk, Desk desk[6], Computer computer[6], Person people[7], Upgrade upgrade[6], int flag)
 {
-    int i;
-    if (flag == 0)
-    {
-        for (i = 0; i<nDesk / 2; i++)
-        {
-            desk[i].state = 0;
-            computer[i].state = 0;
-            people[i + 1].state_person = 0;
-            upgrade[i].state = 0;
-            desk[i + 3].state = 0;
-            computer[i + 3].state = 0;
-            people[i + 4].state_person = 0;
-            upgrade[i + 3].state = 0;
-        }
-    }
-    
-    for (i = 0; i<nDesk / 2; i++)
-    {
-        desk[i].x = 400;
-        desk[i].y = 700 - 200 * i;
-        
-        computer[i].x = 400;
-        computer[i].y = 650 - 200 * i;
-        
-        people[i + 1].x = 400;
-        people[i + 1].y = 620 - 200 * i;
-        
-        upgrade[i].x = 75;
-        upgrade[i].y = 700 - 200 * i;
-        
-        desk[i + 3].x = 800;
-        desk[i + 3].y = 700 - 200 * i;
-        
-        computer[i + 3].x = 800;
-        computer[i + 3].y = 650 - 200 * i;
-        
-        people[i + 4].x = 800;
-        people[i + 4].y = 620 - 200 * i;
-        
-        upgrade[i + 3].x = 1135;
-        upgrade[i + 3].y = 700 - 200 * i;
-    }
+	int i;
+	if (flag == 0)
+	{
+		for (i = 0; i<nDesk / 2; i++)
+		{
+			desk[i].state = 0;
+			computer[i].state = 0;
+			people[i + 1].state_person = 0;
+			upgrade[i].state = 0;
+			desk[i + 3].state = 0;
+			computer[i + 3].state = 0;
+			people[i + 4].state_person = 0;
+			upgrade[i + 3].state = 0;
+		}
+	}
+
+	for (i = 0; i<nDesk / 2; i++)
+	{
+		desk[i].x = 400;
+		desk[i].y = 700 - 200 * i;
+
+		computer[i].x = 400;
+		computer[i].y = 650 - 200 * i;
+
+		people[i + 1].x = 400;
+		people[i + 1].y = 610 - 200 * i;
+		people[i + 1].state_walking = 3;
+
+		upgrade[i].x = 75;
+		upgrade[i].y = 700 - 200 * i;
+
+		desk[i + 3].x = 800;
+		desk[i + 3].y = 700 - 200 * i;
+
+		computer[i + 3].x = 800;
+		computer[i + 3].y = 650 - 200 * i;
+
+		people[i + 4].x = 800;
+		people[i + 4].y = 610 - 200 * i;
+		people[i + 4].state_walking = 3;
+
+		upgrade[i + 3].x = 1135;
+		upgrade[i + 3].y = 700 - 200 * i;
+	}
+
+	people[0].x = 600;
+	people[0].y = 700;
+	people[0].state_walking = 0;
 }
 
 void DrawRoom(void)
@@ -507,20 +513,22 @@ const int nUpgrade = 6;
 
 int main(void)
 {
-    int i, key, nShot, inter_state = 0, inter = 9, year = 2017, semester_state = 0, window_term = 0, game_term = 0, setup_flag = 0;
-    double x_prof = 600, y_prof = 700, x_profdesk = 600, y_profdesk = 125;
-    char decision_leave;
+	int i, key, nShot, inter_state = 0, inter = 9, year = 2017, semester_state = 0, window_term = 0, game_term = 0, setup_flag = 0, prev_state_walking, flag_walk = 0, loop_timer = 10;
+	double x_profdesk = 600, y_profdesk = 125;
+	char decision_leave;
+
 	Effect EFF;
 	Advisor ADV;
     srand(time(NULL));
 	int StudentCounter = 0;
     FsOpenWindow(16, 16, 1200, 800, 1);
-	
+	int grantCounter = 0;
     Desk desk[nDesk];
     Computer computer[nDesk];
     Person people[nPerson];
     Upgrade upgrade[nUpgrade];
 	GradStudent Student[6];
+
     GenerateSetup(nDesk, desk, computer, people, upgrade, setup_flag);
     setup_flag = 1;
 
@@ -532,8 +540,6 @@ int main(void)
     }
     
     people[0].state_person = 1;
-    people[0].x = x_prof;
-    people[0].y = y_prof;
     people[0].r_skin = 255;
     people[0].g_skin = 205;
     people[0].b_skin = 148;
@@ -549,6 +555,10 @@ int main(void)
     people[0].r_shoes = 139;
     people[0].g_shoes = 69;
     people[0].b_shoes = 19;
+	people[0].r_eyes = 161;
+	people[0].g_eyes = 202;
+	people[0].b_eyes = 241;
+
 	for (int i = 1; i < nPerson; i++) {
 
 		people[i].r_skin = 255;
@@ -566,6 +576,9 @@ int main(void)
 		people[i].r_shoes = 139;
 		people[i].g_shoes = 69;
 		people[i].b_shoes = 19;
+		people[i].r_eyes = 161;
+		people[i].g_eyes = 202;
+		people[i].b_eyes = 241;
 }
     
     nShot = 0;
@@ -584,6 +597,7 @@ int main(void)
         }
         else
         {
+			grantCounter = 0;
             printf("Spring Semester, %d\n", year);
         }
 
@@ -592,7 +606,9 @@ int main(void)
 				if (Student[i].GetHappinessVal()<0) {
 					printf("Your student - ");
 					Student[i].PrintName();
-					printf(" - is too unhappy and is dropping out! Do better!");
+					printf(" - is too unhappy to keep working on the research!\n");
+					printf("And they are diagnosed amnesia,it made them forget everything, Research 0!!\n");
+					Student[i].ModifyResearchValue(Student[i].GetResearchVal()*(-1));
 					break;
 				}
 				if (Student[i].GetYear() == 6) {
@@ -637,130 +653,222 @@ int main(void)
             
             switch (key)
             {
-                case FSKEY_UP:
-                    people[0].y -= 10;
-                    for (i = 0; i < nDesk; i++)
-                    {
-                        if (desk[i].state == 1)
-                        {
-                            if (people[0].y > (desk[i].y - 75) && people[0].y < (desk[i].y + 15) && (people[0].x - 32) < (desk[i].x + 90) && (people[0].x + 32) > (desk[i].x - 90))
-                            {
-                                people[0].y += 10;
-                            }
-                        }
-                    }
-                    if (people[0].y > (y_profdesk - 75) && people[0].y < (y_profdesk + 15) && (people[0].x - 32) < (x_profdesk + 180) && (people[0].x + 32) > (x_profdesk - 180))
-                    {
-                        people[0].y += 10;
-                    }
-                    if (people[0].y < 20)
-                    {
-                        people[0].y += 10;
-                    }
-                    for (i = 0; i < nUpgrade; i++)
-                    {
-                        if (upgrade[i].state == 1)
-                        {
-                            if (people[0].y > (upgrade[i].y - 75) && people[0].y < (upgrade[i].y + 15) && (people[0].x - 32) < (upgrade[i].x + 60) && (people[0].x + 32) > (upgrade[i].x - 60))
-                            {
-                                people[0].y += 10;
-                            }
-                        }
-                    }
-                    break;
-                case FSKEY_DOWN:
-                    people[0].y += 10;
-                    for (i = 0; i < nDesk; i++)
-                    {
-                        if (desk[i].state == 1)
-                        {
-                            if (people[0].y > (desk[i].y - 75) && people[0].y < (desk[i].y + 15) && (people[0].x - 32) < (desk[i].x + 90) && (people[0].x + 32) > (desk[i].x - 90))
-                            {
-                                people[0].y -= 10;
-                            }
-                        }
-                    }
-                    if (people[0].y > (y_profdesk - 75) && people[0].y < (y_profdesk + 15) && (people[0].x - 32) < (x_profdesk + 180) && (people[0].x + 32) > (x_profdesk - 180))
-                    {
-                        people[0].y -= 10;
-                    }
-                    if (people[0].y > 750)
-                    {
-                        people[0].y -= 10;
-                    }
-                    for (i = 0; i < nUpgrade; i++)
-                    {
-                        if (upgrade[i].state == 1)
-                        {
-                            if (people[0].y > (upgrade[i].y - 75) && people[0].y < (upgrade[i].y + 15) && (people[0].x - 32) < (upgrade[i].x + 60) && (people[0].x + 32) > (upgrade[i].x - 60))
-                            {
-                                people[0].y -= 10;
-                            }
-                        }
-                    }
-                    break;
-                case FSKEY_RIGHT:
-                    people[0].x += 10;
-                    for (i = 0; i < nDesk; i++)
-                    {
-                        if (desk[i].state == 1)
-                        {
-                            if (people[0].y > (desk[i].y - 75) && people[0].y < (desk[i].y + 15) && (people[0].x - 32) < (desk[i].x + 90) && (people[0].x + 32) > (desk[i].x - 90))
-                            {
-                                people[0].x -= 10;
-                            }
-                        }
-                    }
-                    if (people[0].y > (y_profdesk - 75) && people[0].y < (y_profdesk + 15) && (people[0].x - 32) < (x_profdesk + 180) && (people[0].x + 32) > (x_profdesk - 180))
-                    {
-                        people[0].x -= 10;
-                    }
-                    if (people[0].x > 1180)
-                    {
-                        people[0].x -= 10;
-                    }
-                    for (i = 0; i < nUpgrade; i++)
-                    {
-                        if (upgrade[i].state == 1)
-                        {
-                            if (people[0].y > (upgrade[i].y - 75) && people[0].y < (upgrade[i].y + 15) && (people[0].x - 32) < (upgrade[i].x + 60) && (people[0].x + 32) > (upgrade[i].x - 60))
-                            {
-                                people[0].x -= 10;
-                            }
-                        }
-                    }
-                    break;
-                case FSKEY_LEFT:
-                    people[0].x -= 10;
-                    for (i = 0; i < nDesk; i++)
-                    {
-                        if (desk[i].state == 1)
-                        {
-                            if (people[0].y > (desk[i].y - 75) && people[0].y < (desk[i].y + 15) && (people[0].x - 32) < (desk[i].x + 90) && (people[0].x + 32) > (desk[i].x - 90))
-                            {
-                                people[0].x += 10;
-                            }
-                        }
-                    }
-                    if (people[0].y > (y_profdesk - 75) && people[0].y < (y_profdesk + 15) && (people[0].x - 32) < (x_profdesk + 180) && (people[0].x + 32) > (x_profdesk - 180))
-                    {
-                        people[0].x += 10;
-                    }
-                    if (people[0].x < 20)
-                    {
-                        people[0].x += 10;
-                    }
-                    for (i = 0; i < nUpgrade; i++)
-                    {
-                        if (upgrade[i].state == 1)
-                        {
-                            if (people[0].y > (upgrade[i].y - 75) && people[0].y < (upgrade[i].y + 15) && (people[0].x - 32) < (upgrade[i].x + 60) && (people[0].x + 32) > (upgrade[i].x - 60))
-                            {
-                                people[0].x += 10;
-                            }
-                        }
-                    }
-                    break;
+			case FSKEY_UP:
+				people[0].y -= 10;
+				for (i = 0; i < nDesk; i++)
+				{
+					if (desk[i].state == 1)
+					{
+						if (people[0].y >(desk[i].y - 75) && people[0].y < (desk[i].y + 15) && (people[0].x - 32) < (desk[i].x + 90) && (people[0].x + 32) > (desk[i].x - 90))
+						{
+							people[0].y += 10;
+						}
+					}
+				}
+				if (people[0].y >(y_profdesk - 75) && people[0].y < (y_profdesk + 15) && (people[0].x - 32) < (x_profdesk + 180) && (people[0].x + 32) > (x_profdesk - 180))
+				{
+					people[0].y += 10;
+				}
+				if (people[0].y < 20)
+				{
+					people[0].y += 10;
+				}
+				for (i = 0; i < nUpgrade; i++)
+				{
+					if (upgrade[i].state == 1)
+					{
+						if (people[0].y >(upgrade[i].y - 75) && people[0].y < (upgrade[i].y + 15) && (people[0].x - 32) < (upgrade[i].x + 60) && (people[0].x + 32) > (upgrade[i].x - 60))
+						{
+							people[0].y += 10;
+						}
+					}
+				}
+				prev_state_walking = people[0].state_walking;
+				if (prev_state_walking != 0 && prev_state_walking != 1 && prev_state_walking != 2)
+				{
+					people[0].state_walking = 0;
+				}
+				else if (prev_state_walking == 0)
+				{
+					if (flag_walk == 0)
+					{
+						people[0].state_walking = 1;
+						flag_walk = 1;
+					}
+					else
+					{
+						people[0].state_walking = 2;
+						flag_walk = 0;
+					}
+				}
+				else
+				{
+					people[0].state_walking = 0;
+				}
+				loop_timer = 8;
+				break;
+			case FSKEY_DOWN:
+				people[0].y += 10;
+				for (i = 0; i < nDesk; i++)
+				{
+					if (desk[i].state == 1)
+					{
+						if (people[0].y >(desk[i].y - 75) && people[0].y < (desk[i].y + 15) && (people[0].x - 32) < (desk[i].x + 90) && (people[0].x + 32) > (desk[i].x - 90))
+						{
+							people[0].y -= 10;
+						}
+					}
+				}
+				if (people[0].y >(y_profdesk - 75) && people[0].y < (y_profdesk + 15) && (people[0].x - 32) < (x_profdesk + 180) && (people[0].x + 32) > (x_profdesk - 180))
+				{
+					people[0].y -= 10;
+				}
+				if (people[0].y > 750)
+				{
+					people[0].y -= 10;
+				}
+				for (i = 0; i < nUpgrade; i++)
+				{
+					if (upgrade[i].state == 1)
+					{
+						if (people[0].y >(upgrade[i].y - 75) && people[0].y < (upgrade[i].y + 15) && (people[0].x - 32) < (upgrade[i].x + 60) && (people[0].x + 32) > (upgrade[i].x - 60))
+						{
+							people[0].y -= 10;
+						}
+					}
+				}
+				prev_state_walking = people[0].state_walking;
+				if (prev_state_walking != 3 && prev_state_walking != 4 && prev_state_walking != 5)
+				{
+					people[0].state_walking = 3;
+				}
+				else if (prev_state_walking == 3)
+				{
+					if (flag_walk == 0)
+					{
+						people[0].state_walking = 4;
+						flag_walk = 1;
+					}
+					else
+					{
+						people[0].state_walking = 5;
+						flag_walk = 0;
+					}
+				}
+				else
+				{
+					people[0].state_walking = 3;
+				}
+				loop_timer = 8;
+				break;
+			case FSKEY_RIGHT:
+				people[0].x += 10;
+				for (i = 0; i < nDesk; i++)
+				{
+					if (desk[i].state == 1)
+					{
+						if (people[0].y >(desk[i].y - 75) && people[0].y < (desk[i].y + 15) && (people[0].x - 32) < (desk[i].x + 90) && (people[0].x + 32) > (desk[i].x - 90))
+						{
+							people[0].x -= 10;
+						}
+					}
+				}
+				if (people[0].y >(y_profdesk - 75) && people[0].y < (y_profdesk + 15) && (people[0].x - 32) < (x_profdesk + 180) && (people[0].x + 32) > (x_profdesk - 180))
+				{
+					people[0].x -= 10;
+				}
+				if (people[0].x > 1180)
+				{
+					people[0].x -= 10;
+				}
+				for (i = 0; i < nUpgrade; i++)
+				{
+					if (upgrade[i].state == 1)
+					{
+						if (people[0].y >(upgrade[i].y - 75) && people[0].y < (upgrade[i].y + 15) && (people[0].x - 32) < (upgrade[i].x + 60) && (people[0].x + 32) > (upgrade[i].x - 60))
+						{
+							people[0].x -= 10;
+						}
+					}
+				}
+				prev_state_walking = people[0].state_walking;
+				if (prev_state_walking != 9 && prev_state_walking != 10 && prev_state_walking != 11)
+				{
+					people[0].state_walking = 9;
+				}
+				else if (prev_state_walking == 9)
+				{
+					if (flag_walk == 0)
+					{
+						people[0].state_walking = 10;
+						flag_walk = 1;
+					}
+					else
+					{
+						people[0].state_walking = 11;
+						flag_walk = 0;
+					}
+				}
+				else
+				{
+					people[0].state_walking = 9;
+				}
+				loop_timer = 8;
+				break;
+			case FSKEY_LEFT:
+				people[0].x -= 10;
+				for (i = 0; i < nDesk; i++)
+				{
+					if (desk[i].state == 1)
+					{
+						if (people[0].y >(desk[i].y - 75) && people[0].y < (desk[i].y + 15) && (people[0].x - 32) < (desk[i].x + 90) && (people[0].x + 32) > (desk[i].x - 90))
+						{
+							people[0].x += 10;
+						}
+					}
+				}
+				if (people[0].y >(y_profdesk - 75) && people[0].y < (y_profdesk + 15) && (people[0].x - 32) < (x_profdesk + 180) && (people[0].x + 32) > (x_profdesk - 180))
+				{
+					people[0].x += 10;
+				}
+				if (people[0].x < 20)
+				{
+					people[0].x += 10;
+				}
+				for (i = 0; i < nUpgrade; i++)
+				{
+					if (upgrade[i].state == 1)
+					{
+						if (people[0].y >(upgrade[i].y - 75) && people[0].y < (upgrade[i].y + 15) && (people[0].x - 32) < (upgrade[i].x + 60) && (people[0].x + 32) > (upgrade[i].x - 60))
+						{
+							people[0].x += 10;
+						}
+					}
+				}
+				prev_state_walking = people[0].state_walking;
+				if (prev_state_walking != 6 && prev_state_walking != 7 && prev_state_walking != 7)
+				{
+					people[0].state_walking = 6;
+				}
+				else if (prev_state_walking == 6)
+				{
+					if (flag_walk == 0)
+					{
+						people[0].state_walking = 7;
+						flag_walk = 1;
+					}
+					else
+					{
+						people[0].state_walking = 8;
+						flag_walk = 0;
+					}
+				}
+				else
+				{
+					people[0].state_walking = 6;
+				}
+				loop_timer = 8;
+				break;
                 case FSKEY_SPACE:
                     Interaction(inter, inter_state, upgrade, people, nPerson);
                     break;
@@ -824,7 +932,13 @@ int main(void)
 						char actionFall = actionforFall();
 						
 						if (actionFall == 'A') {
-							ADV.WriteGrant();
+							if (grantCounter < 2) {
+								ADV.WriteGrant();
+								grantCounter++;
+							}
+							else if (grantCounter >= 2) {
+								printf("You can apply to only two grants per year\n");
+							}
 						}
 						if (actionFall == 'B') {
 							ADV.UpgradeLab(Student, upgrade, people, StudentCounter);
@@ -874,7 +988,7 @@ int main(void)
 					if (actionn == 'B') {
 						if (ADV.GetPrestige() > 85.0 && ADV.GetExperience() >85.0 ) {
 							ADV.SendtoCompany(Student, inter - 1);
-							people[inter - 1].state_person = 0;
+							people[inter].state_person = 0;
 						}
 						else {
 							printf("You don`t have enough experience and prestige to send your student to any company you want?\n");
@@ -903,7 +1017,7 @@ int main(void)
                 {
                     if (people[i].y < 125)
                     {
-                        people[i].Draw_up_still();
+                        people[i].Draw();
                     }
                 }
             }
@@ -914,7 +1028,7 @@ int main(void)
                 {
                     if (people[i].y < 225 && people[i].y >= 100)
                     {
-                        people[i].Draw_up_still();
+                        people[i].Draw();
                     }
                 }
             }
@@ -948,7 +1062,7 @@ int main(void)
                 {
                     if (people[i].y < 425 && people[i].y >= 225)
                     {
-                        people[i].Draw_up_still();
+                        people[i].Draw();
                     }
                 }
             }
@@ -982,7 +1096,7 @@ int main(void)
                 {
                     if (people[i].y < 625 && people[i].y >= 425)
                     {
-                        people[i].Draw_up_still();
+                        people[i].Draw();
                     }
                 }
             }
@@ -1016,7 +1130,7 @@ int main(void)
                 {
                     if (people[i].y <= 800 && people[i].y >= 625)
                     {
-                        people[i].Draw_up_still();
+                        people[i].Draw();
                     }
                 }
             }
@@ -1026,6 +1140,28 @@ int main(void)
 			if (EFF.tState != 0) {
 				EFF.DrawTransition();
 			}
+
+			if (loop_timer == 0)
+			{
+				if (people[0].state_walking == 1 || people[0].state_walking == 2)
+				{
+					people[0].state_walking = 0;
+				}
+				else if (people[0].state_walking == 4 || people[0].state_walking == 5)
+				{
+					people[0].state_walking = 3;
+				}
+				else if (people[0].state_walking == 7 || people[0].state_walking == 8)
+				{
+					people[0].state_walking = 6;
+				}
+				else if (people[0].state_walking == 10 || people[0].state_walking == 11)
+				{
+					people[0].state_walking = 9;
+				}
+			}
+
+			loop_timer -= 1;
 
             FsSwapBuffers();
             

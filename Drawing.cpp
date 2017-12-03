@@ -1166,6 +1166,1319 @@ void Upgrade::Draw_Coffee(void)
 
 
 
+
+void Person::Draw_down_still(void)
+{
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 36, y + 22, 10, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 36, y + 22, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 32, y + 16);
+	glVertex2d(x + 32, y + 16);
+	glVertex2d(x + 32, y + 66);
+	glVertex2d(x - 32, y + 66);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 32, y + 66);
+	glVertex2d(x + 32, y + 66);
+	glVertex2d(x + 32, y + 80);
+	glVertex2d(x - 32, y + 80);
+	glEnd();
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x + 34, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x - 34, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 44, y + 34);
+	glVertex2d(x - 32, y + 34);
+	glVertex2d(x - 32, y + 40);
+	glVertex2d(x - 44, y + 40);
+	glEnd();
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x + 44, y + 34);
+	glVertex2d(x + 32, y + 34);
+	glVertex2d(x + 32, y + 40);
+	glVertex2d(x + 44, y + 40);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 44, y + 40);
+	glVertex2d(x - 32, y + 40);
+	glVertex2d(x - 32, y + 66);
+	glVertex2d(x - 44, y + 66);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_QUADS);
+	glVertex2d(x + 44, y + 40);
+	glVertex2d(x + 32, y + 40);
+	glVertex2d(x + 32, y + 66);
+	glVertex2d(x + 44, y + 66);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 38, y + 66, 6, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 38, y + 66, 6, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 26, y + 96, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 16, y + 96, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 26, y + 96, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 16, y + 96, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 26, y + 96);
+	glVertex2d(x - 16, y + 96);
+	glVertex2d(x - 16, y + 104);
+	glVertex2d(x - 26, y + 104);
+	glEnd();
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_QUADS);
+	glVertex2d(x + 26, y + 96);
+	glVertex2d(x + 16, y + 96);
+	glVertex2d(x + 16, y + 104);
+	glVertex2d(x + 26, y + 104);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 32, y + 80);
+	glVertex2d(x - 8, y + 80);
+	glVertex2d(x - 8, y + 96);
+	glVertex2d(x - 32, y + 96);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x + 8, y + 80);
+	glVertex2d(x + 32, y + 80);
+	glVertex2d(x + 32, y + 96);
+	glVertex2d(x + 8, y + 96);
+	glEnd();
+
+	glColor3ub(r_hair, g_hair, b_hair);
+	DrawCircle(x, y, 40, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x, y + 6, 36, 1);
+
+	glColor3ub(255, 255, 255);
+	DrawCircle(x + 16, y + 5, 7, 1);
+
+	glColor3ub(255, 255, 255);
+	DrawCircle(x - 16, y + 5, 7, 1);
+
+	glColor3ub(r_eyes, g_eyes, b_eyes);
+	DrawCircle(x + 14, y + 5, 4, 1);
+
+	glColor3ub(r_eyes, g_eyes, b_eyes);
+	DrawCircle(x - 14, y + 5, 4, 1);
+
+	glColor3ub(0, 0, 0);
+	DrawCircle(x + 14, y + 5, 2, 1);
+
+	glColor3ub(0, 0, 0);
+	DrawCircle(x - 14, y + 5, 2, 1);
+
+	glColor3ub(201, 130, 118);
+	glBegin(GL_QUADS);
+	glVertex2d(x + 10, y + 24);
+	glVertex2d(x - 10, y + 24);
+	glVertex2d(x - 10, y + 32);
+	glVertex2d(x + 10, y + 32);
+	glEnd();
+}
+
+void Person::Draw_down_left(void)
+{
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 36, y + 22, 10, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 36, y + 22, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 32, y + 16);
+	glVertex2d(x + 32, y + 16);
+	glVertex2d(x + 32, y + 66);
+	glVertex2d(x - 32, y + 66);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 32, y + 66);
+	glVertex2d(x + 32, y + 66);
+	glVertex2d(x + 32, y + 80);
+	glVertex2d(x - 32, y + 80);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 38, y + 42, 6, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x + 34, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x - 34, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 44, y + 34);
+	glVertex2d(x - 32, y + 34);
+	glVertex2d(x - 32, y + 40);
+	glVertex2d(x - 44, y + 40);
+	glEnd();
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x + 44, y + 34);
+	glVertex2d(x + 32, y + 34);
+	glVertex2d(x + 32, y + 40);
+	glVertex2d(x + 44, y + 40);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_QUADS);
+	glVertex2d(x + 44, y + 36);
+	glVertex2d(x + 32, y + 36);
+	glVertex2d(x + 32, y + 56);
+	glVertex2d(x + 44, y + 56);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 38, y + 56, 6, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 26, y + 96, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 16, y + 93, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_POLYGON);
+	glVertex2d(x - 26, y + 93);
+	glVertex2d(x - 16, y + 101);
+	glVertex2d(x - 16, y + 101);
+	glVertex2d(x - 26, y + 104);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_POLYGON);
+	glVertex2d(x - 32, y + 80);
+	glVertex2d(x - 8, y + 80);
+	glVertex2d(x - 8, y + 93);
+	glVertex2d(x - 32, y + 99);
+	glEnd();
+
+	glColor3ub(r_hair, g_hair, b_hair);
+	DrawCircle(x, y, 40, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x, y + 6, 36, 1);
+
+	glColor3ub(255, 255, 255);
+	DrawCircle(x + 16, y + 5, 7, 1);
+
+	glColor3ub(255, 255, 255);
+	DrawCircle(x - 16, y + 5, 7, 1);
+
+	glColor3ub(r_eyes, g_eyes, b_eyes);
+	DrawCircle(x + 14, y + 5, 4, 1);
+
+	glColor3ub(r_eyes, g_eyes, b_eyes);
+	DrawCircle(x - 14, y + 5, 4, 1);
+
+	glColor3ub(0, 0, 0);
+	DrawCircle(x + 14, y + 5, 2, 1);
+
+	glColor3ub(0, 0, 0);
+	DrawCircle(x - 14, y + 5, 2, 1);
+
+	glColor3ub(201, 130, 118);
+	glBegin(GL_QUADS);
+	glVertex2d(x + 10, y + 24);
+	glVertex2d(x - 10, y + 24);
+	glVertex2d(x - 10, y + 32);
+	glVertex2d(x + 10, y + 32);
+	glEnd();
+}
+
+void Person::Draw_down_right(void)
+{
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 36, y + 22, 10, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 36, y + 22, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 32, y + 16);
+	glVertex2d(x + 32, y + 16);
+	glVertex2d(x + 32, y + 66);
+	glVertex2d(x - 32, y + 66);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 32, y + 66);
+	glVertex2d(x + 32, y + 66);
+	glVertex2d(x + 32, y + 80);
+	glVertex2d(x - 32, y + 80);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 38, y + 42, 6, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x + 34, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x - 34, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 44, y + 34);
+	glVertex2d(x - 32, y + 34);
+	glVertex2d(x - 32, y + 40);
+	glVertex2d(x - 44, y + 40);
+	glEnd();
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x + 44, y + 34);
+	glVertex2d(x + 32, y + 34);
+	glVertex2d(x + 32, y + 40);
+	glVertex2d(x + 44, y + 40);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 44, y + 36);
+	glVertex2d(x - 32, y + 36);
+	glVertex2d(x - 32, y + 56);
+	glVertex2d(x - 44, y + 56);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 38, y + 56, 6, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 26, y + 96, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 16, y + 93, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_POLYGON);
+	glVertex2d(x + 26, y + 93);
+	glVertex2d(x + 16, y + 101);
+	glVertex2d(x + 16, y + 101);
+	glVertex2d(x + 26, y + 104);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_POLYGON);
+	glVertex2d(x + 32, y + 80);
+	glVertex2d(x + 8, y + 80);
+	glVertex2d(x + 8, y + 93);
+	glVertex2d(x + 32, y + 99);
+	glEnd();
+
+	glColor3ub(r_hair, g_hair, b_hair);
+	DrawCircle(x, y, 40, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x, y + 6, 36, 1);
+
+	glColor3ub(255, 255, 255);
+	DrawCircle(x + 16, y + 5, 7, 1);
+
+	glColor3ub(255, 255, 255);
+	DrawCircle(x - 16, y + 5, 7, 1);
+
+	glColor3ub(r_eyes, g_eyes, b_eyes);
+	DrawCircle(x + 14, y + 5, 4, 1);
+
+	glColor3ub(r_eyes, g_eyes, b_eyes);
+	DrawCircle(x - 14, y + 5, 4, 1);
+
+	glColor3ub(0, 0, 0);
+	DrawCircle(x + 14, y + 5, 2, 1);
+
+	glColor3ub(0, 0, 0);
+	DrawCircle(x - 14, y + 5, 2, 1);
+
+	glColor3ub(201, 130, 118);
+	glBegin(GL_QUADS);
+	glVertex2d(x + 10, y + 24);
+	glVertex2d(x - 10, y + 24);
+	glVertex2d(x - 10, y + 32);
+	glVertex2d(x + 10, y + 32);
+	glEnd();
+}
+
+void Person::Draw_left_still(void)
+{
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 16);
+	glVertex2d(x + 12, y + 16);
+	glVertex2d(x + 12, y + 66);
+	glVertex2d(x - 12, y + 66);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 66);
+	glVertex2d(x + 12, y + 66);
+	glVertex2d(x + 12, y + 80);
+	glVertex2d(x - 12, y + 80);
+	glEnd();
+
+	glColor3ub(r_hair, g_hair, b_hair);
+	DrawCircle(x, y, 40, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 5, y + 7, 35, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 26, y + 16, 10, 1);
+
+	glColor3ub(255, 255, 255);
+	DrawCircle(x - 8, y + 5, 7, 1);
+
+	glColor3ub(r_eyes, g_eyes, b_eyes);
+	DrawCircle(x - 10, y + 5, 4, 1);
+
+	glColor3ub(0, 0, 0);
+	DrawCircle(x - 10, y + 5, 2, 1);
+
+	glColor3ub(201, 130, 118);
+	glBegin(GL_POLYGON);
+	glVertex2d(x - 16, y + 24);
+	glVertex2d(x - 36, y + 24);
+	glVertex2d(x - 30, y + 32);
+	glVertex2d(x - 16, y + 32);
+	glEnd();
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 6, y + 34);
+	glVertex2d(x + 6, y + 34);
+	glVertex2d(x + 6, y + 40);
+	glVertex2d(x - 6, y + 40);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 6, y + 40);
+	glVertex2d(x + 6, y + 40);
+	glVertex2d(x + 6, y + 66);
+	glVertex2d(x - 6, y + 66);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x, y + 66, 6, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 5, y + 96, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 5, y + 96, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 5, y + 96);
+	glVertex2d(x + 5, y + 96);
+	glVertex2d(x + 5, y + 104);
+	glVertex2d(x - 5, y + 104);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 80);
+	glVertex2d(x + 12, y + 80);
+	glVertex2d(x + 12, y + 96);
+	glVertex2d(x - 12, y + 96);
+	glEnd();
+}
+
+void Person::Draw_left_left(void)
+{
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x - 2.2, y + 44);
+	glVertex2d((double)x + 8.2, y + 38);
+	glVertex2d((double)x + 21.2, (double)y + 60.52);
+	glVertex2d((double)x + 10.8, (double)y + 66.52);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 16, y + 63.52, 6, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 16);
+	glVertex2d(x + 12, y + 16);
+	glVertex2d(x + 12, y + 66);
+	glVertex2d(x - 12, y + 66);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 66);
+	glVertex2d(x + 12, y + 66);
+	glVertex2d(x + 12, y + 80);
+	glVertex2d(x - 12, y + 80);
+	glEnd();
+
+	glColor3ub(r_hair, g_hair, b_hair);
+	DrawCircle(x, y, 40, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 5, y + 7, 35, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 26, y + 16, 10, 1);
+
+	glColor3ub(255, 255, 255);
+	DrawCircle(x - 8, y + 5, 7, 1);
+
+	glColor3ub(r_eyes, g_eyes, b_eyes);
+	DrawCircle(x - 10, y + 5, 4, 1);
+
+	glColor3ub(0, 0, 0);
+	DrawCircle(x - 10, y + 5, 2, 1);
+
+	glColor3ub(201, 130, 118);
+	glBegin(GL_POLYGON);
+	glVertex2d(x - 16, y + 24);
+	glVertex2d(x - 36, y + 24);
+	glVertex2d(x - 30, y + 32);
+	glVertex2d(x - 16, y + 32);
+	glEnd();
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 6, y + 34);
+	glVertex2d(x + 6, y + 34);
+	glVertex2d(x + 6, y + 40);
+	glVertex2d(x - 6, y + 40);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x + 2.2, y + 44);
+	glVertex2d((double)x - 8.2, y + 38);
+	glVertex2d((double)x - 21.2, (double)y + 60.52);
+	glVertex2d((double)x - 10.8, (double)y + 66.52);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 16, y + 63.52, 6, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 13.07, y + 97.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 6.15, y + 100.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x + 6.15, (double)y + 100.86);
+	glVertex2d((double)x + 13.07, (double)y + 97.86);
+	glVertex2d((double)x + 17.07, (double)y + 104.79);
+	glVertex2d((double)x + 10.15, (double)y + 107.79);
+	glEnd();
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 13.07, y + 97.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 6.15, y + 100.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x - 6.15, (double)y + 100.86);
+	glVertex2d((double)x - 13.07, (double)y + 97.86);
+	glVertex2d((double)x - 17.07, (double)y + 104.79);
+	glVertex2d((double)x - 10.15, (double)y + 107.79);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 80);
+	glVertex2d(x + 12, y + 80);
+	glVertex2d(x + 12, y + 88);
+	glVertex2d(x - 12, y + 88);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x - 8.78, (double)y + 92);
+	glVertex2d((double)x + 12, (double)y + 80);
+	glVertex2d((double)x + 20, (double)y + 93.86);
+	glVertex2d((double)x - .78, (double)y + 104.86);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x + 8.78, (double)y + 92);
+	glVertex2d((double)x - 12, (double)y + 80);
+	glVertex2d((double)x - 20, (double)y + 93.86);
+	glVertex2d((double)x + .78, (double)y + 104.86);
+	glEnd();
+
+	glColor3ub(0, 0, 0);
+	glBegin(GL_LINES);
+	glVertex2d((double)x - 12, (double)y + 80);
+	glVertex2d((double)x - .78, (double)y + 104.86);
+	glEnd();
+}
+
+void Person::Draw_left_right(void)
+{
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x + 2.2, y + 44);
+	glVertex2d((double)x - 8.2, y + 38);
+	glVertex2d((double)x - 21.2, (double)y + 60.52);
+	glVertex2d((double)x - 10.8, (double)y + 66.52);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 16, y + 63.52, 6, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 16);
+	glVertex2d(x + 12, y + 16);
+	glVertex2d(x + 12, y + 66);
+	glVertex2d(x - 12, y + 66);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 66);
+	glVertex2d(x + 12, y + 66);
+	glVertex2d(x + 12, y + 80);
+	glVertex2d(x - 12, y + 80);
+	glEnd();
+
+	glColor3ub(r_hair, g_hair, b_hair);
+	DrawCircle(x, y, 40, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 5, y + 7, 35, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 26, y + 16, 10, 1);
+
+	glColor3ub(255, 255, 255);
+	DrawCircle(x - 8, y + 5, 7, 1);
+
+	glColor3ub(r_eyes, g_eyes, b_eyes);
+	DrawCircle(x - 10, y + 5, 4, 1);
+
+	glColor3ub(0, 0, 0);
+	DrawCircle(x - 10, y + 5, 2, 1);
+
+	glColor3ub(201, 130, 118);
+	glBegin(GL_POLYGON);
+	glVertex2d(x - 16, y + 24);
+	glVertex2d(x - 36, y + 24);
+	glVertex2d(x - 30, y + 32);
+	glVertex2d(x - 16, y + 32);
+	glEnd();
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 6, y + 34);
+	glVertex2d(x + 6, y + 34);
+	glVertex2d(x + 6, y + 40);
+	glVertex2d(x - 6, y + 40);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x - 2.2, y + 44);
+	glVertex2d((double)x + 8.2, y + 38);
+	glVertex2d((double)x + 21.2, (double)y + 60.52);
+	glVertex2d((double)x + 10.8, (double)y + 66.52);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 16, y + 63.52, 6, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 13.07, y + 97.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 6.15, y + 100.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x + 6.15, (double)y + 100.86);
+	glVertex2d((double)x + 13.07, (double)y + 97.86);
+	glVertex2d((double)x + 17.07, (double)y + 104.79);
+	glVertex2d((double)x + 10.15, (double)y + 107.79);
+	glEnd();
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 13.07, y + 97.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 6.15, y + 100.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x - 6.15, (double)y + 100.86);
+	glVertex2d((double)x - 13.07, (double)y + 97.86);
+	glVertex2d((double)x - 17.07, (double)y + 104.79);
+	glVertex2d((double)x - 10.15, (double)y + 107.79);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 80);
+	glVertex2d(x + 12, y + 80);
+	glVertex2d(x + 12, y + 88);
+	glVertex2d(x - 12, y + 88);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x - 8.78, (double)y + 92);
+	glVertex2d((double)x + 12, (double)y + 80);
+	glVertex2d((double)x + 20, (double)y + 93.86);
+	glVertex2d((double)x - .78, (double)y + 104.86);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x + 8.78, (double)y + 92);
+	glVertex2d((double)x - 12, (double)y + 80);
+	glVertex2d((double)x - 20, (double)y + 93.86);
+	glVertex2d((double)x + .78, (double)y + 104.86);
+	glEnd();
+
+	glColor3ub(0, 0, 0);
+	glBegin(GL_LINES);
+	glVertex2d((double)x + 12, (double)y + 80);
+	glVertex2d((double)x + .78, (double)y + 104.86);
+	glEnd();
+}
+
+void Person::Draw_right_still(void)
+{
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 16);
+	glVertex2d(x + 12, y + 16);
+	glVertex2d(x + 12, y + 66);
+	glVertex2d(x - 12, y + 66);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 66);
+	glVertex2d(x + 12, y + 66);
+	glVertex2d(x + 12, y + 80);
+	glVertex2d(x - 12, y + 80);
+	glEnd();
+
+	glColor3ub(r_hair, g_hair, b_hair);
+	DrawCircle(x, y, 40, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 5, y + 7, 35, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 26, y + 16, 10, 1);
+
+	glColor3ub(255, 255, 255);
+	DrawCircle(x + 8, y + 5, 7, 1);
+
+	glColor3ub(r_eyes, g_eyes, b_eyes);
+	DrawCircle(x + 10, y + 5, 4, 1);
+
+	glColor3ub(0, 0, 0);
+	DrawCircle(x + 10, y + 5, 2, 1);
+
+	glColor3ub(201, 130, 118);
+	glBegin(GL_POLYGON);
+	glVertex2d(x + 16, y + 24);
+	glVertex2d(x + 36, y + 24);
+	glVertex2d(x + 30, y + 32);
+	glVertex2d(x + 16, y + 32);
+	glEnd();
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 6, y + 34);
+	glVertex2d(x + 6, y + 34);
+	glVertex2d(x + 6, y + 40);
+	glVertex2d(x - 6, y + 40);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 6, y + 40);
+	glVertex2d(x + 6, y + 40);
+	glVertex2d(x + 6, y + 66);
+	glVertex2d(x - 6, y + 66);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x, y + 66, 6, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 5, y + 96, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 5, y + 96, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 5, y + 96);
+	glVertex2d(x + 5, y + 96);
+	glVertex2d(x + 5, y + 104);
+	glVertex2d(x - 5, y + 104);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 80);
+	glVertex2d(x + 12, y + 80);
+	glVertex2d(x + 12, y + 96);
+	glVertex2d(x - 12, y + 96);
+	glEnd();
+}
+
+void Person::Draw_right_left(void)
+{
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x - 2.2, y + 44);
+	glVertex2d((double)x + 8.2, y + 38);
+	glVertex2d((double)x + 21.2, (double)y + 60.52);
+	glVertex2d((double)x + 10.8, (double)y + 66.52);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 16, y + 63.52, 6, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 16);
+	glVertex2d(x + 12, y + 16);
+	glVertex2d(x + 12, y + 66);
+	glVertex2d(x - 12, y + 66);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 66);
+	glVertex2d(x + 12, y + 66);
+	glVertex2d(x + 12, y + 80);
+	glVertex2d(x - 12, y + 80);
+	glEnd();
+
+	glColor3ub(r_hair, g_hair, b_hair);
+	DrawCircle(x, y, 40, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 5, y + 7, 35, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 26, y + 16, 10, 1);
+
+	glColor3ub(255, 255, 255);
+	DrawCircle(x + 8, y + 5, 7, 1);
+
+	glColor3ub(r_eyes, g_eyes, b_eyes);
+	DrawCircle(x + 10, y + 5, 4, 1);
+
+	glColor3ub(0, 0, 0);
+	DrawCircle(x + 10, y + 5, 2, 1);
+
+	glColor3ub(201, 130, 118);
+	glBegin(GL_POLYGON);
+	glVertex2d(x + 16, y + 24);
+	glVertex2d(x + 36, y + 24);
+	glVertex2d(x + 30, y + 32);
+	glVertex2d(x + 16, y + 32);
+	glEnd();
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 6, y + 34);
+	glVertex2d(x + 6, y + 34);
+	glVertex2d(x + 6, y + 40);
+	glVertex2d(x - 6, y + 40);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x + 2.2, y + 44);
+	glVertex2d((double)x - 8.2, y + 38);
+	glVertex2d((double)x - 21.2, (double)y + 60.52);
+	glVertex2d((double)x - 10.8, (double)y + 66.52);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 16, y + 63.52, 6, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 13.07, y + 97.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 6.15, y + 100.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x + 6.15, (double)y + 100.86);
+	glVertex2d((double)x + 13.07, (double)y + 97.86);
+	glVertex2d((double)x + 17.07, (double)y + 104.79);
+	glVertex2d((double)x + 10.15, (double)y + 107.79);
+	glEnd();
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 13.07, y + 97.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 6.15, y + 100.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x - 6.15, (double)y + 100.86);
+	glVertex2d((double)x - 13.07, (double)y + 97.86);
+	glVertex2d((double)x - 17.07, (double)y + 104.79);
+	glVertex2d((double)x - 10.15, (double)y + 107.79);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 80);
+	glVertex2d(x + 12, y + 80);
+	glVertex2d(x + 12, y + 88);
+	glVertex2d(x - 12, y + 88);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x - 8.78, (double)y + 92);
+	glVertex2d((double)x + 12, (double)y + 80);
+	glVertex2d((double)x + 20, (double)y + 93.86);
+	glVertex2d((double)x - .78, (double)y + 104.86);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x + 8.78, (double)y + 92);
+	glVertex2d((double)x - 12, (double)y + 80);
+	glVertex2d((double)x - 20, (double)y + 93.86);
+	glVertex2d((double)x + .78, (double)y + 104.86);
+	glEnd();
+
+	glColor3ub(0, 0, 0);
+	glBegin(GL_LINES);
+	glVertex2d((double)x - 12, (double)y + 80);
+	glVertex2d((double)x + .78, (double)y + 104.86);
+	glEnd();
+}
+
+void Person::Draw_right_right(void)
+{
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x + 2.2, y + 44);
+	glVertex2d((double)x - 8.2, y + 38);
+	glVertex2d((double)x - 21.2, (double)y + 60.52);
+	glVertex2d((double)x - 10.8, (double)y + 66.52);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 16, y + 63.52, 6, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 16);
+	glVertex2d(x + 12, y + 16);
+	glVertex2d(x + 12, y + 66);
+	glVertex2d(x - 12, y + 66);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 66);
+	glVertex2d(x + 12, y + 66);
+	glVertex2d(x + 12, y + 80);
+	glVertex2d(x - 12, y + 80);
+	glEnd();
+
+	glColor3ub(r_hair, g_hair, b_hair);
+	DrawCircle(x, y, 40, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 5, y + 7, 35, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 26, y + 16, 10, 1);
+
+	glColor3ub(255, 255, 255);
+	DrawCircle(x + 8, y + 5, 7, 1);
+
+	glColor3ub(r_eyes, g_eyes, b_eyes);
+	DrawCircle(x + 10, y + 5, 4, 1);
+
+	glColor3ub(0, 0, 0);
+	DrawCircle(x + 10, y + 5, 2, 1);
+
+	glColor3ub(201, 130, 118);
+	glBegin(GL_POLYGON);
+	glVertex2d(x + 16, y + 24);
+	glVertex2d(x + 36, y + 24);
+	glVertex2d(x + 30, y + 32);
+	glVertex2d(x + 16, y + 32);
+	glEnd();
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 6, y + 34);
+	glVertex2d(x + 6, y + 34);
+	glVertex2d(x + 6, y + 40);
+	glVertex2d(x - 6, y + 40);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x - 2.2, y + 44);
+	glVertex2d((double)x + 8.2, y + 38);
+	glVertex2d((double)x + 21.2, (double)y + 60.52);
+	glVertex2d((double)x + 10.8, (double)y + 66.52);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 16, y + 63.52, 6, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 13.07, y + 97.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 6.15, y + 100.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x + 6.15, (double)y + 100.86);
+	glVertex2d((double)x + 13.07, (double)y + 97.86);
+	glVertex2d((double)x + 17.07, (double)y + 104.79);
+	glVertex2d((double)x + 10.15, (double)y + 107.79);
+	glEnd();
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 13.07, y + 97.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 6.15, y + 100.86, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x - 6.15, (double)y + 100.86);
+	glVertex2d((double)x - 13.07, (double)y + 97.86);
+	glVertex2d((double)x - 17.07, (double)y + 104.79);
+	glVertex2d((double)x - 10.15, (double)y + 107.79);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 12, y + 80);
+	glVertex2d(x + 12, y + 80);
+	glVertex2d(x + 12, y + 88);
+	glVertex2d(x - 12, y + 88);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x - 8.78, (double)y + 92);
+	glVertex2d((double)x + 12, (double)y + 80);
+	glVertex2d((double)x + 20, (double)y + 93.86);
+	glVertex2d((double)x - .78, (double)y + 104.86);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_POLYGON);
+	glVertex2d((double)x + 8.78, (double)y + 92);
+	glVertex2d((double)x - 12, (double)y + 80);
+	glVertex2d((double)x - 20, (double)y + 93.86);
+	glVertex2d((double)x + .78, (double)y + 104.86);
+	glEnd();
+
+	glColor3ub(0, 0, 0);
+	glBegin(GL_LINES);
+	glVertex2d((double)x + 12, (double)y + 80);
+	glVertex2d((double)x - .78, (double)y + 104.86);
+	glEnd();
+}
+
+void Person::Draw(void)
+{
+	switch (state_walking)
+	{
+	case 0:
+		Draw_up_still();
+		break;
+	case 1:
+		Draw_up_walk_right();
+		break;
+	case 2:
+		Draw_up_walk_left();
+		break;
+	case 3:
+		Draw_down_still();
+		break;
+	case 4:
+		Draw_down_right();
+		break;
+	case 5:
+		Draw_down_left();
+		break;
+	case 6:
+		Draw_left_still();
+		break;
+	case 7:
+		Draw_left_right();
+		break;
+	case 8:
+		Draw_left_left();
+		break;
+	case 9:
+		Draw_right_still();
+		break;
+	case 10:
+		Draw_right_right();
+		break;
+	case 11:
+		Draw_right_left();
+		break;
+	}
+}
+
+void Person::Draw_up_walk_right(void)
+{
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 32, y + 16);
+	glVertex2d(x + 32, y + 16);
+	glVertex2d(x + 32, y + 66);
+	glVertex2d(x - 32, y + 66);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 32, y + 66);
+	glVertex2d(x + 32, y + 66);
+	glVertex2d(x + 32, y + 80);
+	glVertex2d(x - 32, y + 80);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 38, y + 42, 6, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x + 34, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x - 34, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 44, y + 34);
+	glVertex2d(x - 32, y + 34);
+	glVertex2d(x - 32, y + 40);
+	glVertex2d(x - 44, y + 40);
+	glEnd();
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x + 44, y + 34);
+	glVertex2d(x + 32, y + 34);
+	glVertex2d(x + 32, y + 40);
+	glVertex2d(x + 44, y + 40);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 44, y + 36);
+	glVertex2d(x - 32, y + 36);
+	glVertex2d(x - 32, y + 56);
+	glVertex2d(x - 44, y + 56);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 38, y + 56, 6, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 26, y + 93, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x + 16, y + 96, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_POLYGON);
+	glVertex2d(x + 26, y + 93);
+	glVertex2d(x + 16, y + 101);
+	glVertex2d(x + 16, y + 104);
+	glVertex2d(x + 26, y + 101);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_POLYGON);
+	glVertex2d(x + 32, y + 80);
+	glVertex2d(x + 8, y + 80);
+	glVertex2d(x + 8, y + 99);
+	glVertex2d(x + 32, y + 93);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 36, y + 22, 10, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 36, y + 22, 10, 1);
+
+	glColor3ub(r_hair, g_hair, b_hair);
+	DrawCircle(x, y, 40, 1);
+}
+
+void Person::Draw_up_walk_left(void)
+{
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 32, y + 16);
+	glVertex2d(x + 32, y + 16);
+	glVertex2d(x + 32, y + 66);
+	glVertex2d(x - 32, y + 66);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 32, y + 66);
+	glVertex2d(x + 32, y + 66);
+	glVertex2d(x + 32, y + 80);
+	glVertex2d(x - 32, y + 80);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 38, y + 42, 6, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x + 34, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	DrawCircle(x - 34, y + 34, 10, 1);
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x - 44, y + 34);
+	glVertex2d(x - 32, y + 34);
+	glVertex2d(x - 32, y + 40);
+	glVertex2d(x - 44, y + 40);
+	glEnd();
+
+	glColor3ub(r_shirt, g_shirt, b_shirt);
+	glBegin(GL_QUADS);
+	glVertex2d(x + 44, y + 34);
+	glVertex2d(x + 32, y + 34);
+	glVertex2d(x + 32, y + 40);
+	glVertex2d(x + 44, y + 40);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	glBegin(GL_QUADS);
+	glVertex2d(x + 44, y + 36);
+	glVertex2d(x + 32, y + 36);
+	glVertex2d(x + 32, y + 56);
+	glVertex2d(x + 44, y + 56);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 38, y + 56, 6, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 26, y + 93, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	DrawCircle(x - 16, y + 96, 8, 1);
+
+	glColor3ub(r_shoes, g_shoes, b_shoes);
+	glBegin(GL_POLYGON);
+	glVertex2d(x - 26, y + 93);
+	glVertex2d(x - 16, y + 101);
+	glVertex2d(x - 16, y + 104);
+	glVertex2d(x - 26, y + 101);
+	glEnd();
+
+	glColor3ub(r_pants, g_pants, b_pants);
+	glBegin(GL_POLYGON);
+	glVertex2d(x - 32, y + 80);
+	glVertex2d(x - 8, y + 80);
+	glVertex2d(x - 8, y + 99);
+	glVertex2d(x - 32, y + 93);
+	glEnd();
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x - 36, y + 22, 10, 1);
+
+	glColor3ub(r_skin, g_skin, b_skin);
+	DrawCircle(x + 36, y + 22, 10, 1);
+
+	glColor3ub(r_hair, g_hair, b_hair);
+	DrawCircle(x, y, 40, 1);
+}
+
 void Person::Draw_up_still(void)
 {
 	glColor3ub(r_shirt, g_shirt, b_shirt);
@@ -1281,6 +2594,7 @@ void Person::Draw_up_still(void)
 	glColor3ub(r_hair, g_hair, b_hair);
 	DrawCircle(x, y, 40, 1);
 }
+
 
 
 

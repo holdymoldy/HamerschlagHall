@@ -500,19 +500,22 @@ void Advisor::RandomEvents(GradStudent student[], int StudentCounter) {
 	case 4:
 		printf("Someone from another research group just published your work!!\n");
 		printf("This is really bad news and your students' research points just fall back 50%%.\n");
-		for (int i = 0; i < StudentCounter; i++) {
-			student[i].ModifyResearchValue(-50);
-		}
+		int unluckystudent;
+		unluckystudent % (StudentCounter + 1);
+		student[unluckystudent].PrintName();
+		printf("`s research progress is decreased by 50\n");
+		student[unluckystudent].ModifyResearchValue(-50);
 		break;
 	case 5:
 		printf("Suddenly you don't wanna work and sat down and chat with your student.\n");
 		printf("Studnets think you are a nice advisor! Congrats! Prestige + 20 \n");
-		Prestige += 100;
+		Prestige += 20;
 		break;
 	case 6:
 		printf("Your first student just had an epiphany!\n");
-		printf("Congrats, this student's research point increases 20 points!\n");
-		student[0].ModifyResearchValue(-50);
+		student[0].PrintName();
+		printf("Congrats, Research point increases 20 points!\n");
+		student[0].ModifyResearchValue(20);
 		break;
 	case 7:
 		printf("Shoo, an uneventful semester! Finally\n");
