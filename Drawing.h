@@ -16,7 +16,7 @@ public:
 class Person
 {
 public:
-	int state_person, state_walking, r_skin, g_skin, b_skin, r_hair, g_hair, b_hair, r_shirt, g_shirt, b_shirt, r_pants, g_pants, b_pants, r_shoes, g_shoes, b_shoes;
+	int state_person, state_walking, r_skin, g_skin, b_skin, r_hair, g_hair, b_hair, r_shirt, g_shirt, b_shirt, r_pants, g_pants, b_pants, r_shoes, g_shoes, b_shoes, r_eyes, g_eyes, b_eyes;
 	double x, y;
 	void Draw_up_still(void);
 	void Draw_up_walk_left(void);
@@ -30,6 +30,7 @@ public:
 	void Draw_right_still(void);
 	void Draw_right_left(void);
 	void Draw_right_right(void);
+	void Draw(void);
 };
 
 class Desk

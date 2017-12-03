@@ -142,7 +142,7 @@ void Advisor::WriteGrant() {
 	
 	
 }
-void Advisor::Recruit(GradStudent student[], int &StudentCounter, int &flag) { 
+void Advisor::Recruit(GradStudent student[], int &StudentCounter, Person people[], int &flag) { 
 	char Selection[3];
 	int j;
 	char A = 'A';
@@ -184,13 +184,19 @@ void Advisor::Recruit(GradStudent student[], int &StudentCounter, int &flag) {
 		MyFgets(Selection, 2, stdin);
 		if (Selection[0] == 'A' || Selection[0] == 'B' || Selection[0] == 'C' || Selection[0] == 'D' || Selection[0] == 'E' || Selection[0] == 'F' || Selection[0] == 'G') {
 			if (Money > 100000) {
-				student[StudentCounter] = Hire[Selection[0] - 65];
+				for (int i = 1; i < 7; i += 1) {
+					if (people[i].state_person == 0) {
+						people[i].state_person = 1;
+						student[i - 1] = Hire[Selection[0] - 65];
+						break;
+					}
+				}
 				printf("Congrats, you selected: ");
 				Hire[Selection[0] - 65].PrintName();
 				printf("\nStudent costs you 100,000 dollar\n");
 				Money -= 100000;
 				StudentCounter++;
-				flag = 1;
+				//flag = 1;
 			}
 			else if (Money < 100000) {
 				printf("You do not have enough money to recruit a new student, you can apply for a grant on Fall Semester\n");
@@ -468,9 +474,11 @@ void Advisor::SendtoCompany(GradStudent student[],int inter) {
 		char CheckInput[24] = { 'A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','h','I','i','J','j','K','k','L','l' };
 		student[inter].ModifyHappinessValue(80.0);
 		}
-void Advisor::RandomEvents(GradStudent student[], int StudentCounter) {
+void Advisor::RandomEvents(GradStudent student[], Person people[], int StudentCounter) {
 	int randEvent;
 	randEvent = rand() % 8;
+	int luckystudent = rand() % 6 + 1;
+	int unluckystudent = rand() % 6 + 1;
 	switch (randEvent) {
 	case 0:
 		printf("It looks that you are really woring hard as a start up professor,\n");
@@ -480,8 +488,10 @@ void Advisor::RandomEvents(GradStudent student[], int StudentCounter) {
 	case 1:
 		printf("Wow, Thanks Giving is approaching! It looks that everyone is happy!\n");
 		printf("Happiness of every student you have has increased 5%%. \n");
-		for (int i = 0; i < StudentCounter; i++) {
-			student[i].ModifyHappinessValue(5);
+		for (int i = 1; i < 7; i++) {
+			if (people[i].state_person == 1) {
+				student[i].ModifyHappinessValue(5);
+			}
 		}
 		break;
 	case 2:
@@ -493,27 +503,38 @@ void Advisor::RandomEvents(GradStudent student[], int StudentCounter) {
 		printf("Your student's dog just bit you, but you are kind enough not to bite your student back.\n");
 		printf("Your student is very grateful for this,their happiness increase by 5%%, and your prestige also increases by 10.\n");
 		Prestige += 10;
-		for (int i = 0; i < StudentCounter; i++) {
-			student[i].ModifyHappinessValue(5);
+		for (int i = 1; i < 7; i++) {
+			if (people[i].state_person == 1) {
+				student[i].ModifyHappinessValue(5);
+			}
 		}
 		break;
 	case 4:
-		printf("Someone from another research group just published your work!!\n");
-		printf("This is really bad news and your students' research points just fall back 50%%.\n");
-		for (int i = 0; i < StudentCounter; i++) {
-			student[i].ModifyResearchValue(-50);
+
+		
+		
+		if (people[unluckystudent].state_person == 1) {
+			printf("Someone from another research group just published your work!!\n");
+			printf("This is really bad news and your students' research points just fall back 50%%.\n");
+			student[unluckystudent-1].PrintName();
+			printf("`s research progress is decreased by 50\n");
+			student[unluckystudent-1].ModifyResearchValue(-50);
+			break;
 		}
-		break;
 	case 5:
 		printf("Suddenly you don't wanna work and sat down and chat with your student.\n");
 		printf("Studnets think you are a nice advisor! Congrats! Prestige + 20 \n");
-		Prestige += 100;
+		Prestige += 20;
 		break;
 	case 6:
-		printf("Your first student just had an epiphany!\n");
-		printf("Congrats, this student's research point increases 20 points!\n");
-		student[0].ModifyResearchValue(-50);
-		break;
+		
+		if (people[luckystudent].state_person == 1) {
+			printf("Your student just had an epiphany!\n");
+			student[luckystudent-1].PrintName();
+			printf("Congrats, Research point increases 20 points!\n");
+			student[luckystudent - 1].ModifyResearchValue(20);
+			break;
+		}
 	case 7:
 		printf("Shoo, an uneventful semester! Finally\n");
 		printf("Gonna go home and rest!\n");
@@ -527,7 +548,7 @@ void Advisor::Push(GradStudent student[], int inter)
 {
 
 	float ResearchValueChange = 0.0025*student[inter].personality->getStamina()*Mentoring + 0.003*student[inter].personality->getIntelligence()*Knowledge+ 0.08*student[inter].GetResearchVal();
-	float HappinessValueChange = 0.01*student[inter].personality->getOptimism()*(150.0 - Experience)*2.0 - Prestige*student[inter].personality->getOptimism()*0.001;
+	float HappinessValueChange = 1*student[inter].personality->getOptimism()*(150.0 - Experience)*2.0 - Prestige*student[inter].personality->getOptimism()*0.001;
 	student[inter].ModifyResearchValue(ResearchValueChange);
 	student[inter].ModifyHappinessValue(-HappinessValueChange);
 	float ResearchDT = (ResearchValueChange*0.025)*(rand() % 5);
