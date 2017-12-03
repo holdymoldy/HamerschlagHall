@@ -21,7 +21,6 @@ class GradStudent {
 protected:
     
     int year;
-    int *color;
     Counter *happiness,*rout;
     int focus;
     
@@ -36,6 +35,7 @@ public:
     
     char *name;
     int namelength;
+    int *haircolor,*eyecolor,*skincolor;
     Personality *personality;
     Paper *currpaper;
     
@@ -53,17 +53,23 @@ public:
 	float GetResearchVal();
 	float GetHappinessVal();
 	void GenerateName();
-	void GenerateColor();
     void CreatePaper();
     void GeneratePaperAfterSuccess(); //after success
     void NameStudent(char *desired, int desiredlength);
     void PrintName();
     void PrintHappiness();
-    void SetColor(int arr[]);
-    void GetColor(int result[]);
+    void SetHairColor(int arr[]);
+    void GetHairColor(int result[]);
+    void SetEyeColor(int arr[]);
+    void GetEyeColor(int result[]);
+    void SetSkinColor(int arr[]);
+    void GetSkinColor(int result[]);
     int GetYear();
     int GetFocus();
     void turn();
+    void GenerateHairColor();
+    void GenerateEyeColor();
+    void GenerateSkinColor();
 };
 
 
