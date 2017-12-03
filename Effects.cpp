@@ -4,13 +4,28 @@
 #include <stdio.h>
 #include "Advisor.h"
 
-void Effect::DrawMoney(float money, float pres, float know, float ment, float exp)
+void Effect::DrawMoney(float money, float pres, float know, float ment, float exp, int sem, int year)
 {
-	char moneyStr[255];
+	char moneyStr[255], datStr[255];
+	switch (sem)
+	{
+	case(0):
+		sprintf(datStr, "Summer Semester, %d", year);
+		break;
+	case(1):
+		sprintf(datStr, "Fall Semester, %d", year);
+		break;
+	case(2):
+		sprintf(datStr, "Spring Semester, %d", year);
+		break;
+	}
 	sprintf(moneyStr, "Money: $%.2f   Prestige: %.2f   Knowledge: %.2f   Mentoring: %.2f   Experience: %.2f", money, pres, know, ment, exp);
 	glRasterPos2i(20, 20);
-	glColor3ub(0, 0, 255);
+	glColor3ub(1, 1, 1);
 	YsGlDrawFontBitmap10x14(moneyStr);
+	glRasterPos2i(20, 50);
+	glColor3ub(1, 1, 1);
+	YsGlDrawFontBitmap10x14(datStr);
 }
 
 void Effect::initTransition(void)
@@ -35,7 +50,7 @@ void Effect::DrawTransition(void)
 	glVertex2i(x, y + 800);
 	glEnd();
 
-	alpha -= 3;
+	alpha -= 5;
 	if (0 >= alpha)
 	{
 		tState = 0;
