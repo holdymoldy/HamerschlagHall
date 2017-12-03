@@ -7,7 +7,7 @@
 void Effect::DrawMoney(float money, float pres, float know, float ment, float exp)
 {
 	char moneyStr[255];
-	sprintf(moneyStr, "Money: $%.2f   Prestige: %.2f   Knowledge: %.2f   Mentoring: %.2f   Experience: %.2f", money, pres, know, ment, exp);
+	sprintf_s(moneyStr, "Money: $%.2f   Prestige: %.2f   Knowledge: %.2f   Mentoring: %.2f   Experience: %.2f", money, pres, know, ment, exp);
 	glRasterPos2i(20, 20);
 	glColor3ub(0, 0, 255);
 	YsGlDrawFontBitmap10x14(moneyStr);
