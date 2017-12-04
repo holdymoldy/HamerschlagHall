@@ -46,7 +46,7 @@ char actionforStudent() {
 }
 char actionforSummer() {
 	
-	printf("A: A:Would you like to hire a new student?\nB: Do you want to upgrade the office and lab?\nC: Let`s get Crazy!! Party Time\nD: Check your papers\n");
+	printf("A:Would you like to hire a new student?\nB: Do you want to upgrade the office and lab?\nC: Let`s get Crazy!! Party Time\nD: Check your papers\n");
 	char choice[3];
 	My2Fgets(choice, 2, stdin);
 	return choice[0];
@@ -605,9 +605,8 @@ int main(void)
 				if (Student[i].GetHappinessVal()<0) {
 					printf("Your student - ");
 					Student[i].PrintName();
-					printf(" - is too unhappy, they have dropped out!\n");
-					
-					Student[i].ModifyResearchValue(Student[i].GetResearchVal()*(-1));
+					printf(" - is too unhappy, they have dropped out!, you have lost PRESTIGE\n");
+					ADV.AddPrestige(-20.0);
 					people[i + 1].state_person = 0;
 					StudentCounter -= 1;
 					break;
@@ -615,7 +614,9 @@ int main(void)
 				if (Student[i].GetYear() == 6) {
 					printf("Your student - ");
 					Student[i].PrintName();
-					printf(" - has defended! They're graduated!");
+					printf(" - has defended! They're graduated!, you have gained PRESTIGE and MENTORING");
+					ADV.AddPrestige(10.0);
+					ADV.AddMentoring(10.0);
 					people[i + 1].state_person = 0;
 					StudentCounter -= 1;
 					break;
@@ -636,10 +637,9 @@ int main(void)
 					Student[i].ModifyResearchValue(-Student[i].GetResearchVal());
                     Paper new_paper(*Student[i].currpaper);
                     papers.push_back(new_paper);
-
-                    ADV.AddPrestige(new_paper.getCitations()/100.0);
-					ADV.AddExperience(new_paper.getCitations() / 150.0);
-					ADV.AddKnowledge(new_paper.getCitations() / 200.0);
+                    ADV.AddPrestige(new_paper.getCitations()/150.0);
+					ADV.AddExperience(new_paper.getCitations() / 200.0);
+					ADV.AddKnowledge(new_paper.getCitations() / 250.0);
 
 				}
 				
@@ -962,7 +962,7 @@ int main(void)
 					if (semester_state % 3 == 2) {
 						char actionSpring = actionforSpring();
 						if (actionSpring == 'A') {
-							ADV.Conference(Student,StudentCounter);
+							ADV.Conference(Student,people,StudentCounter);
 						}
 						if (actionSpring == 'B') {
 							ADV.UpgradeLab(Student, upgrade, people, StudentCounter);
@@ -1141,7 +1141,7 @@ int main(void)
             }
 
 
-			EFF.DrawMoney(ADV.Money, ADV.GetPrestige(), ADV.GetKnowledge(), ADV.GetMentoring(), ADV.GetExperience());
+			EFF.DrawMoney(ADV.Money, ADV.GetPrestige(), ADV.GetKnowledge(), ADV.GetMentoring(), ADV.GetExperience(), semester_state, year);
 			if (EFF.tState != 0) {
 				EFF.DrawTransition();
 			}
