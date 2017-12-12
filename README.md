@@ -1,5 +1,1 @@
-# HamerschlagHall
-# This is a test change
-# This is a another test changeiiiiiiiii
-#iiiii
-#I need me eigth jewish american soldiers
+A game to simulate the exciting life of a PhD advisor
